@@ -3,14 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tuần 1: Why Semiconductor? Why IC Design?</title>
-    <!-- Tailwind CSS cho giao diện hiện đại và responsive -->
+    <title>Tuần 2: From Idea to Chip | IC Design Mentoring</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- FontAwesome cho icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Cấu hình Tailwind tùy chỉnh -->
     <script>
         tailwind.config = {
             theme: {
@@ -30,22 +26,15 @@
         }
     </script>
     <style>
-        /* Custom styles cho thẻ details (Accordion) */
-        details > summary {
-            list-style: none;
-        }
-        details > summary::-webkit-details-marker {
-            display: none;
-        }
-        details[open] summary ~ * {
-            animation: fadeIn 0.3s ease-in-out;
-        }
+        /* Tùy chỉnh CSS (Animations & Elements) */
+        details > summary { list-style: none; }
+        details > summary::-webkit-details-marker { display: none; }
+        details[open] summary ~ * { animation: fadeIn 0.3s ease-in-out; }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(-10px); }
             to { opacity: 1; transform: translateY(0); }
         }
         
-        /* Custom Checkbox */
         .custom-checkbox {
             appearance: none;
             background-color: #fff;
@@ -76,51 +65,49 @@
             background-color: #10b981;
             border-color: #10b981;
         }
-        .custom-checkbox:checked::before {
-            transform: scale(1);
-        }
-        .task-item.completed {
-            text-decoration: line-through;
-            color: #94a3b8;
-        }
+        .custom-checkbox:checked::before { transform: scale(1); }
+        .task-item.completed { text-decoration: line-through; color: #94a3b8; }
 
-        /* Flow Arrow Animation */
         @keyframes pulse-right {
             0%, 100% { transform: translateX(0); }
             50% { transform: translateX(5px); }
         }
-        .animate-flow {
-            animation: pulse-right 2s infinite ease-in-out;
+        .animate-flow { animation: pulse-right 2s infinite ease-in-out; }
+
+        /* Animation cho Demo Flow tuần 2 */
+        .flow-step-active {
+            box-shadow: 0 0 15px rgba(37, 99, 235, 0.6);
+            transform: scale(1.05);
+            border-color: #3b82f6 !important;
+            transition: all 0.3s ease;
         }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased selection:bg-primary selection:text-white pb-20">
 
-    <!-- HERO SECTION -->
     <header class="bg-gradient-to-br from-dark to-slate-700 text-white pt-16 pb-20 px-6 shadow-xl relative overflow-hidden">
-        <!-- Background decoration -->
         <div class="absolute top-0 right-0 opacity-10 pointer-events-none">
-            <i class="fa-solid fa-microchip text-[20rem] -mt-10 -mr-10"></i>
+            <i class="fa-solid fa-code-branch text-[20rem] -mt-10 -mr-10"></i>
         </div>
         
         <div class="max-w-4xl mx-auto relative z-10">
             <div class="flex flex-wrap items-center gap-3 mb-4">
-                <span class="bg-primary text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Tuần 1</span>
+                <span class="bg-primary text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Tuần 2</span>
                 <span class="bg-secondary text-dark text-xs font-bold px-3 py-1 rounded-full"><i class="fa-solid fa-rocket mr-1"></i> Khởi Động</span>
                 <span class="bg-white/20 text-white border border-white/30 text-xs font-semibold px-3 py-1 rounded-full"><i class="fa-solid fa-university mr-1"></i> Phenikaa University</span>
             </div>
             
             <h1 class="text-4xl md:text-5xl font-extrabold mb-3 leading-tight text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-300">
-                Why Semiconductor? Why IC Design?
+                From Idea to Chip
             </h1>
             <h2 class="text-xl md:text-2xl font-medium text-slate-300 mb-6 border-l-4 border-primary pl-4">
-                Vì Sao Ngành Bán Dẫn Và Thiết Kế Vi Mạch Quan Trọng?
+                Từ Ý Tưởng Đến Con Chip / Hệ Thống Số
             </h2>
             
             <div class="bg-white/10 backdrop-blur-md rounded-xl p-5 border border-white/20 mb-8 max-w-3xl">
                 <p class="text-lg leading-relaxed">
                     <i class="fa-solid fa-quote-left text-primary opacity-50 mr-2"></i>
-                    Mục tiêu tuần này không phải là nhồi nhét lý thuyết vật lý khô khan. Chúng ta sẽ cùng nhau tìm hiểu <strong>Bản chất</strong> ngành bán dẫn là gì, những con chip "vô hình" đang điều khiển cuộc sống ra sao, và định hình <strong>Tư duy nghề nghiệp</strong> cho kỹ sư điện tử tương lai.
+                    Tuần này, chúng ta sẽ tìm hiểu hành trình một ý tưởng kỹ thuật được chuyển hóa thành mạch số. Thiết kế phần cứng <strong>KHÔNG</strong> bắt đầu bằng việc mở máy tính lên và gõ code. Nó bắt đầu từ việc thấu hiểu yêu cầu (Requirements) và xác định chức năng hệ thống.
                 </p>
             </div>
 
@@ -128,25 +115,24 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="flex items-start gap-3">
                     <div class="bg-white/20 w-8 h-8 flex items-center justify-center rounded-lg text-secondary shrink-0"><i class="fa-solid fa-bullseye"></i></div>
-                    <p class="text-sm mt-1">Nắm vững khái niệm cốt lõi: Chất bán dẫn, Chip, và IC Design.</p>
+                    <p class="text-sm mt-1">Nắm vững quy trình: Idea &rarr; RTL &rarr; Simulation &rarr; FPGA &rarr; ASIC.</p>
                 </div>
                 <div class="flex items-start gap-3">
-                    <div class="bg-white/20 w-8 h-8 flex items-center justify-center rounded-lg text-secondary shrink-0"><i class="fa-solid fa-microchip"></i></div>
-                    <p class="text-sm mt-1">Nhận diện được kiến trúc vi mạch cơ bản trong đời sống (SoC).</p>
+                    <div class="bg-white/20 w-8 h-8 flex items-center justify-center rounded-lg text-secondary shrink-0"><i class="fa-solid fa-list-check"></i></div>
+                    <p class="text-sm mt-1">Hiểu rằng thiết kế vi mạch bắt nguồn từ "Đặc tả yêu cầu" (Specification).</p>
                 </div>
                 <div class="flex items-start gap-3">
-                    <div class="bg-white/20 w-8 h-8 flex items-center justify-center rounded-lg text-secondary shrink-0"><i class="fa-solid fa-map"></i></div>
-                    <p class="text-sm mt-1">Mường tượng rõ ràng lộ trình làm việc (Design Flow) của kỹ sư IC.</p>
+                    <div class="bg-white/20 w-8 h-8 flex items-center justify-center rounded-lg text-secondary shrink-0"><i class="fa-solid fa-vial-virus"></i></div>
+                    <p class="text-sm mt-1">Hiểu rõ vì sao phải Mô phỏng (Simulation) trước khi nạp lên phần cứng.</p>
                 </div>
                 <div class="flex items-start gap-3">
-                    <div class="bg-white/20 w-8 h-8 flex items-center justify-center rounded-lg text-secondary shrink-0"><i class="fa-solid fa-fire"></i></div>
-                    <p class="text-sm mt-1">Xây dựng thói quen tự học và kỹ năng thảo luận nhóm chuyên ngành.</p>
+                    <div class="bg-white/20 w-8 h-8 flex items-center justify-center rounded-lg text-secondary shrink-0"><i class="fa-solid fa-code"></i></div>
+                    <p class="text-sm mt-1">Biết được vai trò của ngôn ngữ mô tả phần cứng (Verilog).</p>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- MAIN CONTENT -->
     <main class="max-w-4xl mx-auto px-4 sm:px-6 -mt-10 relative z-20 space-y-8">
 
         <!-- BEFORE SESSION SECTION -->
@@ -158,12 +144,11 @@
             </div>
             <div class="p-6">
                 <p class="text-slate-600 mb-6">
-                    Để buổi mentoring thực sự là không gian thảo luận thay vì "nghe giảng một chiều", các bạn hãy dành 15-30 phút đọc tài liệu này. 
-                    <strong>Đừng lo lắng nếu có thuật ngữ mới</strong>, chúng ta sẽ giải mã chúng cùng nhau.
+                    Để buổi học diễn ra hiệu quả, hãy xem qua lộ trình thiết kế cơ bản. Đừng cố gắng hiểu sâu cách viết code ngay lúc này, hãy tập trung vào bức tranh tổng thể (Big Picture).
                 </p>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Checklist cá nhân -->
+                    <!-- Checklist -->
                     <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 hover:border-primary/30 transition-colors">
                         <h4 class="font-bold text-dark mb-4 border-b pb-2 flex items-center gap-2">
                             <i class="fa-solid fa-list-check text-primary"></i> Checklist Tự Học
@@ -171,31 +156,31 @@
                         <ul class="space-y-3" id="prep-checklist">
                             <li class="flex items-start gap-3 group">
                                 <input type="checkbox" class="custom-checkbox mt-0.5" id="task1" onclick="toggleTask(this)">
-                                <label for="task1" class="cursor-pointer text-sm text-slate-700 task-item group-hover:text-primary transition-colors">Đọc, tương tác với phần "Khái niệm cốt lõi"</label>
+                                <label for="task1" class="cursor-pointer text-sm text-slate-700 task-item group-hover:text-primary transition-colors">Đọc phần "Khái niệm cốt lõi" và thử Demo bên dưới</label>
                             </li>
                             <li class="flex items-start gap-3 group">
                                 <input type="checkbox" class="custom-checkbox mt-0.5" id="task2" onclick="toggleTask(this)">
-                                <label for="task2" class="cursor-pointer text-sm text-slate-700 task-item group-hover:text-primary transition-colors">Nắm vững các từ vựng tiếng Anh chuyên ngành</label>
+                                <label for="task2" class="cursor-pointer text-sm text-slate-700 task-item group-hover:text-primary transition-colors">Tìm hiểu trước về từ vựng (Specification, RTL, Testbench)</label>
                             </li>
                             <li class="flex items-start gap-3 group">
                                 <input type="checkbox" class="custom-checkbox mt-0.5" id="task3" onclick="toggleTask(this)">
-                                <label for="task3" class="cursor-pointer text-sm text-slate-700 task-item group-hover:text-primary transition-colors">Chuẩn bị sổ tay ghi chú hoặc bật Notion/Word</label>
+                                <label for="task3" class="cursor-pointer text-sm text-slate-700 task-item group-hover:text-primary transition-colors">Suy nghĩ: Chức năng của một chiếc đèn giao thông là gì?</label>
                             </li>
                             <li class="flex items-start gap-3 group">
                                 <input type="checkbox" class="custom-checkbox mt-0.5" id="task4" onclick="toggleTask(this)">
-                                <label for="task4" class="cursor-pointer text-sm text-slate-700 task-item group-hover:text-primary transition-colors">Test Mic/Camera trước khi vào Google Meet</label>
+                                <label for="task4" class="cursor-pointer text-sm text-slate-700 task-item group-hover:text-primary transition-colors">Liệt kê các câu hỏi còn thắc mắc để hỏi Mentor</label>
                             </li>
                         </ul>
                     </div>
 
                     <!-- Câu hỏi gợi mở -->
                     <div class="bg-blue-50 p-5 rounded-xl border border-blue-200 relative overflow-hidden">
-                        <i class="fa-regular fa-circle-question absolute -right-4 -bottom-4 text-6xl text-blue-200 opacity-50"></i>
+                        <i class="fa-regular fa-lightbulb absolute -right-4 -bottom-4 text-6xl text-blue-200 opacity-50"></i>
                         <h4 class="font-bold text-primary mb-4 border-b border-blue-200 pb-2 relative z-10">Tư Duy Khởi Động</h4>
                         <ul class="space-y-3 list-disc list-inside text-sm text-slate-700 relative z-10">
-                            <li>Lấy chiếc điện thoại của bạn ra. Theo bạn, bên trong nó có 1 con chip hay nhiều con chip?</li>
-                            <li>Theo bạn, quy trình để làm ra 1 con chip giống với <strong>xây nhà</strong> hay giống với <strong>viết phần mềm</strong> hơn?</li>
-                            <li>Tại sao các cường quốc công nghệ lại cạnh tranh gay gắt về chất bán dẫn?</li>
+                            <li>Nếu bạn muốn xây một ngôi nhà, bạn sẽ vẽ bản vẽ thiết kế trước, hay mua gạch về xây ngay lập tức?</li>
+                            <li>Nếu bạn lập trình một phần mềm bị lỗi, bạn có thể dễ dàng sửa nó bằng bản cập nhật (Update). Nếu một con chip sản xuất ra bị lỗi, chuyện gì sẽ xảy ra?</li>
+                            <li>Từ đó suy ra: Tại sao khâu <strong>Kiểm thử (Verification/Simulation)</strong> lại cực kỳ quan trọng trong IC Design?</li>
                         </ul>
                     </div>
                 </div>
@@ -206,148 +191,103 @@
         <section class="bg-white rounded-2xl shadow-lg border border-slate-200 overflow-hidden">
             <div class="px-6 py-4 border-b border-slate-100 bg-gradient-to-r from-slate-50 to-white">
                 <h3 class="text-xl font-bold text-dark flex items-center gap-2">
-                    <i class="fa-solid fa-microscope text-primary"></i> 5 Khái Niệm Cốt Lõi & Trực Quan Hoá
+                    <i class="fa-solid fa-microscope text-primary"></i> 5 Bước Trong Quy Trình Thiết Kế Số
                 </h3>
             </div>
             
             <div class="p-6 divide-y divide-slate-100">
-                <!-- Concept 1 & Demo -->
+                <!-- Concept 1 & 2 -->
                 <div class="py-5 first:pt-0">
-                    <h4 class="text-lg font-bold text-primary mb-2 flex items-center gap-2">
-                        <span class="bg-primary/10 text-primary w-6 h-6 rounded-full flex items-center justify-center text-sm">1</span> 
-                        Semiconductor (Chất bán dẫn)
-                    </h4>
-                    <p class="text-slate-600 text-sm leading-relaxed mb-4">
-                        Là vật liệu (tiêu biểu nhất là <strong>Silicon</strong>) có tính dẫn điện nằm giữa chất dẫn điện (đồng) và chất cách điện (nhựa/cao su). Nhờ khả năng có thể "điều khiển" được độ dẫn điện bằng điện áp, con người dùng vật liệu này để chế tạo ra các công tắc điện tử siêu nhỏ gọi là <strong>Transistor</strong>.
-                    </p>
-                    
-                    <!-- Interactive Transistor Demo -->
-                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
-                        <div class="flex-1">
-                            <p class="text-sm font-semibold text-dark"><i class="fa-solid fa-gamepad text-secondary"></i> Demo Tương Tác: Bản chất Mạch số</p>
-                            <p class="text-xs text-slate-500 mt-1">Hàng tỷ Transistor hoạt động như các công tắc đóng/ngắt (On/Off) ở tốc độ siêu cao, tạo ra chuỗi tín hiệu 1 và 0 để máy tính xử lý.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="text-lg font-bold text-primary mb-2 flex items-center gap-2">
+                                <span class="bg-primary/10 text-primary w-6 h-6 rounded-full flex items-center justify-center text-sm">1</span> Idea & Specification
+                            </h4>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                                Bắt đầu từ <strong>Ý tưởng</strong> (vd: "Tôi muốn làm bộ đếm giây"). Kỹ sư phải viết ra <strong>Đặc tả (Specification)</strong>: Đầu vào (Input) gồm những gì? Nút bấm? Nguồn điện? Đầu ra (Output) là gì? Hoạt động logic ra sao?
+                            </p>
                         </div>
-                        <div class="flex items-center gap-4 bg-white px-4 py-2 rounded-lg shadow-sm border border-slate-200">
-                            <span class="text-xs font-bold text-slate-400">Tín hiệu:</span>
-                            <!-- Toggle Button -->
-                            <label class="relative inline-flex items-center cursor-pointer">
-                                <input type="checkbox" id="transistorToggle" class="sr-only peer">
-                                <div class="w-11 h-6 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-accent"></div>
-                                <span id="bitState" class="ml-3 text-xl font-black text-slate-400 font-mono w-4">0</span>
-                            </label>
-                            <div class="w-px h-6 bg-slate-200"></div>
-                            <i id="bulbIcon" class="fa-regular fa-lightbulb text-2xl text-slate-300 transition-colors duration-300"></i>
+                        <div>
+                            <h4 class="text-lg font-bold text-primary mb-2 flex items-center gap-2">
+                                <span class="bg-primary/10 text-primary w-6 h-6 rounded-full flex items-center justify-center text-sm">2</span> RTL (Verilog/VHDL)
+                            </h4>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                                Dịch bản đặc tả bằng chữ thành mã code phần cứng gọi là <strong>RTL (Register-Transfer Level)</strong>. Ngôn ngữ phổ biến nhất hiện nay là <strong>Verilog</strong>. Đoạn code này mô tả cách tín hiệu điện di chuyển qua các cổng logic.
+                            </p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Concept 2 & Block Diagram -->
+                <!-- Concept 3, 4, 5 -->
                 <div class="py-5">
-                    <h4 class="text-lg font-bold text-primary mb-2 flex items-center gap-2">
-                        <span class="bg-primary/10 text-primary w-6 h-6 rounded-full flex items-center justify-center text-sm">2</span> 
-                        Chip / Integrated Circuit (Mạch tích hợp)
-                    </h4>
-                    <p class="text-slate-600 text-sm leading-relaxed mb-4">
-                        Thay vì hàn từng linh kiện rời rạc trên bảng mạch lớn, người ta <strong>"tích hợp" (integrate)</strong> hàng triệu đến hàng tỷ Transistor vào một miếng Silicon bé xíu, gọi là Chip (hay IC). Một thiết bị hiện đại thường chứa nhiều IC, gọi là hệ thống <strong>SoC (System on Chip)</strong>.
-                    </p>
-                    
-                    <!-- SoC Block Diagram -->
-                    <div class="bg-blue-50/50 p-4 rounded-xl border border-blue-100">
-                        <p class="text-xs font-semibold text-slate-500 mb-3 text-center uppercase tracking-wider">Mô hình khối: Smartphone chứa những loại chip gì?</p>
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-center">
-                            <div class="bg-white p-3 rounded-lg border border-slate-200 shadow-sm hover:border-blue-400 transition-all group">
-                                <i class="fa-solid fa-microchip text-blue-500 mb-2 group-hover:scale-110 transition-transform"></i>
-                                <h5 class="font-bold text-xs text-dark">Processor (SoC)</h5>
-                                <p class="text-[10px] text-slate-500">Bộ não trung tâm (CPU, GPU)</p>
-                            </div>
-                            <div class="bg-white p-3 rounded-lg border border-slate-200 shadow-sm hover:border-emerald-400 transition-all group">
-                                <i class="fa-solid fa-memory text-emerald-500 mb-2 group-hover:scale-110 transition-transform"></i>
-                                <h5 class="font-bold text-xs text-dark">Memory (DRAM/NAND)</h5>
-                                <p class="text-[10px] text-slate-500">Lưu trữ dữ liệu (RAM, ROM)</p>
-                            </div>
-                            <div class="bg-white p-3 rounded-lg border border-slate-200 shadow-sm hover:border-purple-400 transition-all group">
-                                <i class="fa-solid fa-satellite-dish text-purple-500 mb-2 group-hover:scale-110 transition-transform"></i>
-                                <h5 class="font-bold text-xs text-dark">RF / Modem</h5>
-                                <p class="text-[10px] text-slate-500">Xử lý sóng Wifi/5G/Bluetooth</p>
-                            </div>
-                            <div class="bg-white p-3 rounded-lg border border-slate-200 shadow-sm hover:border-amber-400 transition-all group">
-                                <i class="fa-solid fa-battery-half text-amber-500 mb-2 group-hover:scale-110 transition-transform"></i>
-                                <h5 class="font-bold text-xs text-dark">PMIC</h5>
-                                <p class="text-[10px] text-slate-500">Quản lý và phân phối nguồn điện</p>
-                            </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div>
+                            <h4 class="text-base font-bold text-primary mb-2 flex items-center gap-2">
+                                <span class="bg-primary/10 text-primary w-5 h-5 rounded-full flex items-center justify-center text-xs">3</span> Simulation
+                            </h4>
+                            <p class="text-slate-600 text-sm leading-relaxed">
+                                <strong>Mô phỏng (Testbench)</strong>. Đưa tín hiệu ảo vào đoạn code RTL để xem dạng sóng (Waveform) đầu ra có đúng với ý tưởng ban đầu không.
+                            </p>
+                        </div>
+                        <div>
+                            <h4 class="text-base font-bold text-primary mb-2 flex items-center gap-2">
+                                <span class="bg-primary/10 text-primary w-5 h-5 rounded-full flex items-center justify-center text-xs">4</span> FPGA Prototype
+                            </h4>
+                            <p class="text-slate-600 text-sm leading-relaxed">
+                                Đổ code xuống Board <strong>FPGA</strong> (Mạch logic lập trình được) để chạy thử nghiệm phần cứng thực tế. Sửa lỗi với chi phí rất rẻ.
+                            </p>
+                        </div>
+                        <div>
+                            <h4 class="text-base font-bold text-primary mb-2 flex items-center gap-2">
+                                <span class="bg-primary/10 text-primary w-5 h-5 rounded-full flex items-center justify-center text-xs">5</span> ASIC
+                            </h4>
+                            <p class="text-slate-600 text-sm leading-relaxed">
+                                Gửi bản thiết kế đến nhà máy (TSMC, Samsung) để đúc ra con chip chuyên dụng <strong>ASIC</strong> thật sự. Tốn hàng triệu USD.
+                            </p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Concept 3 & Design Flow Diagram -->
+                <!-- Interactive Demo Flow -->
                 <div class="py-5">
-                    <h4 class="text-lg font-bold text-primary mb-2 flex items-center gap-2">
-                        <span class="bg-primary/10 text-primary w-6 h-6 rounded-full flex items-center justify-center text-sm">3</span> 
-                        IC Design (Thiết kế vi mạch) & Lộ trình (Design Flow)
-                    </h4>
-                    <p class="text-slate-600 text-sm leading-relaxed mb-4">
-                        Kỹ sư IC Design <strong>không phải là người đứng trong nhà máy để làm ra con chip vật lý</strong>. Họ giống như "Kiến trúc sư phần cứng": sử dụng ngôn ngữ lập trình (Verilog/VHDL) và phần mềm thiết kế chuyên dụng (EDA Tools) để vẽ ra bản thiết kế logic và vật lý của chip.
-                    </p>
-
-                    <!-- IC Design Flow Diagram -->
-                    <div class="bg-slate-800 p-5 rounded-xl border border-slate-700 overflow-x-auto">
-                        <p class="text-xs font-semibold text-slate-400 mb-4 text-center uppercase tracking-wider">Quy Trình Thiết Kế Vi Mạch Cơ Bản (ASIC Flow)</p>
-                        <div class="flex flex-col md:flex-row items-center justify-between min-w-max gap-2 px-2">
-                            <!-- Step 1 -->
-                            <div class="flex flex-col items-center w-28">
-                                <div class="w-12 h-12 rounded-full bg-slate-700 flex items-center justify-center border-2 border-slate-500 mb-2 z-10 relative">
-                                    <i class="fa-solid fa-file-lines text-white"></i>
-                                </div>
-                                <span class="text-xs font-bold text-white text-center">Specification</span>
-                                <span class="text-[10px] text-slate-400 text-center">Lên ý tưởng/Tài liệu</span>
+                    <div class="bg-slate-800 p-5 rounded-xl border border-slate-700">
+                        <div class="flex justify-between items-center mb-4">
+                            <p class="text-sm font-semibold text-white"><i class="fa-solid fa-gamepad text-secondary"></i> Demo: Click để xem hành trình của 1 dự án!</p>
+                            <button id="nextFlowBtn" class="bg-primary hover:bg-blue-500 text-white text-xs font-bold py-1.5 px-4 rounded shadow-md transition-colors">
+                                Chuyển bước tiếp theo <i class="fa-solid fa-arrow-right ml-1"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="flex flex-col md:flex-row items-center justify-between gap-4 px-2 mt-6">
+                            <!-- Flow Steps -->
+                            <div id="step-1" class="flow-step flex flex-col items-center w-28 p-2 rounded-lg border-2 border-transparent transition-all opacity-50">
+                                <i class="fa-regular fa-lightbulb text-3xl text-yellow-400 mb-2"></i>
+                                <span class="text-xs font-bold text-white text-center">1. Idea</span>
+                                <span id="desc-1" class="text-[10px] text-slate-400 text-center mt-1 hidden">Viết tài liệu Specs</span>
                             </div>
-                            <!-- Arrow -->
-                            <div class="hidden md:block w-8 h-0.5 bg-slate-600 relative animate-flow"><i class="fa-solid fa-caret-right text-slate-500 absolute -right-2 -top-[7px]"></i></div>
-                            <div class="md:hidden h-6 w-0.5 bg-slate-600"></div>
+                            
+                            <i class="fa-solid fa-chevron-right text-slate-500 hidden md:block"></i>
 
-                            <!-- Step 2 -->
-                            <div class="flex flex-col items-center w-28">
-                                <div class="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center border-2 border-blue-400 mb-2 z-10 relative shadow-[0_0_15px_rgba(37,99,235,0.5)]">
-                                    <i class="fa-solid fa-code text-white"></i>
-                                </div>
-                                <span class="text-xs font-bold text-blue-300 text-center">RTL Design</span>
-                                <span class="text-[10px] text-slate-400 text-center">Code mô tả phần cứng</span>
+                            <div id="step-2" class="flow-step flex flex-col items-center w-28 p-2 rounded-lg border-2 border-transparent transition-all opacity-50">
+                                <i class="fa-solid fa-laptop-code text-3xl text-blue-400 mb-2"></i>
+                                <span class="text-xs font-bold text-white text-center">2. RTL Code</span>
+                                <span id="desc-2" class="text-[10px] text-slate-400 text-center mt-1 hidden">Code Verilog</span>
                             </div>
-                            <!-- Arrow -->
-                            <div class="hidden md:block w-8 h-0.5 bg-slate-600 relative animate-flow"><i class="fa-solid fa-caret-right text-slate-500 absolute -right-2 -top-[7px]"></i></div>
-                            <div class="md:hidden h-6 w-0.5 bg-slate-600"></div>
 
-                            <!-- Step 3 -->
-                            <div class="flex flex-col items-center w-28">
-                                <div class="w-12 h-12 rounded-full bg-emerald-600 flex items-center justify-center border-2 border-emerald-400 mb-2 z-10 relative">
-                                    <i class="fa-solid fa-bug-slash text-white"></i>
-                                </div>
-                                <span class="text-xs font-bold text-emerald-300 text-center">Verification</span>
-                                <span class="text-[10px] text-slate-400 text-center">Mô phỏng/Tìm lỗi</span>
+                            <i class="fa-solid fa-chevron-right text-slate-500 hidden md:block"></i>
+
+                            <div id="step-3" class="flow-step flex flex-col items-center w-28 p-2 rounded-lg border-2 border-transparent transition-all opacity-50">
+                                <i class="fa-solid fa-wave-square text-3xl text-emerald-400 mb-2"></i>
+                                <span class="text-xs font-bold text-white text-center">3. Simulation</span>
+                                <span id="desc-3" class="text-[10px] text-slate-400 text-center mt-1 hidden">Xem dạng sóng</span>
                             </div>
-                            <!-- Arrow -->
-                            <div class="hidden md:block w-8 h-0.5 bg-slate-600 relative animate-flow"><i class="fa-solid fa-caret-right text-slate-500 absolute -right-2 -top-[7px]"></i></div>
-                            <div class="md:hidden h-6 w-0.5 bg-slate-600"></div>
 
-                            <!-- Step 4 -->
-                            <div class="flex flex-col items-center w-28">
-                                <div class="w-12 h-12 rounded-full bg-purple-600 flex items-center justify-center border-2 border-purple-400 mb-2 z-10 relative">
-                                    <i class="fa-solid fa-layer-group text-white"></i>
-                                </div>
-                                <span class="text-xs font-bold text-purple-300 text-center">Physical Design</span>
-                                <span class="text-[10px] text-slate-400 text-center">Bố trí Layout vật lý</span>
-                            </div>
-                            <!-- Arrow -->
-                            <div class="hidden md:block w-8 h-0.5 border-t-2 border-dashed border-slate-600 relative"><i class="fa-solid fa-caret-right text-slate-500 absolute -right-2 -top-[7px]"></i></div>
-                            <div class="md:hidden h-6 w-0.5 border-l-2 border-dashed border-slate-600"></div>
+                            <i class="fa-solid fa-chevron-right text-slate-500 hidden md:block"></i>
 
-                            <!-- Step 5 (Out of scope of designer) -->
-                            <div class="flex flex-col items-center w-28 opacity-60">
-                                <div class="w-12 h-12 rounded-full bg-slate-700 flex items-center justify-center border-2 border-slate-500 mb-2 z-10 relative">
-                                    <i class="fa-solid fa-industry text-white"></i>
-                                </div>
-                                <span class="text-xs font-bold text-slate-300 text-center">Fabrication (Fab)</span>
-                                <span class="text-[10px] text-slate-400 text-center">Nhà máy sản xuất</span>
+                            <div id="step-4" class="flow-step flex flex-col items-center w-28 p-2 rounded-lg border-2 border-transparent transition-all opacity-50">
+                                <i class="fa-solid fa-microchip text-3xl text-purple-400 mb-2"></i>
+                                <span class="text-xs font-bold text-white text-center">4. FPGA/ASIC</span>
+                                <span id="desc-4" class="text-[10px] text-slate-400 text-center mt-1 hidden">Chip thực tế</span>
                             </div>
                         </div>
                     </div>
@@ -359,7 +299,7 @@
         <section class="bg-white rounded-2xl shadow-lg border border-slate-200 overflow-hidden">
             <div class="bg-amber-50 border-b border-amber-200 px-6 py-4 flex items-center justify-between">
                 <h3 class="text-xl font-bold text-dark flex items-center gap-2">
-                    <i class="fa-solid fa-users-gear text-secondary"></i> Nhiệm Vụ Sinh Viên
+                    <i class="fa-solid fa-users-gear text-secondary"></i> Nhiệm Vụ Của Nhóm
                 </h3>
                 <span class="text-xs bg-amber-200 text-amber-800 px-3 py-1 rounded-full font-bold shadow-sm">Thuyết trình 10 phút</span>
             </div>
@@ -368,31 +308,31 @@
                     <i class="fa-solid fa-lightbulb text-secondary text-xl mt-1"></i>
                     <div>
                         <p class="text-sm font-bold text-slate-800 mb-1">Quy tắc Mentor:</p>
-                        <p class="text-sm text-slate-600 italic">"Không cần bài báo cáo hoàn hảo như luận văn. Hãy dùng ngôn ngữ của một sinh viên để giải thích vấn đề cho sinh viên khác hiểu. Aim for clarity, not perfection."</p>
+                        <p class="text-sm text-slate-600 italic">"Đừng cố gắng copy các đoạn code khó hiểu trên mạng để khoe. Hãy giải thích bằng ngôn ngữ đơn giản nhất: Ý tưởng biến thành mạch số như thế nào?"</p>
                     </div>
                 </div>
 
-                <h4 class="font-bold text-dark mb-3 text-sm uppercase tracking-wider">Gợi ý nội dung Slide (5-7 trang):</h4>
+                <h4 class="font-bold text-dark mb-3 text-sm uppercase tracking-wider">Gợi ý nội dung Slide nhóm (5-7 trang):</h4>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-slate-700 mb-2">
                     <div class="bg-slate-50 p-3 rounded-lg border border-slate-200 flex gap-3 items-center hover:border-amber-300 transition-colors">
                         <span class="bg-dark text-white rounded w-6 h-6 flex items-center justify-center shrink-0 font-bold text-xs">1</span>
-                        <p class="font-medium">Chất bán dẫn & Chip đơn giản là gì?</p>
+                        <p class="font-medium">Một "Ý tưởng phần cứng" (Idea) được mô tả như thế nào?</p>
                     </div>
                     <div class="bg-slate-50 p-3 rounded-lg border border-slate-200 flex gap-3 items-center hover:border-amber-300 transition-colors">
                         <span class="bg-dark text-white rounded w-6 h-6 flex items-center justify-center shrink-0 font-bold text-xs">2</span>
-                        <p class="font-medium">5 ví dụ Chip trong đời sống thường ngày.</p>
+                        <p class="font-medium">RTL và Verilog là gì? Tại sao không dùng C/C++?</p>
                     </div>
                     <div class="bg-slate-50 p-3 rounded-lg border border-slate-200 flex gap-3 items-center hover:border-amber-300 transition-colors">
                         <span class="bg-dark text-white rounded w-6 h-6 flex items-center justify-center shrink-0 font-bold text-xs">3</span>
-                        <p class="font-medium">Kỹ sư IC Design thực chất làm công việc gì?</p>
+                        <p class="font-medium">Mục đích của việc Mô phỏng (Simulation)?</p>
                     </div>
                     <div class="bg-slate-50 p-3 rounded-lg border border-slate-200 flex gap-3 items-center hover:border-amber-300 transition-colors">
                         <span class="bg-dark text-white rounded w-6 h-6 flex items-center justify-center shrink-0 font-bold text-xs">4</span>
-                        <p class="font-medium">Top 3 công ty thiết kế chip tại Việt Nam/Thế giới.</p>
+                        <p class="font-medium">FPGA và ASIC nằm ở đâu trong quy trình này?</p>
                     </div>
                     <div class="bg-slate-50 p-3 rounded-lg border border-slate-200 flex gap-3 items-center sm:col-span-2 hover:border-amber-300 transition-colors bg-gradient-to-r from-amber-50 to-white">
                         <span class="bg-secondary text-white rounded w-6 h-6 flex items-center justify-center shrink-0 font-bold text-xs"><i class="fa-solid fa-question"></i></span>
-                        <p class="font-medium">Chuẩn bị sẵn 3 câu hỏi (chỗ còn thắc mắc) để hỏi Mentor.</p>
+                        <p class="font-medium">Chuẩn bị sẵn 2-3 câu hỏi để thảo luận và nhờ Mentor giải đáp.</p>
                     </div>
                 </div>
             </div>
@@ -412,7 +352,7 @@
                         <span class="text-accent font-bold text-sm w-16 bg-accent/10 px-2 py-0.5 rounded text-center">0' - 5'</span>
                         <h4 class="font-bold text-dark text-lg">Quick Check-in</h4>
                     </div>
-                    <p class="text-sm text-slate-600 bg-slate-50 p-2 rounded border border-slate-100">Điểm danh, kiểm tra đường truyền, khởi động bằng một câu hỏi từ Mentor.</p>
+                    <p class="text-sm text-slate-600 bg-slate-50 p-2 rounded border border-slate-100">Điểm danh, kiểm tra năng lượng, nhắc lại nhanh kiến thức tuần 1.</p>
                 </div>
                 
                 <div class="relative pl-6 md:pl-8 group">
@@ -421,7 +361,7 @@
                         <span class="text-primary font-bold text-sm w-16 bg-primary/10 px-2 py-0.5 rounded text-center">5' - 15'</span>
                         <h4 class="font-bold text-dark text-lg">Student Presentation</h4>
                     </div>
-                    <p class="text-sm text-slate-600 bg-slate-50 p-2 rounded border border-slate-100">Nhóm/cá nhân thuyết trình. Lớp lắng nghe và note lại thắc mắc.</p>
+                    <p class="text-sm text-slate-600 bg-slate-50 p-2 rounded border border-slate-100">Cá nhân/Nhóm đại diện lên thuyết trình về "Flow thiết kế: Idea to Chip".</p>
                 </div>
 
                 <div class="relative pl-6 md:pl-8 group">
@@ -430,7 +370,7 @@
                         <span class="text-dark font-bold text-sm w-16 bg-slate-200 px-2 py-0.5 rounded text-center">15' - 25'</span>
                         <h4 class="font-bold text-dark text-lg">Mentor Guidance</h4>
                     </div>
-                    <p class="text-sm text-slate-600 bg-slate-50 p-2 rounded border border-slate-100">Mentor nhận xét, <strong class="text-red-500">sửa lỗi hiểu sai (misconceptions)</strong>, và chốt kiến thức chuẩn học thuật kỹ thuật.</p>
+                    <p class="text-sm text-slate-600 bg-slate-50 p-2 rounded border border-slate-100">Mentor nhận xét, <strong class="text-red-500">nhấn mạnh tầm quan trọng của Specification trước khi code</strong>, giải đáp thuật ngữ khó.</p>
                 </div>
 
                 <div class="relative pl-6 md:pl-8 group">
@@ -439,7 +379,7 @@
                         <span class="text-secondary font-bold text-sm w-16 bg-secondary/10 px-2 py-0.5 rounded text-center">25' - 45'</span>
                         <h4 class="font-bold text-dark text-lg">Breakout Room</h4>
                     </div>
-                    <p class="text-sm text-slate-600 bg-slate-50 p-2 rounded border border-slate-100">Chia phòng nhỏ (4-5 bạn/phòng). Tranh luận theo Guideline bên dưới.</p>
+                    <p class="text-sm text-slate-600 bg-slate-50 p-2 rounded border border-slate-100">Vào phòng nhỏ. Phân tích chức năng của một thiết bị quen thuộc theo Guideline.</p>
                 </div>
 
                 <div class="relative pl-6 md:pl-8 group">
@@ -448,7 +388,7 @@
                         <span class="text-purple-500 font-bold text-sm w-16 bg-purple-100 px-2 py-0.5 rounded text-center">45' - 55'</span>
                         <h4 class="font-bold text-dark text-lg">Group Sharing</h4>
                     </div>
-                    <p class="text-sm text-slate-600 bg-slate-50 p-2 rounded border border-slate-100">Đại diện các phòng báo cáo 1 điểm tâm đắc nhất khi quay lại phòng lớn.</p>
+                    <p class="text-sm text-slate-600 bg-slate-50 p-2 rounded border border-slate-100">Reporter các nhóm tóm tắt thiết bị nhóm mình chọn và các Input/Output xác định được.</p>
                 </div>
 
                 <div class="relative pl-6 md:pl-8 group">
@@ -457,7 +397,7 @@
                         <span class="text-emerald-600 font-bold text-sm w-16 bg-emerald-100 px-2 py-0.5 rounded text-center">55' - 60'</span>
                         <h4 class="font-bold text-dark text-lg">Wrap-up & Task</h4>
                     </div>
-                    <p class="text-sm text-slate-600 bg-slate-50 p-2 rounded border border-slate-100">Mentor tổng kết bài, giao task nhỏ về nhà và gửi link form điểm danh.</p>
+                    <p class="text-sm text-slate-600 bg-slate-50 p-2 rounded border border-slate-100">Giao task (Viết spec cho 1 mini-project) và điểm danh.</p>
                 </div>
             </div>
         </section>
@@ -469,12 +409,12 @@
                     <i class="fa-solid fa-comments text-secondary text-xl"></i>
                     <h3 class="text-xl font-bold">Hướng Dẫn Breakout Room</h3>
                 </div>
-                <span class="text-[10px] uppercase font-bold bg-white/10 px-2 py-1 rounded text-slate-300">Không gian an toàn tâm lý</span>
+                <span class="text-[10px] uppercase font-bold bg-white/10 px-2 py-1 rounded text-slate-300">Case Study: Đèn Giao Thông</span>
             </div>
             
             <div class="bg-rose-500/10 border-b border-rose-500/20 px-6 py-2 text-sm text-rose-200 flex items-center gap-2">
-                <i class="fa-solid fa-shield-heart"></i>
-                <em>Lưu ý: Không có câu trả lời sai trong buổi học này, hãy tự tin nêu góc nhìn cá nhân!</em>
+                <i class="fa-solid fa-brain"></i>
+                <em>Tập tư duy như Kỹ sư: Phá vỡ một hệ thống lớn thành các thành phần Input / Logic / Output.</em>
             </div>
 
             <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -484,13 +424,13 @@
                     </h4>
                     <ul class="space-y-3">
                         <li class="bg-white/5 p-3 rounded-lg text-sm border-l-2 border-secondary hover:bg-white/10 transition-colors">
-                            <span class="font-bold text-secondary mr-2">Q1.</span> What devices around you use chips? (Quanh bạn có thiết bị nào có dùng chip? Kể tên thứ bạn nghĩ là ít ngờ tới nhất).
+                            <span class="font-bold text-secondary mr-2">Q1.</span> Nếu thiết kế bộ điều khiển đèn giao thông tại ngã tư, bạn cần xác định những chức năng (Requirements) nào?
                         </li>
                         <li class="bg-white/5 p-3 rounded-lg text-sm border-l-2 border-secondary hover:bg-white/10 transition-colors">
-                            <span class="font-bold text-secondary mr-2">Q2.</span> Which IC Design career path sounds interesting? (Trong lộ trình Thiết kế vi mạch, bạn tò mò công đoạn nào nhất?).
+                            <span class="font-bold text-secondary mr-2">Q2.</span> Tại sao cần phải chạy mô phỏng (Simulation) bộ điều khiển này thay vì nạp thẳng lên ngã tư thật nghiệm thu?
                         </li>
                         <li class="bg-white/5 p-3 rounded-lg text-sm border-l-2 border-secondary hover:bg-white/10 transition-colors">
-                            <span class="font-bold text-secondary mr-2">Q3.</span> What worries you most? (Điều gì làm bạn e ngại nhất khi theo đuổi ngành Bán dẫn tại VN hiện nay?).
+                            <span class="font-bold text-secondary mr-2">Q3.</span> FPGA và ASIC khác nhau thế nào theo cách hiểu của nhóm? Ngã tư đường phố nên dùng chip gì?
                         </li>
                     </ul>
                 </div>
@@ -502,19 +442,19 @@
                     <div class="space-y-2 mb-4 bg-black/20 p-3 rounded-xl border border-white/5">
                         <div class="flex items-center gap-3">
                             <div class="bg-white/10 w-8 h-8 rounded-full flex items-center justify-center shrink-0"><i class="fa-solid fa-user-tie text-accent text-sm"></i></div>
-                            <p class="text-sm"><strong class="text-white">Facilitator:</strong> Gọi tên từng bạn để đảm bảo ai cũng được nói.</p>
+                            <p class="text-sm"><strong class="text-white">Facilitator:</strong> Điều phối mọi người liệt kê Đầu vào (Cảm biến/Nút bấm) và Đầu ra (Đèn).</p>
                         </div>
                         <div class="flex items-center gap-3">
                             <div class="bg-white/10 w-8 h-8 rounded-full flex items-center justify-center shrink-0"><i class="fa-solid fa-pen-clip text-accent text-sm"></i></div>
-                            <p class="text-sm"><strong class="text-white">Note Keeper:</strong> Tóm tắt nhanh ý chính vào chatbox nhóm.</p>
+                            <p class="text-sm"><strong class="text-white">Note Keeper:</strong> Ghi lại câu trả lời Q1, Q2, Q3 vào chatbox.</p>
                         </div>
                         <div class="flex items-center gap-3">
                             <div class="bg-white/10 w-8 h-8 rounded-full flex items-center justify-center shrink-0"><i class="fa-solid fa-bullhorn text-accent text-sm"></i></div>
-                            <p class="text-sm"><strong class="text-white">Reporter:</strong> Thay mặt nhóm trình bày 1 phút lúc ra phòng lớn.</p>
+                            <p class="text-sm"><strong class="text-white">Reporter:</strong> Tóm tắt nhanh: Nhóm em định nghĩa Đèn giao thông có 2 Input và 3 Output...</p>
                         </div>
                     </div>
                     <div class="bg-accent/20 p-4 rounded-xl border border-accent/40 shadow-inner">
-                        <p class="text-sm"><strong class="text-accent"><i class="fa-solid fa-trophy mr-1"></i> Output kỳ vọng:</strong> Nhóm chốt được 1 thiết bị thú vị nhất (Q1) và 1 nỗi lo lắng lớn nhất (Q3) để báo cáo.</p>
+                        <p class="text-sm"><strong class="text-accent"><i class="fa-solid fa-bolt mr-1"></i> Output kỳ vọng:</strong> Nhóm phân tích rõ ràng được Specs của 1 ngã tư đèn đỏ cơ bản.</p>
                     </div>
                 </div>
             </div>
@@ -525,36 +465,36 @@
             <div class="flex flex-col md:flex-row md:items-center justify-between mb-6">
                 <div>
                     <h3 class="text-xl font-bold text-dark flex items-center gap-2">
-                        <i class="fa-solid fa-language text-accent"></i> Từ Vựng Tiếng Anh Chuyên Ngành
+                        <i class="fa-solid fa-language text-accent"></i> Từ Vựng Thiết Kế
                     </h3>
-                    <p class="text-sm text-slate-500 italic mt-1">Trong ngành kỹ thuật, Tiếng Anh là công cụ sinh tồn. Hãy quen với chúng.</p>
+                    <p class="text-sm text-slate-500 italic mt-1">Dân làm mạch số chắc chắn sẽ nhắc đến các từ khóa này hàng ngày.</p>
                 </div>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                <!-- Word Cards with Hover Effects -->
+                <!-- Word Cards -->
                 <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover:border-primary hover:-translate-y-1 hover:shadow-md transition-all duration-300 group cursor-default">
-                    <h4 class="font-bold text-primary text-lg mb-1 border-b pb-1">Semiconductor</h4>
-                    <p class="text-sm font-bold text-dark mb-1">Chất bán dẫn</p>
-                    <p class="text-[11px] text-slate-500 leading-tight">Vật liệu nền tảng làm ra Chip (như Silicon).</p>
+                    <h4 class="font-bold text-primary text-lg mb-1 border-b pb-1">Specification</h4>
+                    <p class="text-sm font-bold text-dark mb-1">Đặc tả yêu cầu</p>
+                    <p class="text-[11px] text-slate-500 leading-tight">Tài liệu mô tả chi tiết đầu vào, đầu ra, và chức năng mong muốn của chip.</p>
                 </div>
                 
                 <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover:border-primary hover:-translate-y-1 hover:shadow-md transition-all duration-300 group cursor-default">
-                    <h4 class="font-bold text-primary text-lg mb-1 border-b pb-1">Integrated Circuit</h4>
-                    <p class="text-sm font-bold text-dark mb-1">Mạch tích hợp (IC)</p>
-                    <p class="text-[11px] text-slate-500 leading-tight">Tên kỹ thuật chính thức của Vi mạch/Chip.</p>
+                    <h4 class="font-bold text-primary text-lg mb-1 border-b pb-1">RTL</h4>
+                    <p class="text-sm font-bold text-dark mb-1">Mức truyền thanh ghi</p>
+                    <p class="text-[11px] text-slate-500 leading-tight">(Register-Transfer Level) Mức mô tả code phần cứng (thường dùng Verilog/VHDL).</p>
                 </div>
                 
                 <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover:border-primary hover:-translate-y-1 hover:shadow-md transition-all duration-300 group cursor-default">
-                    <h4 class="font-bold text-primary text-lg mb-1 border-b pb-1">ASIC</h4>
-                    <p class="text-sm font-bold text-dark mb-1">Chip chuyên dụng</p>
-                    <p class="text-[11px] text-slate-500 leading-tight">(Application-Specific IC) Chip thiết kế cứng cho 1 mục đích duy nhất.</p>
+                    <h4 class="font-bold text-primary text-lg mb-1 border-b pb-1">Simulation</h4>
+                    <p class="text-sm font-bold text-dark mb-1">Mô phỏng</p>
+                    <p class="text-[11px] text-slate-500 leading-tight">Quá trình dùng phần mềm để kiểm tra xem code RTL chạy có đúng logic không.</p>
                 </div>
                 
                 <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover:border-primary hover:-translate-y-1 hover:shadow-md transition-all duration-300 group cursor-default">
-                    <h4 class="font-bold text-primary text-lg mb-1 border-b pb-1">FPGA</h4>
-                    <p class="text-sm font-bold text-dark mb-1">Mạch lập trình được</p>
-                    <p class="text-[11px] text-slate-500 leading-tight">(Field-Programmable Gate Array) Chip cho phép viết code đổi phần cứng.</p>
+                    <h4 class="font-bold text-primary text-lg mb-1 border-b pb-1">Testbench</h4>
+                    <p class="text-sm font-bold text-dark mb-1">Môi trường kiểm thử</p>
+                    <p class="text-[11px] text-slate-500 leading-tight">Đoạn code viết ra chỉ để tạo tín hiệu giả (stimulus) nạp vào thiết kế chính để mô phỏng.</p>
                 </div>
             </div>
         </section>
@@ -563,7 +503,7 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <!-- MENTOR QUICK NOTE -->
             <section class="bg-blue-600 text-white rounded-2xl shadow-lg p-6 relative overflow-hidden flex flex-col">
-                <i class="fa-solid fa-graduation-cap absolute -right-6 -bottom-6 text-9xl text-blue-500 opacity-30"></i>
+                <i class="fa-solid fa-chalkboard-user absolute -right-6 -bottom-6 text-9xl text-blue-500 opacity-30"></i>
                 <div class="relative z-10 flex-1">
                     <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
                         <i class="fa-solid fa-lightbulb text-yellow-300"></i> Lời Khuyên Từ Mentor
@@ -571,13 +511,13 @@
                     
                     <div class="space-y-4">
                         <div class="bg-yellow-500/20 p-3 rounded-lg border border-yellow-400/50 backdrop-blur-sm">
-                            <span class="text-yellow-300 text-xs font-bold uppercase tracking-wider block mb-1"><i class="fa-solid fa-triangle-exclamation"></i> Sửa Lỗi Hiểu Lầm (Misconception)</span>
-                            <p class="text-sm text-white leading-relaxed">IC Design <strong>KHÔNG</strong> phải làm công nhân trong nhà máy hóa chất. Công việc này diễn ra trong văn phòng (Clean room for servers), sử dụng tư duy Logic và viết Code (Hardware Description Language - HDL) giống hệt kỹ sư IT phần mềm.</p>
+                            <span class="text-yellow-300 text-xs font-bold uppercase tracking-wider block mb-1"><i class="fa-solid fa-triangle-exclamation"></i> Sửa Lỗi Tư Duy (Misconception)</span>
+                            <p class="text-sm text-white leading-relaxed">Nhiều sinh viên nghĩ thiết kế bắt đầu bằng việc code Verilog. <strong>SAI!</strong> Thiết kế bắt đầu bằng việc lấy giấy bút ra, vẽ hình chữ nhật (Khối hệ thống), xác định rõ có bao nhiêu mũi tên cắm vào (Input), mũi tên đi ra (Output) và chức năng là gì.</p>
                         </div>
 
                         <div class="border-t border-blue-400/50 pt-3">
-                            <p class="text-base font-bold text-yellow-300 italic mb-2">"Hành trình ngàn dặm bắt đầu từ những cổng Logic (Logic Gates)."</p>
-                            <p class="text-sm text-blue-50 leading-relaxed">Các bạn sinh viên hoàn toàn có thể bắt đầu bằng việc: Học cực chắc môn <strong>Kỹ thuật số (Digital Logic)</strong>, tập viết code bằng <strong>Verilog</strong>, đổ code chạy thực tế trên Board <strong>FPGA</strong>, và luyện tiếng Anh thật tốt.</p>
+                            <p class="text-base font-bold text-yellow-300 italic mb-2">"Good engineering starts from understanding requirements, not from writing code."</p>
+                            <p class="text-sm text-blue-50 leading-relaxed">Kỹ sư xịn là người viết Specs rõ ràng, lường trước mọi trường hợp (corner cases) để Verification. Viết code chỉ là bước chuyển thể ngôn ngữ con người sang ngôn ngữ máy.</p>
                         </div>
                     </div>
                 </div>
@@ -586,31 +526,31 @@
             <!-- MINI PROJECT CONNECTION -->
             <section class="bg-white rounded-2xl shadow-lg border border-slate-200 p-6 flex flex-col">
                 <h3 class="text-xl font-bold text-dark mb-4 flex items-center gap-2 border-b pb-3">
-                    <i class="fa-solid fa-plug-circle-bolt text-secondary"></i> Tính Thực Tiễn (Định Hướng)
+                    <i class="fa-solid fa-plug-circle-bolt text-secondary"></i> Kết Nối Dự Án (Mini-Projects)
                 </h3>
                 <p class="text-sm text-slate-600 mb-4">
-                    Lý thuyết sẽ rất chán nếu không làm ra sản phẩm. Chủ đề hôm nay là tư duy nền để các kỳ tới bạn tự làm được các Mini Projects hệ thống số như:
+                    Quy trình Idea &rarr; Spec &rarr; RTL &rarr; Sim &rarr; FPGA được áp dụng cho mọi đồ án thực hành sau này của bạn, điển hình như:
                 </p>
                 <div class="grid grid-cols-2 gap-3 flex-grow">
-                    <div class="bg-slate-50 border border-slate-100 rounded-lg p-3 flex flex-col items-center justify-center text-center hover:border-blue-300 transition-colors shadow-sm">
-                        <i class="fa-solid fa-traffic-light text-2xl text-accent mb-2"></i>
-                        <h4 class="font-bold text-xs text-dark">Traffic Light FSM</h4>
-                        <p class="text-[10px] text-slate-500 mt-1">Hệ điều khiển đèn giao thông</p>
+                    <div class="bg-slate-50 border border-slate-100 rounded-lg p-3 flex flex-col items-center justify-center text-center hover:border-emerald-300 transition-colors shadow-sm">
+                        <i class="fa-solid fa-traffic-light text-2xl text-emerald-600 mb-2"></i>
+                        <h4 class="font-bold text-xs text-dark">Traffic Light</h4>
+                        <p class="text-[10px] text-slate-500 mt-1">Viết specs cho đèn đỏ/xanh/vàng</p>
+                    </div>
+                    <div class="bg-slate-50 border border-slate-100 rounded-lg p-3 flex flex-col items-center justify-center text-center hover:border-red-300 transition-colors shadow-sm">
+                        <i class="fa-solid fa-lock text-2xl text-red-500 mb-2"></i>
+                        <h4 class="font-bold text-xs text-dark">Password Lock</h4>
+                        <p class="text-[10px] text-slate-500 mt-1">Mạch khóa cửa nhập mã PIN</p>
+                    </div>
+                    <div class="bg-slate-50 border border-slate-100 rounded-lg p-3 flex flex-col items-center justify-center text-center hover:border-purple-300 transition-colors shadow-sm">
+                        <i class="fa-solid fa-glass-water text-2xl text-purple-500 mb-2"></i>
+                        <h4 class="font-bold text-xs text-dark">Vending Machine</h4>
+                        <p class="text-[10px] text-slate-500 mt-1">Mô phỏng máy bán nước tự động</p>
                     </div>
                     <div class="bg-slate-50 border border-slate-100 rounded-lg p-3 flex flex-col items-center justify-center text-center hover:border-blue-300 transition-colors shadow-sm">
                         <i class="fa-solid fa-stopwatch-20 text-2xl text-primary mb-2"></i>
                         <h4 class="font-bold text-xs text-dark">Digital Counter</h4>
-                        <p class="text-[10px] text-slate-500 mt-1">Bộ đếm giây hiển thị LED 7 đoạn</p>
-                    </div>
-                    <div class="bg-slate-50 border border-slate-100 rounded-lg p-3 flex flex-col items-center justify-center text-center hover:border-blue-300 transition-colors shadow-sm">
-                        <i class="fa-solid fa-microchip text-2xl text-purple-600 mb-2"></i>
-                        <h4 class="font-bold text-xs text-dark">FPGA Demo</h4>
-                        <p class="text-[10px] text-slate-500 mt-1">Hiện thực hoá code Verilog lên Board</p>
-                    </div>
-                    <div class="bg-slate-50 border border-slate-100 rounded-lg p-3 flex flex-col items-center justify-center text-center hover:border-blue-300 transition-colors shadow-sm">
-                        <i class="fa-solid fa-network-wired text-2xl text-amber-600 mb-2"></i>
-                        <h4 class="font-bold text-xs text-dark">UART Protocol</h4>
-                        <p class="text-[10px] text-slate-500 mt-1">Giao tiếp chip với máy tính</p>
+                        <p class="text-[10px] text-slate-500 mt-1">Đồng hồ bấm giờ đếm ngược</p>
                     </div>
                 </div>
             </section>
@@ -627,25 +567,21 @@
                 <!-- Mini Task -->
                 <div class="bg-white p-5 rounded-xl border border-emerald-100 shadow-sm mb-6 relative overflow-hidden">
                     <div class="absolute right-0 top-0 w-1 h-full bg-emerald-400"></div>
-                    <h4 class="font-bold text-emerald-700 mb-2 flex items-center gap-2"><i class="fa-solid fa-fire text-secondary"></i> Bài Tập Về Nhà (Mini Task)</h4>
-                    <p class="text-sm text-slate-700 mb-3">Mỗi bạn hãy lên Group chung, chọn <strong>1 thiết bị có chứa chip</strong> (ngoại trừ Điện thoại/Máy tính) và đăng 1 post trả lời nhanh 3 ý:</p>
+                    <h4 class="font-bold text-emerald-700 mb-2 flex items-center gap-2"><i class="fa-solid fa-fire text-secondary"></i> Task Tuần Này (Mini Specs)</h4>
+                    <p class="text-sm text-slate-700 mb-3">Mỗi bạn hãy chọn 1 hệ thống điện tử số cực kỳ đơn giản (Ví dụ: Hệ thống báo cháy, Cửa tự động mở khi có người...) và post vào group nhóm các ý sau:</p>
                     <ul class="list-disc list-inside text-sm text-slate-600 space-y-1 ml-2 font-medium">
-                        <li>Thiết bị đó là gì?</li>
-                        <li>Nó dùng vi xử lý (chip) để làm tính năng gì?</li>
-                        <li>Nếu tháo con chip ra, điều gì sẽ xảy ra?</li>
+                        <li><strong>Idea:</strong> Hệ thống làm gì?</li>
+                        <li><strong>Inputs:</strong> Nó nhận tín hiệu từ đâu? (Cảm biến nhiệt? Nút nhấn?)</li>
+                        <li><strong>Outputs:</strong> Nó xuất tín hiệu đi đâu? (Còi hú? Động cơ kéo cửa?)</li>
+                        <li><strong>Mô phỏng (Thinking):</strong> Nếu Input X xảy ra thì Output Y là gì?</li>
                     </ul>
-                    <!-- Thêm tính năng tương tác theo Review -->
-                    <div class="mt-4 bg-emerald-50 border border-emerald-100 p-3 rounded-lg text-xs text-emerald-700 font-semibold flex items-center gap-2">
-                        <i class="fa-regular fa-thumbs-up text-lg"></i>
-                        <span>Gắn kết cộng đồng: Đừng quên thả tim, mở cam và tương tác trên nhóm cộng đồng và chia sẻ cho nhiều người đang quan tâm đến chủ đề này nhé!</span>
-                    </div>
                 </div>
 
                 <!-- Accordions for Outcomes and Reflection -->
                 <div class="space-y-3">
                     <details class="group bg-white rounded-lg border border-slate-200 transition-all">
                         <summary class="flex items-center justify-between p-4 cursor-pointer font-semibold text-slate-800 group-open:text-emerald-700 hover:bg-slate-50 transition-colors rounded-lg">
-                            <span class="flex items-center gap-2"><i class="fa-solid fa-clipboard-check text-emerald-500"></i> Mục tiêu sinh viên đạt được (Tự kiểm tra)</span>
+                            <span class="flex items-center gap-2"><i class="fa-solid fa-clipboard-check text-emerald-500"></i> Mục tiêu sinh viên đạt được (Tự đánh giá)</span>
                             <span class="transition-transform duration-300 group-open:rotate-180">
                                 <i class="fa-solid fa-chevron-down text-slate-400"></i>
                             </span>
@@ -653,11 +589,11 @@
                         <div class="p-4 border-t border-slate-100 text-sm text-slate-600 bg-slate-50/50">
                             <p class="mb-3 text-xs italic text-slate-500">"Sau buổi này, tôi có thể tự tin nói rằng:"</p>
                             <ul class="space-y-2">
-                                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> Giải thích được đơn giản sự khác biệt giữa Vật liệu bán dẫn và Vi mạch (Chip).</li>
-                                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> Đưa ra được ví dụ về cấu trúc một hệ thống vi mạch (SoC).</li>
-                                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> Liệt kê được các bước cơ bản trong Design Flow (RTL -> Verif -> Physical).</li>
-                                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> Hiểu được vai trò thực sự của một Kỹ sư Thiết kế vi mạch.</li>
-                                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> Cảm thấy có hứng thú với các dự án Mạch số (Digital Design) sắp tới.</li>
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> Hiểu thiết kế phải bắt đầu từ việc nắm rõ yêu cầu, không phải lao vào code.</li>
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> Giải thích được quy trình cơ bản Idea &rarr; RTL &rarr; FPGA/ASIC.</li>
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> Biết vì sao cần phải Mô phỏng (Simulation) để tìm lỗi.</li>
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> Hiểu được Verilog dùng để kết nối với phần cứng thực tế.</li>
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> Có thể tự liệt kê Input/Output/Chức năng cho một hệ thống đơn giản.</li>
                             </ul>
                         </div>
                     </details>
@@ -670,21 +606,19 @@
                             </span>
                         </summary>
                         <div class="p-4 border-t border-slate-100 bg-blue-50/30">
-                            <p class="text-sm text-slate-600 mb-4">Nhằm mục đích đo lường hiệu quả học tập và cải thiện cho tuần sau, vui lòng dành 1 phút điền form.</p>
+                            <p class="text-sm text-slate-600 mb-4">Vui lòng dành 1 phút review buổi học để Mentor hỗ trợ tốt hơn cho tuần tới.</p>
                             <div class="bg-white border border-slate-200 p-4 rounded-lg shadow-sm">
                                 <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Mentor sẽ hỏi 5 nội dung sau:</p>
                                 <ol class="list-decimal list-inside text-sm text-slate-700 space-y-1.5 font-medium">
-                                    <li>Xác nhận tham gia buổi học hôm nay?</li>
-                                    <li>Mức độ hiểu bài của bạn (Thang 1-5)?</li>
-                                    <li>Điều gì làm bạn ấn tượng/thú vị nhất?</li>
-                                    <li>Khái niệm nào bạn vẫn còn lấn cấn chưa hiểu rõ?</li>
-                                    <li>Tuần tới bạn dự định làm action nhỏ nào để duy trì đà học tập?</li>
+                                    <li>Xác nhận tham gia buổi học Week 2?</li>
+                                    <li>Em hiểu luồng Idea &rarr; RTL &rarr; FPGA ở mức độ nào (1-5)?</li>
+                                    <li>Điều gì em thấy rõ ràng hơn sau buổi học này?</li>
+                                    <li>Khái niệm nào em vẫn cảm thấy lơ mơ?</li>
+                                    <li>Em dự định viết specs (Input/Output) cho hệ thống nào để làm bài tập tuần này?</li>
                                 </ol>
                             </div>
-                            <!-- Link Google Form chuẩn -->
-                            <!-- MENTOR: Dán đường link Google Form thực tế của lớp học vào thuộc tính href=" " bên dưới -->
                             <a href="https://forms.gle/4ZFMSAyY3GHe2soZA" target="_blank" class="mt-4 bg-primary hover:bg-blue-700 text-white font-semibold py-2.5 px-6 rounded-lg transition-colors inline-flex items-center gap-2 shadow-md hover:shadow-lg">
-                                <i class="fa-brands fa-google"></i> Mở Google Form Điểm Danh
+                                <i class="fa-brands fa-google"></i> Mở Google Form Tuần 2
                             </a>
                         </div>
                     </details>
@@ -708,7 +642,6 @@
             <h4 class="text-xl font-bold text-white mb-2">IC Design Mentoring Community</h4>
             <p class="text-lg italic text-slate-400 font-light mb-8">"Learn a little, build a little, share a little, grow a little."</p>
             
-            <!-- THÔNG TIN BẢN QUYỀN (Cập nhật theo yêu cầu) -->
             <div class="bg-slate-800/80 inline-block p-4 rounded-xl border border-slate-700 mx-auto text-center max-w-2xl">
                 <div class="flex items-center justify-center gap-2 mb-2 text-white">
                     <i class="fa-solid fa-copyright"></i> <span class="font-bold">Bản quyền nội dung:</span>
@@ -733,27 +666,57 @@
             }
         }
 
-        // 2. Interactive Transistor Toggle Demo
+        // 2. Flow Interactive Demo Logic (Week 2 specific)
         document.addEventListener('DOMContentLoaded', () => {
-            const toggleBtn = document.getElementById('transistorToggle');
-            const bitState = document.getElementById('bitState');
-            const bulbIcon = document.getElementById('bulbIcon');
+            const steps = [
+                document.getElementById('step-1'),
+                document.getElementById('step-2'),
+                document.getElementById('step-3'),
+                document.getElementById('step-4')
+            ];
+            const descs = [
+                document.getElementById('desc-1'),
+                document.getElementById('desc-2'),
+                document.getElementById('desc-3'),
+                document.getElementById('desc-4')
+            ];
+            const nextBtn = document.getElementById('nextFlowBtn');
+            let currentStep = -1;
 
-            toggleBtn.addEventListener('change', function() {
-                if(this.checked) {
-                    bitState.textContent = "1";
-                    bitState.classList.remove('text-slate-400');
-                    bitState.classList.add('text-accent');
-                    
-                    bulbIcon.classList.remove('text-slate-300');
-                    bulbIcon.classList.add('text-yellow-400', 'drop-shadow-[0_0_8px_rgba(250,204,21,0.8)]');
+            nextBtn.addEventListener('click', () => {
+                // If it reached the end, reset to beginning
+                if (currentStep >= steps.length - 1) {
+                    steps.forEach((step, index) => {
+                        step.classList.remove('flow-step-active', 'opacity-100');
+                        step.classList.add('opacity-50');
+                        descs[index].classList.add('hidden');
+                    });
+                    currentStep = -1;
+                    nextBtn.innerHTML = 'Bắt đầu quá trình <i class="fa-solid fa-play ml-1"></i>';
+                    return;
+                }
+
+                currentStep++;
+                
+                // Activate current step
+                steps[currentStep].classList.remove('opacity-50');
+                steps[currentStep].classList.add('opacity-100', 'flow-step-active');
+                descs[currentStep].classList.remove('hidden');
+
+                // Remove active styling from previous step (but keep it fully opaque to show progress)
+                if (currentStep > 0) {
+                    steps[currentStep - 1].classList.remove('flow-step-active');
+                }
+
+                // Change button text
+                if (currentStep === steps.length - 1) {
+                    nextBtn.innerHTML = 'Chạy lại từ đầu <i class="fa-solid fa-rotate-right ml-1"></i>';
+                    nextBtn.classList.replace('bg-primary', 'bg-emerald-500');
+                    nextBtn.classList.replace('hover:bg-blue-500', 'hover:bg-emerald-600');
                 } else {
-                    bitState.textContent = "0";
-                    bitState.classList.remove('text-accent');
-                    bitState.classList.add('text-slate-400');
-                    
-                    bulbIcon.classList.remove('text-yellow-400', 'drop-shadow-[0_0_8px_rgba(250,204,21,0.8)]');
-                    bulbIcon.classList.add('text-slate-300');
+                    nextBtn.innerHTML = 'Chuyển bước tiếp theo <i class="fa-solid fa-arrow-right ml-1"></i>';
+                    nextBtn.classList.replace('bg-emerald-500', 'bg-primary');
+                    nextBtn.classList.replace('hover:bg-emerald-600', 'hover:bg-blue-500');
                 }
             });
         });
