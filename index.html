@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tuần 4: Combinational Logic Circuits | IC Design Mentoring</title>
+    <title>Tuần 5: Sequential Logic and Memory | IC Design Mentoring</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -26,7 +26,7 @@
         }
     </script>
     <style>
-        /* Tùy chỉnh CSS (Animations & Elements) */
+        /* CSS Animations & Elements */
         details > summary { list-style: none; }
         details > summary::-webkit-details-marker { display: none; }
         details[open] summary ~ * { animation: fadeIn 0.3s ease-in-out; }
@@ -68,58 +68,59 @@
         .custom-checkbox:checked::before { transform: scale(1); }
         .task-item.completed { text-decoration: line-through; color: #94a3b8; }
 
-        /* SVG MUX Animations */
+        /* Sequential Logic Demo Animations */
         .svg-wire {
-            transition: all 0.3s ease-in-out;
+            transition: stroke 0.3s ease-in-out, stroke-width 0.3s ease-in-out;
+        }
+        .svg-text {
+            transition: fill 0.3s ease-in-out;
         }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased selection:bg-primary selection:text-white pb-20">
 
-    <!-- HERO SECTION -->
     <header class="bg-gradient-to-br from-dark to-slate-700 text-white pt-16 pb-20 px-6 shadow-xl relative overflow-hidden">
         <div class="absolute top-0 right-0 opacity-10 pointer-events-none">
-            <i class="fa-solid fa-puzzle-piece text-[20rem] -mt-10 -mr-10"></i>
+            <i class="fa-solid fa-clock-rotate-left text-[20rem] -mt-10 -mr-10"></i>
         </div>
         
         <div class="max-w-4xl mx-auto relative z-10">
             <div class="flex flex-wrap items-center gap-3 mb-4">
-                <span class="bg-primary text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Tuần 4</span>
-                <span class="bg-secondary text-dark text-xs font-bold px-3 py-1 rounded-full"><i class="fa-solid fa-cubes mr-1"></i> Khối Chức Năng</span>
+                <span class="bg-primary text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Tuần 5</span>
+                <span class="bg-secondary text-dark text-xs font-bold px-3 py-1 rounded-full"><i class="fa-solid fa-memory mr-1"></i> Bộ Nhớ & Trạng Thái</span>
                 <span class="bg-white/20 text-white border border-white/30 text-xs font-semibold px-3 py-1 rounded-full"><i class="fa-solid fa-university mr-1"></i> Phenikaa University</span>
             </div>
             
             <h1 class="text-4xl md:text-5xl font-extrabold mb-3 leading-tight text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-300">
-                Combinational Logic Circuits
+                Sequential Logic & Memory
             </h1>
             <h2 class="text-xl md:text-2xl font-medium text-slate-300 mb-6 border-l-4 border-primary pl-4">
-                Mạch Tổ Hợp Và Ứng Dụng Thực Tế
+                Mạch Tuần Tự, Flip-Flop Và Vai Trò Của Trí Nhớ
             </h2>
             
             <div class="bg-white/10 backdrop-blur-md rounded-xl p-5 border border-white/20 mb-8 max-w-3xl">
                 <p class="text-lg leading-relaxed">
                     <i class="fa-solid fa-quote-left text-primary opacity-50 mr-2"></i>
-                    Tuần này chúng ta nâng cấp tư duy thiết kế: Không ghép từng cổng AND/OR lẻ tẻ nữa. Chúng ta sẽ lắp ghép hệ thống từ những <strong>"Viên gạch Lego" (Functional Blocks)</strong> có sẵn như Bộ cộng (Adder), Bộ chọn (MUX), và Bộ giải mã (Decoder).
+                    Nếu Mạch tổ hợp (Tuần 4) là những hệ thống <strong>"bấm nút là chạy liền"</strong> (không có trí nhớ), thì Mạch tuần tự là hệ thống biết <strong>"Ghi nhớ Quá khứ"</strong> để quyết định Tương lai. Tuần này, ta sẽ tìm hiểu trái tim của mọi máy tính: Đồng hồ (Clock) và Mạch nhớ (Flip-Flop).
                 </p>
             </div>
 
-            <!-- Mục tiêu buổi học -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="flex items-start gap-3">
-                    <div class="bg-white/20 w-8 h-8 flex items-center justify-center rounded-lg text-secondary shrink-0"><i class="fa-solid fa-bolt"></i></div>
-                    <p class="text-sm mt-1">Nắm vững khái niệm Mạch tổ hợp (không có bộ nhớ, Output phụ thuộc ngay lập tức vào Input).</p>
+                    <div class="bg-white/20 w-8 h-8 flex items-center justify-center rounded-lg text-secondary shrink-0"><i class="fa-solid fa-code-compare"></i></div>
+                    <p class="text-sm mt-1">Phân biệt được rõ ràng Mạch tổ hợp (Combinational) và Mạch tuần tự (Sequential).</p>
                 </div>
                 <div class="flex items-start gap-3">
-                    <div class="bg-white/20 w-8 h-8 flex items-center justify-center rounded-lg text-secondary shrink-0"><i class="fa-solid fa-traffic-light"></i></div>
-                    <p class="text-sm mt-1">Phân biệt được Mạch tổ hợp và Mạch tuần tự.</p>
+                    <div class="bg-white/20 w-8 h-8 flex items-center justify-center rounded-lg text-secondary shrink-0"><i class="fa-solid fa-clock"></i></div>
+                    <p class="text-sm mt-1">Hiểu vì sao hệ thống số cần Xung nhịp (Clock) để gõ nhịp đồng bộ.</p>
                 </div>
                 <div class="flex items-start gap-3">
-                    <div class="bg-white/20 w-8 h-8 flex items-center justify-center rounded-lg text-secondary shrink-0"><i class="fa-solid fa-layer-group"></i></div>
-                    <p class="text-sm mt-1">Hiểu rõ 5 khối cơ bản: Adder, MUX, Decoder, Encoder, Comparator.</p>
+                    <div class="bg-white/20 w-8 h-8 flex items-center justify-center rounded-lg text-secondary shrink-0"><i class="fa-solid fa-microchip"></i></div>
+                    <p class="text-sm mt-1">Nắm vững chức năng của Flip-Flop, Register (Thanh ghi), Counter (Bộ đếm).</p>
                 </div>
                 <div class="flex items-start gap-3">
-                    <div class="bg-white/20 w-8 h-8 flex items-center justify-center rounded-lg text-secondary shrink-0"><i class="fa-solid fa-code"></i></div>
-                    <p class="text-sm mt-1">Liên kết được các khối logic này với các đoạn code trong ngôn ngữ Verilog.</p>
+                    <div class="bg-white/20 w-8 h-8 flex items-center justify-center rounded-lg text-secondary shrink-0"><i class="fa-solid fa-stopwatch-20"></i></div>
+                    <p class="text-sm mt-1">Tạo nền tảng vững chắc để thiết kế Máy trạng thái (FSM) vào tuần sau.</p>
                 </div>
             </div>
         </div>
@@ -127,7 +128,6 @@
 
     <main class="max-w-4xl mx-auto px-4 sm:px-6 -mt-10 relative z-20 space-y-8">
 
-        <!-- BEFORE SESSION SECTION -->
         <section class="bg-white rounded-2xl shadow-lg border border-slate-200 overflow-hidden">
             <div class="bg-blue-50 border-b border-blue-100 px-6 py-4 flex items-center justify-between">
                 <h3 class="text-xl font-bold text-dark flex items-center gap-2">
@@ -136,11 +136,10 @@
             </div>
             <div class="p-6">
                 <p class="text-slate-600 mb-6">
-                    Mạch tổ hợp (Combinational) giống như một cái máy tính bỏ túi: <strong>Bấm phím nào là hiện kết quả đó ngay lập tức, không lưu lại dữ liệu cũ</strong>. Hãy đọc kỹ phần định nghĩa và thử chơi với Demo MUX bên dưới trước khi vào lớp.
+                    Mạch tuần tự (Sequential) phức tạp hơn mạch tổ hợp vì nó phụ thuộc vào <strong>Thời gian (Time)</strong>. Kết quả không chỉ phụ thuộc vào bạn bấm gì ngay lúc này, mà còn phụ thuộc vào trạng thái trước đó của hệ thống.
                 </p>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Checklist -->
                     <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 hover:border-primary/30 transition-colors">
                         <h4 class="font-bold text-dark mb-4 border-b pb-2 flex items-center gap-2">
                             <i class="fa-solid fa-list-check text-primary"></i> Checklist Tự Học
@@ -148,38 +147,36 @@
                         <ul class="space-y-3" id="prep-checklist">
                             <li class="flex items-start gap-3 group">
                                 <input type="checkbox" class="custom-checkbox mt-0.5" id="task1" onclick="toggleTask(this)">
-                                <label for="task1" class="cursor-pointer text-sm text-slate-700 task-item group-hover:text-primary transition-colors">Đọc định nghĩa: Mạch tổ hợp khác mạch tuần tự ở đâu?</label>
+                                <label for="task1" class="cursor-pointer text-sm text-slate-700 task-item group-hover:text-primary transition-colors">Ôn lại kiến thức Mạch tổ hợp (Tuần 4)</label>
                             </li>
                             <li class="flex items-start gap-3 group">
                                 <input type="checkbox" class="custom-checkbox mt-0.5" id="task2" onclick="toggleTask(this)">
-                                <label for="task2" class="cursor-pointer text-sm text-slate-700 task-item group-hover:text-primary transition-colors">Trải nghiệm Demo Bộ Chọn Kênh (Multiplexer) bên dưới</label>
+                                <label for="task2" class="cursor-pointer text-sm text-slate-700 task-item group-hover:text-primary transition-colors">Trải nghiệm Demo Flip-Flop (Bộ đếm) bên dưới</label>
                             </li>
                             <li class="flex items-start gap-3 group">
                                 <input type="checkbox" class="custom-checkbox mt-0.5" id="task3" onclick="toggleTask(this)">
-                                <label for="task3" class="cursor-pointer text-sm text-slate-700 task-item group-hover:text-primary transition-colors">Tìm hiểu trước về chức năng của 1 khối: Adder / Decoder</label>
+                                <label for="task3" class="cursor-pointer text-sm text-slate-700 task-item group-hover:text-primary transition-colors">Tìm hiểu các khái niệm: D Flip-Flop, Thanh ghi (Register)</label>
                             </li>
                             <li class="flex items-start gap-3 group">
                                 <input type="checkbox" class="custom-checkbox mt-0.5" id="task4" onclick="toggleTask(this)">
-                                <label for="task4" class="cursor-pointer text-sm text-slate-700 task-item group-hover:text-primary transition-colors">Chuẩn bị sổ tay và ghi chú các thắc mắc cho Mentor</label>
+                                <label for="task4" class="cursor-pointer text-sm text-slate-700 task-item group-hover:text-primary transition-colors">Chuẩn bị 1 ví dụ về máy móc "có trí nhớ" để thảo luận</label>
                             </li>
                         </ul>
                     </div>
 
-                    <!-- Câu hỏi gợi mở -->
                     <div class="bg-blue-50 p-5 rounded-xl border border-blue-200 relative overflow-hidden">
                         <i class="fa-regular fa-lightbulb absolute -right-4 -bottom-4 text-6xl text-blue-200 opacity-50"></i>
                         <h4 class="font-bold text-primary mb-4 border-b border-blue-200 pb-2 relative z-10">Tư Duy Khởi Động</h4>
                         <ul class="space-y-3 list-disc list-inside text-sm text-slate-700 relative z-10">
-                            <li>Khi bạn ấn phím "2", "Cộng", "3", "Bằng" trên máy tính Casio, khối linh kiện nào chịu trách nhiệm thực hiện phép tính $2+3=5$?</li>
-                            <li>Nếu có 4 camera an ninh nhưng bạn chỉ có 1 màn hình hiển thị, làm sao để thiết kế một mạch "Chọn" camera muốn xem? (Hint: MUX)</li>
-                            <li>Tại sao người ta gọi là mạch "Không có trí nhớ" (No Memory)?</li>
+                            <li>Thang máy đang ở tầng 1. Bạn bấm nút tầng 3. Làm sao thang máy "nhớ" được bạn vừa bấm nút để chạy lên mà bạn không cần phải giữ tay vào nút bấm mãi?</li>
+                            <li>Đồng hồ điện tử đếm giây (0, 1, 2...). Nếu nó không "nhớ" được mình đang ở giây số 2, làm sao nó biết tiếp theo phải chuyển sang giây số 3?</li>
+                            <li>Xung nhịp (Clock) trong CPU máy tính là gì? (Ví dụ: Chip Intel Core i7 chạy ở tốc độ 3.0 GHz)</li>
                         </ul>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- KEY CONCEPTS & INTERACTIVE DEMOS -->
         <section class="bg-white rounded-2xl shadow-lg border border-slate-200 overflow-hidden">
             <div class="px-6 py-4 border-b border-slate-100 bg-gradient-to-r from-slate-50 to-white">
                 <h3 class="text-xl font-bold text-dark flex items-center gap-2">
@@ -193,114 +190,135 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <h4 class="text-lg font-bold text-primary mb-2 flex items-center gap-2">
-                                <span class="bg-primary/10 text-primary w-6 h-6 rounded-full flex items-center justify-center text-sm">1</span> Mạch Tổ Hợp (Combinational)
+                                <span class="bg-primary/10 text-primary w-6 h-6 rounded-full flex items-center justify-center text-sm">1</span> Sequential Logic & Feedback
                             </h4>
                             <p class="text-slate-600 text-sm leading-relaxed mb-4">
-                                Đầu ra (Output) tại bất kỳ thời điểm nào <strong>CHỈ</strong> phụ thuộc vào Đầu vào (Input) tại thời điểm đó. Không phụ thuộc vào quá khứ. Thay đổi Input -> Output đổi ngay lập tức.
+                                Đầu ra (Output) phụ thuộc vào Đầu vào (Input) hiện tại <strong>VÀ</strong> Trạng thái trước đó (Previous State). Bí mật nằm ở chỗ: Tín hiệu đầu ra được <strong>vòng lại (feedback)</strong> đưa vào làm đầu vào tiếp theo thông qua một phần tử nhớ (Memory).
                             </p>
                         </div>
                         <div>
                             <h4 class="text-lg font-bold text-primary mb-2 flex items-center gap-2">
-                                <span class="bg-primary/10 text-primary w-6 h-6 rounded-full flex items-center justify-center text-sm">2</span> Khối Chức Năng (Function Block)
+                                <span class="bg-primary/10 text-primary w-6 h-6 rounded-full flex items-center justify-center text-sm">2</span> Flip-Flop & Clock (Xung nhịp)
                             </h4>
                             <p class="text-slate-600 text-sm leading-relaxed mb-4">
-                                Các kỹ sư đóng gói hàng chục cổng logic thành một "hộp đen" có chức năng cụ thể để dễ sử dụng lại. Ví dụ: Bộ cộng (Adder), Bộ chọn (Multiplexer), Bộ giải mã (Decoder).
+                                Flip-flop là phần tử nhớ bé nhất. Khác với mạch tổ hợp "chạy ngay", Flip-Flop chỉ chịu cập nhật giá trị mới khi có sự kiện <strong>cạnh lên hoặc cạnh xuống của Xung nhịp (Clock)</strong> gõ nhịp. Clock đóng vai trò như nhạc trưởng đồng bộ cả hệ thống.
                             </p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Standardized SVG Interactive MUX Demo -->
+                <!-- Unified SVG Interactive D Flip-Flop Counter Demo -->
                 <div class="py-5">
                     <div class="bg-slate-800 p-5 rounded-xl border border-slate-700">
-                        <p class="text-sm font-semibold text-white mb-4"><i class="fa-solid fa-gamepad text-secondary"></i> Demo: Bộ Chọn Kênh 2-to-1 Multiplexer (MUX)</p>
-                        <p class="text-xs text-slate-400 mb-6 italic">Bài toán: Bạn có 2 nguồn phát nhạc (A và B), nhưng chỉ có 1 Loa (Y). Bạn dùng Công tắc (Selector S) để quyết định nghe nguồn nào.</p>
+                        <div class="mb-4">
+                            <p class="text-sm font-semibold text-white"><i class="fa-solid fa-gamepad text-secondary"></i> Demo: Bộ Đếm Cơ Bản (Counter) với D Flip-Flop</p>
+                            <p class="text-xs text-slate-400 italic mt-1">Quan sát sự khác biệt: Tín hiệu "Trạng thái tiếp theo (D)" đã được tính toán xong bởi Adder, nhưng nó bị "Chặn" ở cổng D. Nó chỉ được nạp vào bộ nhớ (Q) khi bạn ấn Kích Xung Clock.</p>
+                        </div>
                         
-                        <div class="flex flex-col md:flex-row items-center justify-between gap-8 bg-slate-900 p-6 rounded-lg border border-slate-700">
+                        <div class="bg-slate-900 p-4 sm:p-6 rounded-lg border border-slate-600 flex flex-col items-center">
                             
-                            <!-- Left: Control Panel -->
-                            <div class="flex flex-col gap-4 w-full md:w-1/3">
-                                <div class="bg-slate-800 p-3 rounded border border-slate-600">
-                                    <div class="flex justify-between items-center mb-2">
-                                        <span class="text-white font-bold text-sm">Dữ liệu A <span class="text-[10px] uppercase bg-slate-700 text-emerald-400 px-1 rounded ml-1">Kênh 1</span></span>
-                                        <span id="valMuxA" class="text-lg font-black text-emerald-400 font-mono">1</span>
-                                    </div>
-                                    <label class="relative inline-flex items-center cursor-pointer w-full">
-                                        <input type="checkbox" id="muxInputA" class="sr-only peer" checked>
-                                        <div class="w-11 h-6 bg-slate-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-500"></div>
-                                        <span class="ml-3 text-xs text-slate-400">Bật/Tắt Tín Hiệu</span>
-                                    </label>
-                                </div>
+                            <!-- SVG Circuit Schematic -->
+                            <div class="w-full max-w-3xl overflow-visible">
+                                <svg viewBox="0 0 650 350" class="w-full h-auto drop-shadow-lg font-mono">
+                                    <defs>
+                                        <!-- Markers for directional flow -->
+                                        <marker id="arrow-idle" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                            <polygon points="0 0, 10 3.5, 0 7" fill="#475569" />
+                                        </marker>
+                                        <marker id="arrow-q" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                            <polygon points="0 0, 10 3.5, 0 7" fill="#10b981" />
+                                        </marker>
+                                        <marker id="arrow-d" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                            <polygon points="0 0, 10 3.5, 0 7" fill="#3b82f6" />
+                                        </marker>
+                                        <marker id="arrow-fb" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                            <polygon points="0 0, 10 3.5, 0 7" fill="#f59e0b" />
+                                        </marker>
+                                    </defs>
 
-                                <div class="bg-slate-800 p-3 rounded border border-slate-600">
-                                    <div class="flex justify-between items-center mb-2">
-                                        <span class="text-white font-bold text-sm">Dữ liệu B <span class="text-[10px] uppercase bg-slate-700 text-blue-400 px-1 rounded ml-1">Kênh 2</span></span>
-                                        <span id="valMuxB" class="text-lg font-black text-slate-500 font-mono">0</span>
-                                    </div>
-                                    <label class="relative inline-flex items-center cursor-pointer w-full">
-                                        <input type="checkbox" id="muxInputB" class="sr-only peer">
-                                        <div class="w-11 h-6 bg-slate-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-500"></div>
-                                        <span class="ml-3 text-xs text-slate-400">Bật/Tắt Tín Hiệu</span>
-                                    </label>
-                                </div>
-
-                                <div class="bg-slate-800 p-3 rounded border border-primary">
-                                    <label class="text-white font-bold text-sm block mb-2 text-center text-secondary">Công tắc chọn (Selector S)</label>
-                                    <select id="muxSel" class="bg-slate-900 text-white text-sm font-bold rounded p-2 outline-none cursor-pointer w-full border border-slate-600 text-center">
-                                        <option value="0">S = 0 (Cho phép Kênh A qua)</option>
-                                        <option value="1">S = 1 (Cho phép Kênh B qua)</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <!-- Center: SVG Schematic -->
-                            <div class="w-full md:w-1/3 flex justify-center py-4">
-                                <svg viewBox="0 0 240 180" class="w-full max-w-[280px] overflow-visible drop-shadow-lg">
-                                    <!-- Input Wires -->
-                                    <line id="svgWireA" class="svg-wire" x1="10" y1="50" x2="80" y2="50" stroke="#10b981" stroke-width="4" stroke-linecap="round"/>
-                                    <text x="0" y="45" fill="white" font-size="14" font-family="monospace" font-weight="bold">A</text>
-                                    <text id="svgTextA" x="25" y="40" fill="#10b981" font-size="12" font-family="monospace" font-weight="bold">1</text>
-
-                                    <line id="svgWireB" class="svg-wire" x1="10" y1="130" x2="80" y2="130" stroke="#475569" stroke-width="2" stroke-linecap="round"/>
-                                    <text x="0" y="125" fill="white" font-size="14" font-family="monospace" font-weight="bold">B</text>
-                                    <text id="svgTextB" x="25" y="120" fill="#475569" font-size="12" font-family="monospace" font-weight="bold">0</text>
-
-                                    <!-- Selector S Wire -->
-                                    <line id="svgWireS" class="svg-wire" x1="120" y1="140" x2="120" y2="180" stroke="#f59e0b" stroke-width="3" stroke-linecap="round"/>
-                                    <text x="130" y="175" fill="#f59e0b" font-size="14" font-weight="bold">S</text>
-                                    <text id="svgTextS" x="130" y="155" fill="#f59e0b" font-size="12" font-family="monospace" font-weight="bold">0</text>
-
-                                    <!-- Output Y Wire -->
-                                    <line id="svgWireY" class="svg-wire" x1="160" y1="90" x2="230" y2="90" stroke="#10b981" stroke-width="4" stroke-linecap="round"/>
-                                    <text x="220" y="80" fill="white" font-size="14" font-family="monospace" font-weight="bold">Y</text>
+                                    <!-- Wires (Paths) -->
+                                    <!-- Feedback Wire (Amber) -->
+                                    <path id="wireFeedback" d="M 480 130 L 480 260 L 50 260 L 50 150 L 100 150" fill="none" stroke="#475569" stroke-width="3" marker-end="url(#arrow-idle)" class="svg-wire"/>
                                     
-                                    <!-- MUX Body (Trapezoid) -->
-                                    <polygon points="80,20 160,60 160,120 80,160" fill="#334155" stroke="#2563eb" stroke-width="3" stroke-linejoin="round"/>
-                                    <text x="120" y="85" fill="white" font-size="18" font-weight="bold" text-anchor="middle">MUX</text>
-                                    <text x="120" y="105" fill="#94a3b8" font-size="10" font-family="monospace" text-anchor="middle">2-to-1</text>
+                                    <!-- D-FF Input Wire (Blue) -->
+                                    <path id="wireD" d="M 220 130 L 350 130" fill="none" stroke="#475569" stroke-width="3" marker-end="url(#arrow-idle)" class="svg-wire"/>
+
+                                    <!-- D-FF Output Wire Q (Emerald) -->
+                                    <path id="wireQ" d="M 450 130 L 550 130" fill="none" stroke="#475569" stroke-width="3" marker-end="url(#arrow-idle)" class="svg-wire"/>
+
+                                    <!-- Clock Wire -->
+                                    <g>
+                                        <path id="wireClk" d="M 400 320 L 400 180" fill="none" stroke="#475569" stroke-width="3" stroke-dasharray="6,4" class="svg-wire"/>
+                                        <text x="410" y="315" fill="#cbd5e1" font-size="14" font-family="sans-serif" font-weight="bold">CLK</text>
+                                    </g>
+
+                                    <!-- Components -->
+                                    <!-- Adder Box (Combinational) -->
+                                    <g>
+                                        <rect x="100" y="80" width="120" height="100" rx="8" fill="#1e293b" stroke="#3b82f6" stroke-width="3"/>
+                                        <text x="160" y="125" fill="white" font-size="28" font-weight="bold" text-anchor="middle">+ 1</text>
+                                        <text x="160" y="155" fill="#94a3b8" font-size="12" font-family="sans-serif" text-anchor="middle">Bộ Cộng (+1)</text>
+                                        <text x="160" y="170" fill="#64748b" font-size="10" font-family="sans-serif" text-anchor="middle">(Mạch Tổ Hợp)</text>
+                                    </g>
+
+                                    <!-- D Flip-Flop Box (Sequential/Memory) -->
+                                    <g>
+                                        <rect x="350" y="80" width="100" height="100" rx="8" fill="#1e293b" stroke="#f59e0b" stroke-width="3" class="drop-shadow-[0_0_8px_rgba(245,158,11,0.2)]"/>
+                                        <text x="365" y="105" fill="white" font-size="18" font-weight="bold">D</text>
+                                        <text x="435" y="105" fill="white" font-size="18" font-weight="bold" text-anchor="end">Q</text>
+                                        <text x="400" y="145" fill="#e2e8f0" font-size="22" font-weight="900" text-anchor="middle" letter-spacing="2">D-FF</text>
+                                        <text x="400" y="165" fill="#64748b" font-size="10" font-family="sans-serif" text-anchor="middle">(Bộ Nhớ)</text>
+                                        <!-- Clock Triangle Symbol -->
+                                        <polygon points="390 180, 410 180, 400 165" fill="#1e293b" stroke="#cbd5e1" stroke-width="2"/>
+                                    </g>
+
+                                    <!-- Output Box (LED Display) -->
+                                    <g>
+                                        <rect x="550" y="85" width="90" height="90" rx="12" fill="#020617" stroke="#10b981" stroke-width="4"/>
+                                        <text id="valDisplaySVG" x="595" y="145" fill="#10b981" font-size="45" font-weight="900" text-anchor="middle">0</text>
+                                        <text x="595" y="165" fill="#10b981" font-size="10" font-family="sans-serif" font-weight="bold" text-anchor="middle" opacity="0.8">OUTPUT</text>
+                                    </g>
+
+                                    <!-- Value Labels on Wires -->
+                                    <!-- Current State (Q) -->
+                                    <g class="transition-transform hover:scale-105">
+                                        <rect x="483" y="65" width="30" height="24" rx="4" fill="#0f172a" stroke="#475569"/>
+                                        <text id="valQ" x="498" y="83" fill="white" font-size="16" text-anchor="middle" font-weight="bold" class="svg-text">0</text>
+                                        <text x="498" y="55" fill="#cbd5e1" font-size="12" font-family="sans-serif" text-anchor="middle">Trạng thái Hiện tại (Q)</text>
+                                    </g>
+
+                                    <!-- Next State (D) -->
+                                    <g class="transition-transform hover:scale-105">
+                                        <rect x="270" y="65" width="30" height="24" rx="4" fill="#0f172a" stroke="#475569"/>
+                                        <text id="valD" x="285" y="83" fill="white" font-size="16" text-anchor="middle" font-weight="bold" class="svg-text">1</text>
+                                        <text x="285" y="55" fill="#3b82f6" font-size="12" font-family="sans-serif" text-anchor="middle" font-weight="bold">Trạng thái Tiếp theo (D)</text>
+                                    </g>
+
+                                    <!-- Feedback Value -->
+                                    <g class="transition-transform hover:scale-105">
+                                        <rect x="250" y="250" width="30" height="24" rx="4" fill="#0f172a" stroke="#475569"/>
+                                        <text id="valFeedback" x="265" y="268" fill="#f59e0b" font-size="16" text-anchor="middle" font-weight="bold" class="svg-text">0</text>
+                                        <text x="265" y="290" fill="#f59e0b" font-size="12" font-family="sans-serif" text-anchor="middle">Feedback (Vòng lặp)</text>
+                                    </g>
                                 </svg>
                             </div>
 
-                            <!-- Right: Output Panel -->
-                            <div class="w-full md:w-1/3 flex flex-col items-center justify-center">
-                                <div class="bg-slate-800 p-6 rounded-full border-4 border-slate-600 flex items-center justify-center w-28 h-28 mb-4 relative overflow-hidden transition-all duration-300" id="outputContainer">
-                                    <div id="glowY" class="absolute inset-0 bg-emerald-500/30 blur-xl opacity-100 transition-opacity"></div>
-                                    <span class="text-slate-300 font-bold absolute top-3 text-[10px] uppercase tracking-wider z-10">Output Y</span>
-                                    <span id="valMuxY" class="text-5xl font-black text-emerald-400 font-mono z-10 relative">1</span>
-                                </div>
-                                <div class="text-center">
-                                    <p id="logicExp" class="text-sm text-white font-mono bg-black/50 border border-slate-600 px-4 py-2 rounded shadow-inner">
-                                        Y = A (Vì S = 0)
-                                    </p>
-                                </div>
+                            <!-- Interactive Button Area -->
+                            <div class="mt-4 flex flex-col items-center">
+                                <button id="btnClock" class="bg-primary hover:bg-blue-500 text-white font-bold py-3 px-8 rounded-lg shadow-[0_4px_0_#1e3a8a] active:translate-y-1 active:shadow-none transition-all flex items-center gap-3 text-lg border border-blue-400">
+                                    <i class="fa-solid fa-bolt text-yellow-300"></i> Kích Xung Clock
+                                </button>
+                                <p class="text-xs text-slate-400 mt-3 font-mono bg-black/30 px-3 py-1.5 rounded border border-slate-700">
+                                    Q(t+1) &lt;= D(t)
+                                </p>
                             </div>
+
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- STUDENT-GENERATED CONTENT SECTION -->
         <section class="bg-white rounded-2xl shadow-lg border border-slate-200 overflow-hidden">
             <div class="bg-amber-50 border-b border-amber-200 px-6 py-4 flex items-center justify-between">
                 <h3 class="text-xl font-bold text-dark flex items-center gap-2">
@@ -313,7 +331,7 @@
                     <i class="fa-solid fa-lightbulb text-secondary text-xl mt-1"></i>
                     <div>
                         <p class="text-sm font-bold text-slate-800 mb-1">Quy tắc Mentor:</p>
-                        <p class="text-sm text-slate-600 italic">"Đừng vẽ một đống cổng logic nhằng nhịt lên slide. Hãy dùng sơ đồ khối hộp đen (Black box). Nói rõ Khối đó tên gì, Input là gì, Output ra sao, và dùng trong thực tế để làm việc gì."</p>
+                        <p class="text-sm text-slate-600 italic">"Đừng giải thích Flip-Flop bằng cấu tạo điện tử rắc rối bên trong. Hãy giải thích nó như một 'Cái hộp lưu trữ' và chỉ mở nắp cho phép dữ liệu mới vào khi có tiếng gõ nhịp (Clock)."</p>
                     </div>
                 </div>
 
@@ -321,43 +339,41 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-slate-700 mb-2">
                     <div class="bg-slate-50 p-3 rounded-lg border border-slate-200 flex gap-3 items-center hover:border-amber-300 transition-colors">
                         <span class="bg-dark text-white rounded w-6 h-6 flex items-center justify-center shrink-0 font-bold text-xs">1</span>
-                        <p class="font-medium">Mạch tổ hợp là gì? Nêu điểm khác biệt với mạch tuần tự.</p>
+                        <p class="font-medium">Mạch tuần tự là gì? Sự khác biệt cốt lõi (Feedback & Memory).</p>
                     </div>
                     <div class="bg-slate-50 p-3 rounded-lg border border-slate-200 flex gap-3 items-center hover:border-amber-300 transition-colors">
                         <span class="bg-dark text-white rounded w-6 h-6 flex items-center justify-center shrink-0 font-bold text-xs">2</span>
-                        <p class="font-medium">Trình bày về Bộ cộng (Adder) và Bộ so sánh (Comparator).</p>
+                        <p class="font-medium">Xung nhịp Clock là gì? Tại sao CPU lại cần Clock (GHz)?</p>
                     </div>
                     <div class="bg-slate-50 p-3 rounded-lg border border-slate-200 flex gap-3 items-center hover:border-amber-300 transition-colors">
                         <span class="bg-dark text-white rounded w-6 h-6 flex items-center justify-center shrink-0 font-bold text-xs">3</span>
-                        <p class="font-medium">Giải thích cách hoạt động của MUX và Decoder/Encoder.</p>
+                        <p class="font-medium">Giải thích Flip-Flop (D-FF), Thanh ghi (Register), và Bộ đếm (Counter).</p>
                     </div>
                     <div class="bg-slate-50 p-3 rounded-lg border border-slate-200 flex gap-3 items-center hover:border-amber-300 transition-colors">
                         <span class="bg-dark text-white rounded w-6 h-6 flex items-center justify-center shrink-0 font-bold text-xs">4</span>
-                        <p class="font-medium">Đưa ra 1 ví dụ cụ thể có kèm Bảng chân lý (Truth table) của khối đó.</p>
+                        <p class="font-medium">Nêu 1 ví dụ máy móc thực tế cần tính "nhớ" trạng thái.</p>
                     </div>
                     <div class="bg-slate-50 p-3 rounded-lg border border-slate-200 flex gap-3 items-center sm:col-span-2 hover:border-amber-300 transition-colors bg-gradient-to-r from-amber-50 to-white">
                         <span class="bg-secondary text-white rounded w-6 h-6 flex items-center justify-center shrink-0 font-bold text-xs"><i class="fa-solid fa-code"></i></span>
-                        <p class="font-medium">Mở rộng: Khối MUX nếu viết bằng ngôn ngữ Verilog thì trông như thế nào?</p>
+                        <p class="font-medium">Liên kết mở rộng: Các biến `reg` và khối `always @(posedge clk)` trong Verilog dùng để làm gì?</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- DURING SESSION (TIMELINE) -->
         <section class="bg-white rounded-2xl shadow-lg border border-slate-200 p-6">
             <h3 class="text-xl font-bold text-dark mb-6 flex items-center gap-2 border-b pb-4">
                 <i class="fa-solid fa-stopwatch text-accent"></i> Tiến Trình Buổi Học (60 Phút)
             </h3>
             
             <div class="relative border-l-2 border-slate-200 ml-3 md:ml-6 space-y-6">
-                <!-- Timeline Items -->
                 <div class="relative pl-6 md:pl-8 group">
                     <div class="absolute w-4 h-4 bg-accent rounded-full -left-[9px] top-1 border-4 border-white shadow group-hover:scale-125 transition-transform"></div>
                     <div class="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 mb-1">
                         <span class="text-accent font-bold text-sm w-16 bg-accent/10 px-2 py-0.5 rounded text-center">0' - 5'</span>
                         <h4 class="font-bold text-dark text-lg">Quick Check-in</h4>
                     </div>
-                    <p class="text-sm text-slate-600 bg-slate-50 p-2 rounded border border-slate-100">Mentor đặt một bài toán ghép khối (Lego) nhanh để khởi động tư duy.</p>
+                    <p class="text-sm text-slate-600 bg-slate-50 p-2 rounded border border-slate-100">Khởi động tư duy: Nhắc lại Mạch tổ hợp (Tuần 4) là "bấm ra ngay", vậy máy đếm giờ làm sao hoạt động?</p>
                 </div>
                 
                 <div class="relative pl-6 md:pl-8 group">
@@ -366,7 +382,7 @@
                         <span class="text-primary font-bold text-sm w-16 bg-primary/10 px-2 py-0.5 rounded text-center">5' - 15'</span>
                         <h4 class="font-bold text-dark text-lg">Student Presentation</h4>
                     </div>
-                    <p class="text-sm text-slate-600 bg-slate-50 p-2 rounded border border-slate-100">Nhóm báo cáo về "Combinational Logic Circuits" (Mạch tổ hợp cơ bản).</p>
+                    <p class="text-sm text-slate-600 bg-slate-50 p-2 rounded border border-slate-100">Nhóm báo cáo về "Sequential Logic & Memory".</p>
                 </div>
 
                 <div class="relative pl-6 md:pl-8 group">
@@ -375,7 +391,7 @@
                         <span class="text-dark font-bold text-sm w-16 bg-slate-200 px-2 py-0.5 rounded text-center">15' - 25'</span>
                         <h4 class="font-bold text-dark text-lg">Mentor Guidance</h4>
                     </div>
-                    <p class="text-sm text-slate-600 bg-slate-50 p-2 rounded border border-slate-100">Mentor tổng kết: <strong class="text-red-500">Mạch tổ hợp là nền tảng của ALU (bộ tính toán trong CPU)</strong>. Bổ sung cách dùng code "assign" trong Verilog.</p>
+                    <p class="text-sm text-slate-600 bg-slate-50 p-2 rounded border border-slate-100">Mentor phân tích: <strong class="text-red-500">Mạch tuần tự = Mạch tổ hợp + Vòng lặp + Flip-Flop</strong>. Chốt lại vai trò bắt nhịp của Clock.</p>
                 </div>
 
                 <div class="relative pl-6 md:pl-8 group">
@@ -384,7 +400,7 @@
                         <span class="text-secondary font-bold text-sm w-16 bg-secondary/10 px-2 py-0.5 rounded text-center">25' - 45'</span>
                         <h4 class="font-bold text-dark text-lg">Breakout Room</h4>
                     </div>
-                    <p class="text-sm text-slate-600 bg-slate-50 p-2 rounded border border-slate-100">Chia nhóm, thảo luận cách ứng dụng 1 khối cụ thể vào Mini-Project.</p>
+                    <p class="text-sm text-slate-600 bg-slate-50 p-2 rounded border border-slate-100">Thảo luận case study: Bóc tách một hệ thống có trạng thái thực tế.</p>
                 </div>
 
                 <div class="relative pl-6 md:pl-8 group">
@@ -393,7 +409,7 @@
                         <span class="text-purple-500 font-bold text-sm w-16 bg-purple-100 px-2 py-0.5 rounded text-center">45' - 55'</span>
                         <h4 class="font-bold text-dark text-lg">Group Sharing</h4>
                     </div>
-                    <p class="text-sm text-slate-600 bg-slate-50 p-2 rounded border border-slate-100">Các nhóm trình bày kiến trúc (Input/Output/Function) của khối mình vừa chọn.</p>
+                    <p class="text-sm text-slate-600 bg-slate-50 p-2 rounded border border-slate-100">Các nhóm trình bày "Trí nhớ" của hệ thống nhóm mình chọn nằm ở đâu và lưu dữ liệu gì.</p>
                 </div>
 
                 <div class="relative pl-6 md:pl-8 group">
@@ -402,19 +418,18 @@
                         <span class="text-emerald-600 font-bold text-sm w-16 bg-emerald-100 px-2 py-0.5 rounded text-center">55' - 60'</span>
                         <h4 class="font-bold text-dark text-lg">Wrap-up & Task</h4>
                     </div>
-                    <p class="text-sm text-slate-600 bg-slate-50 p-2 rounded border border-slate-100">Giao task (Viết spec cho khối chức năng) và điền Google form.</p>
+                    <p class="text-sm text-slate-600 bg-slate-50 p-2 rounded border border-slate-100">Giao task (Mô tả trạng thái của 1 máy) và làm form điểm danh.</p>
                 </div>
             </div>
         </section>
 
-        <!-- BREAKOUT ROOM GUIDE -->
         <section class="bg-gradient-to-br from-slate-800 to-dark text-white rounded-2xl shadow-lg overflow-hidden border border-slate-700">
             <div class="px-6 py-4 border-b border-white/10 flex flex-wrap items-center justify-between gap-2">
                 <div class="flex items-center gap-2">
                     <i class="fa-solid fa-comments text-secondary text-xl"></i>
                     <h3 class="text-xl font-bold">Hướng Dẫn Breakout Room</h3>
                 </div>
-                <span class="text-[10px] uppercase font-bold bg-white/10 px-2 py-1 rounded text-slate-300">System Architecture</span>
+                <span class="text-[10px] uppercase font-bold bg-white/10 px-2 py-1 rounded text-slate-300">System State Analysis</span>
             </div>
 
             <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -424,13 +439,13 @@
                     </h4>
                     <ul class="space-y-3">
                         <li class="bg-white/5 p-3 rounded-lg text-sm border-l-2 border-secondary hover:bg-white/10 transition-colors">
-                            <span class="font-bold text-secondary mr-2">Q1.</span> Cả nhóm hãy chọn MỘT khối chức năng: Adder, MUX, Decoder, hoặc Encoder. Khối đó dùng để giải quyết bài toán gì trong thực tế?
+                            <span class="font-bold text-secondary mr-2">Q1.</span> Cả nhóm hãy chọn MỘT thiết bị (ví dụ: Thang máy, Máy giặt, Lò vi sóng). Thiết bị này cần phải <strong>"Ghi nhớ"</strong> điều gì để hoạt động trơn tru?
                         </li>
                         <li class="bg-white/5 p-3 rounded-lg text-sm border-l-2 border-secondary hover:bg-white/10 transition-colors">
-                            <span class="font-bold text-secondary mr-2">Q2.</span> Khối đó có bao nhiêu chân Input (Đầu vào tín hiệu, chân điều khiển) và bao nhiêu chân Output?
+                            <span class="font-bold text-secondary mr-2">Q2.</span> Nếu gỡ bỏ bộ nhớ (tức là nó trở thành mạch tổ hợp thuần túy), thiết bị đó sẽ hoạt động lỗi như thế nào?
                         </li>
                         <li class="bg-white/5 p-3 rounded-lg text-sm border-l-2 border-secondary hover:bg-white/10 transition-colors">
-                            <span class="font-bold text-secondary mr-2">Q3.</span> Hãy nghĩ ra một Mini-project vui vẻ có thể sử dụng khối này (Ví dụ: Dùng Decoder để tạo bộ hiển thị LED 7 thanh đếm số).
+                            <span class="font-bold text-secondary mr-2">Q3.</span> Sự kiện nào làm thay đổi trạng thái của thiết bị (Người dùng bấm nút, Cảm biến chạm, Hết thời gian Timer)?
                         </li>
                     </ul>
                 </div>
@@ -442,22 +457,21 @@
                     <div class="space-y-2 mb-4 bg-black/20 p-3 rounded-xl border border-white/5">
                         <div class="flex items-center gap-3">
                             <div class="bg-white/10 w-8 h-8 rounded-full flex items-center justify-center shrink-0"><i class="fa-solid fa-user-tie text-accent text-sm"></i></div>
-                            <p class="text-sm"><strong class="text-white">Facilitator:</strong> Chọn ngay 1 khối quen thuộc nhất để nhóm không mất thời gian tranh cãi.</p>
+                            <p class="text-sm"><strong class="text-white">Facilitator:</strong> Chọn một thiết bị thân thuộc nhất (như Máy bán nước tự động) để phân tích.</p>
                         </div>
                         <div class="flex items-center gap-3">
                             <div class="bg-white/10 w-8 h-8 rounded-full flex items-center justify-center shrink-0"><i class="fa-solid fa-pen-clip text-accent text-sm"></i></div>
-                            <p class="text-sm"><strong class="text-white">Note Keeper:</strong> Vẽ nháp hình chữ nhật của khối đó, mũi tên nào đi vào, mũi tên nào đi ra.</p>
+                            <p class="text-sm"><strong class="text-white">Note Keeper:</strong> Liệt kê các trạng thái (State) ra chatbox (Vd: Trạng thái chờ, Trạng thái đang vắt quần áo...).</p>
                         </div>
                         <div class="flex items-center gap-3">
                             <div class="bg-white/10 w-8 h-8 rounded-full flex items-center justify-center shrink-0"><i class="fa-solid fa-bullhorn text-accent text-sm"></i></div>
-                            <p class="text-sm"><strong class="text-white">Reporter:</strong> Trình bày: "Nhóm em chọn MUX 4-to-1, dùng để chọn tín hiệu từ 4 cảm biến vào 1 vi xử lý...".</p>
+                            <p class="text-sm"><strong class="text-white">Reporter:</strong> Trình bày: "Hệ thống máy giặt cần ghi nhớ chu trình đang giặt hay đang vắt, nếu không nó sẽ..."</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- KEY VOCABULARY BILINGUAL -->
         <section class="bg-slate-50 rounded-2xl shadow-sm border border-slate-200 p-6">
             <h3 class="text-xl font-bold text-dark flex items-center gap-2 mb-6">
                 <i class="fa-solid fa-language text-accent"></i> Từ Vựng Tiếng Anh Chuyên Ngành
@@ -465,36 +479,35 @@
             
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover:border-primary transition-all duration-300">
-                    <h4 class="font-bold text-primary text-lg mb-1">Comb Logic</h4>
-                    <p class="text-sm font-bold text-dark mb-1">Mạch tổ hợp</p>
-                    <p class="text-[11px] text-slate-500">Mạch không có trí nhớ, tín hiệu ra tính ngay từ tín hiệu vào.</p>
+                    <h4 class="font-bold text-primary text-lg mb-1">Sequential Logic</h4>
+                    <p class="text-sm font-bold text-dark mb-1">Mạch tuần tự</p>
+                    <p class="text-[11px] text-slate-500">Mạch có chứa phần tử nhớ, ngõ ra phụ thuộc cả ngõ vào hiện tại và trạng thái quá khứ.</p>
                 </div>
                 
                 <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover:border-primary transition-all duration-300">
-                    <h4 class="font-bold text-primary text-lg mb-1">Multiplexer</h4>
-                    <p class="text-sm font-bold text-dark mb-1">Bộ chọn kênh (MUX)</p>
-                    <p class="text-[11px] text-slate-500">Mạch chọn 1 trong nhiều tín hiệu đầu vào để đưa ra đầu ra.</p>
+                    <h4 class="font-bold text-primary text-lg mb-1">Clock (CLK)</h4>
+                    <p class="text-sm font-bold text-dark mb-1">Xung nhịp đồng hồ</p>
+                    <p class="text-[11px] text-slate-500">Tín hiệu vuông dao động liên tục, dùng để đồng bộ toàn bộ mạch điện tử.</p>
                 </div>
                 
                 <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover:border-primary transition-all duration-300">
-                    <h4 class="font-bold text-primary text-lg mb-1">Decoder</h4>
-                    <p class="text-sm font-bold text-dark mb-1">Bộ giải mã</p>
-                    <p class="text-[11px] text-slate-500">Chuyển đổi tín hiệu nhị phân (vd: 3 bit) thành các tín hiệu rời rạc (8 ngõ ra).</p>
+                    <h4 class="font-bold text-primary text-lg mb-1">Flip-Flop</h4>
+                    <p class="text-sm font-bold text-dark mb-1">Phần tử nhớ 1-bit</p>
+                    <p class="text-[11px] text-slate-500">Mạch chốt dữ liệu (thường là cạnh lên của xung Clock).</p>
                 </div>
                 
                 <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover:border-primary transition-all duration-300">
-                    <h4 class="font-bold text-primary text-lg mb-1">Adder</h4>
-                    <p class="text-sm font-bold text-dark mb-1">Bộ cộng</p>
-                    <p class="text-[11px] text-slate-500">Thực hiện phép tính cộng số học giữa các bit nhị phân (Half/Full Adder).</p>
+                    <h4 class="font-bold text-primary text-lg mb-1">Register</h4>
+                    <p class="text-sm font-bold text-dark mb-1">Thanh ghi</p>
+                    <p class="text-[11px] text-slate-500">Tập hợp nhiều Flip-Flop (vd 8-bit, 32-bit) dùng để lưu một từ dữ liệu lớn hơn.</p>
                 </div>
             </div>
         </section>
 
         <!-- TWO COLUMNS SECTION: MENTOR NOTE & PROJECTS -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <!-- MENTOR QUICK NOTE -->
             <section class="bg-blue-600 text-white rounded-2xl shadow-lg p-6 relative overflow-hidden flex flex-col">
-                <i class="fa-solid fa-puzzle-piece absolute -right-6 -bottom-6 text-9xl text-blue-500 opacity-30"></i>
+                <i class="fa-solid fa-clock-rotate-left absolute -right-6 -bottom-6 text-9xl text-blue-500 opacity-30"></i>
                 <div class="relative z-10 flex-1">
                     <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
                         <i class="fa-solid fa-lightbulb text-yellow-300"></i> Lời Khuyên Từ Mentor
@@ -503,51 +516,49 @@
                     <div class="space-y-4">
                         <div class="bg-yellow-500/20 p-3 rounded-lg border border-yellow-400/50 backdrop-blur-sm">
                             <span class="text-yellow-300 text-xs font-bold uppercase tracking-wider block mb-1"><i class="fa-solid fa-triangle-exclamation"></i> Sửa Lỗi Tư Duy (Misconception)</span>
-                            <p class="text-sm text-white leading-relaxed">Nhiều bạn nghĩ làm Mạch tổ hợp là cứ phải dùng đại số Boole, rút gọn bìa Karnaugh cực khổ cho cả hệ thống lớn. <strong>Sự thật:</strong> Kỹ sư xài các khối chức năng (MUX, Adder) đã đóng gói sẵn bằng code Verilog. Máy tính sẽ tự động tổng hợp mạch (synthesize) thành cổng logic.</p>
+                            <p class="text-sm text-white leading-relaxed">Nhiều bạn sinh viên code Verilog thường viết mọi thứ vào khối `always`. Mạch tuần tự chỉ dùng cho những tín hiệu <strong>CẦN LƯU TRỮ TRẠNG THÁI</strong>. Nếu hệ thống không cần nhớ, hãy dùng mạch tổ hợp (dùng `assign`) để tiết kiệm tài nguyên (tiết kiệm Flip-Flop) của chip.</p>
                         </div>
 
                         <div class="border-t border-blue-400/50 pt-3">
-                            <p class="text-base font-bold text-yellow-300 italic mb-2">"Think in blocks, not in gates."</p>
-                            <p class="text-sm text-blue-50 leading-relaxed">Tư duy thiết kế hiện đại là lắp ghép các "khối hộp đen" (Black box). Bạn chỉ cần biết khối đó nhận Input gì, nhả Output gì, không cần vẽ lại từng cổng AND/OR bên trong.</p>
+                            <p class="text-base font-bold text-yellow-300 italic mb-2">"Think about the Clock."</p>
+                            <p class="text-sm text-blue-50 leading-relaxed">Kỹ sư số xịn là người kiểm soát được từng nhịp đập của xung Clock. Thiết kế hệ thống đồng bộ (Synchronous) giúp mạch chạy ổn định ở tần số cao mà không bị lỗi 타이ming (Timing violation).</p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- MINI PROJECT CONNECTION -->
             <section class="bg-white rounded-2xl shadow-lg border border-slate-200 p-6 flex flex-col">
                 <h3 class="text-xl font-bold text-dark mb-4 flex items-center gap-2 border-b pb-3">
                     <i class="fa-solid fa-plug-circle-bolt text-secondary"></i> Kết Nối Dự Án (Mini-Projects)
                 </h3>
                 <p class="text-sm text-slate-600 mb-4">
-                    Các khối Combinational Logic này chính là trái tim cấu tạo nên ALU (Bộ xử lý tính toán) trong mọi con chip CPU:
+                    Mạch tuần tự (Clock, Register, Counter) là cốt lõi của tất cả các hệ thống điều khiển tự động:
                 </p>
                 <div class="grid grid-cols-2 gap-3 flex-grow">
                     <div class="bg-slate-50 border border-slate-100 rounded-lg p-3 flex flex-col items-center justify-center text-center hover:border-emerald-300 transition-colors shadow-sm">
-                        <i class="fa-solid fa-plus-minus text-2xl text-emerald-600 mb-2"></i>
-                        <h4 class="font-bold text-xs text-dark">4-bit Adder</h4>
-                        <p class="text-[10px] text-slate-500 mt-1">Ghép 4 bộ Full Adder làm máy tính cộng</p>
+                        <i class="fa-solid fa-stopwatch text-2xl text-emerald-600 mb-2"></i>
+                        <h4 class="font-bold text-xs text-dark">Digital Stopwatch</h4>
+                        <p class="text-[10px] text-slate-500 mt-1">Đồng hồ bấm giờ, dùng Counter để đếm nhịp Clock.</p>
                     </div>
                     <div class="bg-slate-50 border border-slate-100 rounded-lg p-3 flex flex-col items-center justify-center text-center hover:border-red-400 transition-colors shadow-sm">
-                        <i class="fa-solid fa-eye text-2xl text-red-500 mb-2"></i>
-                        <h4 class="font-bold text-xs text-dark">7-Seg Decoder</h4>
-                        <p class="text-[10px] text-slate-500 mt-1">Giải mã bit nhị phân để sáng đèn LED 7 đoạn</p>
+                        <i class="fa-solid fa-traffic-light text-2xl text-red-500 mb-2"></i>
+                        <h4 class="font-bold text-xs text-dark">Traffic Controller</h4>
+                        <p class="text-[10px] text-slate-500 mt-1">Lưu trữ trạng thái hiện tại là Đèn Đỏ hay Xanh.</p>
                     </div>
                     <div class="bg-slate-50 border border-slate-100 rounded-lg p-3 flex flex-col items-center justify-center text-center hover:border-purple-400 transition-colors shadow-sm">
-                        <i class="fa-solid fa-code-branch text-2xl text-purple-500 mb-2"></i>
-                        <h4 class="font-bold text-xs text-dark">4-to-1 MUX</h4>
-                        <p class="text-[10px] text-slate-500 mt-1">Bộ chọn kênh âm thanh/hình ảnh</p>
+                        <i class="fa-solid fa-arrow-up-9-1 text-2xl text-purple-500 mb-2"></i>
+                        <h4 class="font-bold text-xs text-dark">Elevator System</h4>
+                        <p class="text-[10px] text-slate-500 mt-1">Ghi nhớ các lệnh bấm tầng và điều khiển motor.</p>
                     </div>
                     <div class="bg-slate-50 border border-slate-100 rounded-lg p-3 flex flex-col items-center justify-center text-center hover:border-blue-400 transition-colors shadow-sm">
-                        <i class="fa-solid fa-equals text-2xl text-primary mb-2"></i>
-                        <h4 class="font-bold text-xs text-dark">Password Checker</h4>
-                        <p class="text-[10px] text-slate-500 mt-1">Dùng khối Comparator để kiểm tra mã PIN</p>
+                        <i class="fa-solid fa-water text-2xl text-primary mb-2"></i>
+                        <h4 class="font-bold text-xs text-dark">Washing Machine</h4>
+                        <p class="text-[10px] text-slate-500 mt-1">Chuyển qua lại các chế độ Giặt, Xả, Vắt.</p>
                     </div>
                 </div>
             </section>
         </div>
 
-        <!-- AFTER SESSION -->
         <section class="bg-emerald-50 rounded-2xl shadow-sm border border-emerald-200 overflow-hidden">
             <div class="bg-emerald-100/50 px-6 py-4 border-b border-emerald-200">
                 <h3 class="text-xl font-bold text-emerald-800 flex items-center gap-2">
@@ -558,18 +569,17 @@
                 <!-- Mini Task -->
                 <div class="bg-white p-5 rounded-xl border border-emerald-100 shadow-sm mb-6 relative overflow-hidden">
                     <div class="absolute right-0 top-0 w-1 h-full bg-emerald-400"></div>
-                    <h4 class="font-bold text-emerald-700 mb-2 flex items-center gap-2"><i class="fa-solid fa-fire text-secondary"></i> Task Tuần Này (Describe a Block)</h4>
-                    <p class="text-sm text-slate-700 mb-3">Mỗi bạn hãy chọn <strong>1 khối mạch tổ hợp (MUX, Decoder, Encoder, Adder, Comparator)</strong> và post lên Group lớp:</p>
+                    <h4 class="font-bold text-emerald-700 mb-2 flex items-center gap-2"><i class="fa-solid fa-fire text-secondary"></i> Task Tuần Này (System State Definition)</h4>
+                    <p class="text-sm text-slate-700 mb-3">Mỗi bạn hãy chọn <strong>1 hệ thống có chứa các trạng thái (State)</strong> (ví dụ: máy rút tiền, lò vi sóng, cửa tự động) và post mô tả lên Group lớp:</p>
                     <ul class="list-disc list-inside text-sm text-slate-600 space-y-1 ml-2 font-mono bg-slate-50 p-3 rounded border border-slate-200">
-                        <li><strong>Tên khối:</strong> ...</li>
-                        <li><strong>Chức năng:</strong> Dùng để làm gì?</li>
-                        <li><strong>Input:</strong> Gồm những chân nào?</li>
-                        <li><strong>Output:</strong> Gồm những chân nào?</li>
-                        <li><strong>Ứng dụng:</strong> Dùng trong thiết bị nào thực tế?</li>
+                        <li><strong>Hệ thống:</strong> ...</li>
+                        <li><strong>Trạng thái ban đầu:</strong> Vd: Chờ người dùng đút tiền.</li>
+                        <li><strong>Sự kiện (Trigger):</strong> Đút 10k vào máy.</li>
+                        <li><strong>Trạng thái tiếp theo:</strong> Chờ người dùng chọn nút nước...</li>
+                        <li><strong>Có cần bộ nhớ không?</strong> Có, để nhớ máy đã nhận bao nhiêu tiền.</li>
                     </ul>
                 </div>
 
-                <!-- Accordions for Outcomes and Reflection -->
                 <div class="space-y-3">
                     <details class="group bg-white rounded-lg border border-slate-200 transition-all">
                         <summary class="flex items-center justify-between p-4 cursor-pointer font-semibold text-slate-800 group-open:text-emerald-700 hover:bg-slate-50 transition-colors rounded-lg">
@@ -580,11 +590,11 @@
                         </summary>
                         <div class="p-4 border-t border-slate-100 text-sm text-slate-600 bg-slate-50/50">
                             <ul class="space-y-2">
-                                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> Giải thích được định nghĩa Mạch tổ hợp (Combinational circuit).</li>
-                                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> Phân biệt được mạch tổ hợp không có trí nhớ so với mạch tuần tự.</li>
-                                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> Mô tả được chức năng của các khối MUX, Decoder, Adder.</li>
-                                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> Xác định rõ các cổng vào (Input) và cổng ra (Output) của một khối chức năng.</li>
-                                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> Bắt đầu có tư duy "ghép block" trong thiết kế thay vì ghép cổng logic.</li>
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> Giải thích được sự khác biệt giữa mạch tuần tự và mạch tổ hợp.</li>
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> Hiểu được vai trò của Xung nhịp (Clock) trong việc đồng bộ hệ thống.</li>
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> Mô tả được chức năng lưu trữ 1 bit của Flip-Flop.</li>
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> Phân biệt được Flip-Flop, Register (Thanh ghi) và Counter (Bộ đếm).</li>
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> Bước đầu phân tích được một hệ thống máy móc theo hướng thay đổi trạng thái (FSM).</li>
                             </ul>
                         </div>
                     </details>
@@ -597,19 +607,19 @@
                             </span>
                         </summary>
                         <div class="p-4 border-t border-slate-100 bg-blue-50/30">
-                            <p class="text-sm text-slate-600 mb-4">Vui lòng hoàn thành Form để Mentor nắm được mức độ tiếp thu của bạn.</p>
+                            <p class="text-sm text-slate-600 mb-4">Vui lòng hoàn thành Form để Mentor nắm được mức độ tiếp thu của bạn, chuẩn bị cho bài Máy Trạng Thái Tuần sau.</p>
                             <div class="bg-white border border-slate-200 p-4 rounded-lg shadow-sm">
                                 <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Mentor sẽ hỏi 5 nội dung sau:</p>
                                 <ol class="list-decimal list-inside text-sm text-slate-700 space-y-1.5 font-medium">
-                                    <li>Xác nhận tham gia buổi học Week 4?</li>
-                                    <li>Mức độ hiểu bài về các khối tổ hợp (1-5)?</li>
-                                    <li>Khối chức năng nào bạn thấy dễ hiểu nhất?</li>
-                                    <li>Khối mạch nào bạn thấy rối và khó hình dung nhất?</li>
-                                    <li>Bạn có tò mò muốn biết code Verilog cho MUX viết như thế nào không?</li>
+                                    <li>Xác nhận tham gia buổi học Week 5?</li>
+                                    <li>Mức độ hiểu bài về mạch tuần tự (1-5)?</li>
+                                    <li>Khái niệm nào khó hiểu nhất: clock, state, flip-flop, register, counter?</li>
+                                    <li>Ví dụ nào trong buổi học giúp bạn dễ mường tượng nhất?</li>
+                                    <li>Bạn muốn tự thử thiết kế FSM cho hệ thống nào ở tuần sau?</li>
                                 </ol>
                             </div>
                             <a href="https://forms.gle/4ZFMSAyY3GHe2soZA" target="_blank" class="mt-4 bg-primary hover:bg-blue-700 text-white font-semibold py-2.5 px-6 rounded-lg transition-colors inline-flex items-center gap-2 shadow-md hover:shadow-lg">
-                                <i class="fa-brands fa-google"></i> Mở Google Form Tuần 4
+                                <i class="fa-brands fa-google"></i> Mở Google Form Tuần 5
                             </a>
                         </div>
                     </details>
@@ -619,7 +629,6 @@
         
     </main>
 
-    <!-- FOOTER -->
     <footer class="mt-16 bg-slate-900 text-slate-300 py-12 text-center border-t-4 border-primary">
         <div class="max-w-4xl mx-auto px-4">
             <div class="flex justify-center items-center gap-3 mb-6">
@@ -643,7 +652,6 @@
         </div>
     </footer>
 
-    <!-- INTERACTIVE JAVASCRIPT CHO MUX -->
     <script>
         // 1. Checklist Logic
         function toggleTask(checkbox) {
@@ -655,134 +663,102 @@
             }
         }
 
-        // 2. Interactive MUX Logic
+        // 2. Interactive SVG Counter Logic
         document.addEventListener('DOMContentLoaded', () => {
-            const inputA = document.getElementById('muxInputA');
-            const inputB = document.getElementById('muxInputB');
-            const selectS = document.getElementById('muxSel');
+            const btnClock = document.getElementById('btnClock');
             
-            const valA = document.getElementById('valMuxA');
-            const valB = document.getElementById('valMuxB');
-            const valY = document.getElementById('valMuxY');
-            const logicExp = document.getElementById('logicExp');
+            // Text Elements
+            const valD = document.getElementById('valD');
+            const valQ = document.getElementById('valQ');
+            const valFeedback = document.getElementById('valFeedback');
+            const valDisplaySVG = document.getElementById('valDisplaySVG');
             
-            const svgWireA = document.getElementById('svgWireA');
-            const svgWireB = document.getElementById('svgWireB');
-            const svgWireY = document.getElementById('svgWireY');
-            const svgWireS = document.getElementById('svgWireS');
-            
-            const svgTextA = document.getElementById('svgTextA');
-            const svgTextB = document.getElementById('svgTextB');
-            const svgTextS = document.getElementById('svgTextS');
-            
-            const outputContainer = document.getElementById('outputContainer');
-            const glowY = document.getElementById('glowY');
+            // Wire Elements
+            const wireClk = document.getElementById('wireClk');
+            const wireQ = document.getElementById('wireQ');
+            const wireFeedback = document.getElementById('wireFeedback');
+            const wireD = document.getElementById('wireD');
 
-            function updateMux() {
-                const aVal = inputA.checked ? 1 : 0;
-                const bVal = inputB.checked ? 1 : 0;
-                const selVal = parseInt(selectS.value);
-                let outVal = 0;
+            // Markers
+            const arrowQ = document.getElementById('arrow-q');
+            const arrowD = document.getElementById('arrow-d');
+            const arrowFb = document.getElementById('arrow-fb');
 
-                // Update text inputs in control panel
-                valA.textContent = aVal;
-                valA.className = aVal === 1 ? "text-lg font-black text-emerald-400 font-mono" : "text-lg font-black text-slate-500 font-mono";
+            let currentState = 0; // Q
+            let nextState = 1;    // D
+
+            function triggerClockPulse() {
+                // Disable button to prevent spamming
+                btnClock.disabled = true;
+                btnClock.classList.add('bg-emerald-500', 'scale-95');
                 
-                valB.textContent = bVal;
-                valB.className = bVal === 1 ? "text-lg font-black text-blue-400 font-mono" : "text-lg font-black text-slate-500 font-mono";
-
-                // Update SVG Input Texts
-                svgTextA.textContent = aVal;
-                svgTextA.setAttribute('fill', aVal === 1 ? '#10b981' : '#475569');
+                // STEP 1: Pulse the Clock Wire (Visual)
+                wireClk.setAttribute('stroke', '#10b981');
+                wireClk.setAttribute('stroke-width', '4');
                 
-                svgTextB.textContent = bVal;
-                svgTextB.setAttribute('fill', bVal === 1 ? '#3b82f6' : '#475569');
-                
-                svgTextS.textContent = selVal;
-
-                // Visual SVG wire active states (Data Flow)
-                if (aVal === 1) {
-                    svgWireA.setAttribute('stroke', '#10b981');
-                    svgWireA.setAttribute('stroke-width', '4');
-                } else {
-                    svgWireA.setAttribute('stroke', '#475569');
-                    svgWireA.setAttribute('stroke-width', '2');
-                }
-
-                if (bVal === 1) {
-                    svgWireB.setAttribute('stroke', '#3b82f6');
-                    svgWireB.setAttribute('stroke-width', '4');
-                } else {
-                    svgWireB.setAttribute('stroke', '#475569');
-                    svgWireB.setAttribute('stroke-width', '2');
-                }
-
-                // MUX Logic (Combinational)
-                if (selVal === 0) {
-                    outVal = aVal;
-                    logicExp.textContent = "Y = A (Vì S = 0)";
+                // STEP 2: D Flip-Flop catches the Data at the clock edge
+                setTimeout(() => {
+                    currentState = nextState;
                     
-                    // Dim unselected wire in SVG
-                    svgWireB.style.opacity = "0.3";
-                    svgTextB.style.opacity = "0.3";
-                    svgWireA.style.opacity = "1";
-                    svgTextA.style.opacity = "1";
+                    // Update Text Values for Q & Display
+                    valQ.textContent = currentState;
+                    valDisplaySVG.textContent = currentState;
+                    valFeedback.textContent = currentState;
                     
-                    // Output coloring based on A
-                    if(outVal === 1) {
-                        svgWireY.setAttribute('stroke', '#10b981');
-                        svgWireY.setAttribute('stroke-width', '5');
-                        
-                        outputContainer.className = "bg-slate-800 p-6 rounded-full border-4 border-emerald-500 flex items-center justify-center w-28 h-28 mb-4 relative overflow-hidden transition-all duration-300 shadow-[0_0_15px_rgba(16,185,129,0.5)]";
-                        valY.className = "text-5xl font-black text-emerald-400 font-mono z-10 relative";
-                        glowY.className = "absolute inset-0 bg-emerald-500/30 blur-xl opacity-100 transition-opacity";
-                    } else {
-                        svgWireY.setAttribute('stroke', '#475569');
-                        svgWireY.setAttribute('stroke-width', '2');
-                        
-                        outputContainer.className = "bg-slate-800 p-6 rounded-full border-4 border-slate-600 flex items-center justify-center w-28 h-28 mb-4 relative overflow-hidden transition-all duration-300";
-                        valY.className = "text-5xl font-black text-slate-600 font-mono z-10 relative";
-                        glowY.className = "absolute inset-0 bg-slate-500/0 blur-xl opacity-0 transition-opacity";
-                    }
-
-                } else {
-                    outVal = bVal;
-                    logicExp.textContent = "Y = B (Vì S = 1)";
+                    // Animate Q and Feedback Wires
+                    wireQ.setAttribute('stroke', '#10b981');
+                    wireQ.setAttribute('stroke-width', '4');
+                    if(arrowQ) arrowQ.querySelector('polygon').setAttribute('fill', '#10b981');
                     
-                    // Dim unselected wire in SVG
-                    svgWireA.style.opacity = "0.3";
-                    svgTextA.style.opacity = "0.3";
-                    svgWireB.style.opacity = "1";
-                    svgTextB.style.opacity = "1";
+                    wireFeedback.setAttribute('stroke', '#f59e0b');
+                    wireFeedback.setAttribute('stroke-width', '4');
+                    if(arrowFb) arrowFb.querySelector('polygon').setAttribute('fill', '#f59e0b');
+                    
+                }, 200);
 
-                    // Output coloring based on B
-                    if(outVal === 1) {
-                        svgWireY.setAttribute('stroke', '#3b82f6');
-                        svgWireY.setAttribute('stroke-width', '5');
-                        
-                        outputContainer.className = "bg-slate-800 p-6 rounded-full border-4 border-blue-500 flex items-center justify-center w-28 h-28 mb-4 relative overflow-hidden transition-all duration-300 shadow-[0_0_15px_rgba(59,130,246,0.5)]";
-                        valY.className = "text-5xl font-black text-blue-400 font-mono z-10 relative";
-                        glowY.className = "absolute inset-0 bg-blue-500/30 blur-xl opacity-100 transition-opacity";
-                    } else {
-                        svgWireY.setAttribute('stroke', '#475569');
-                        svgWireY.setAttribute('stroke-width', '2');
-                        
-                        outputContainer.className = "bg-slate-800 p-6 rounded-full border-4 border-slate-600 flex items-center justify-center w-28 h-28 mb-4 relative overflow-hidden transition-all duration-300";
-                        valY.className = "text-5xl font-black text-slate-600 font-mono z-10 relative";
-                        glowY.className = "absolute inset-0 bg-slate-500/0 blur-xl opacity-0 transition-opacity";
-                    }
-                }
-                
-                valY.textContent = outVal;
+                // STEP 3: Combinational Logic (Adder) calculates new D after propagation delay
+                setTimeout(() => {
+                    nextState = (currentState + 1) % 10; // Mod 10 counter (0 to 9)
+                    
+                    // Update D value
+                    valD.textContent = nextState;
+                    
+                    // Animate D Wire
+                    wireD.setAttribute('stroke', '#3b82f6');
+                    wireD.setAttribute('stroke-width', '4');
+                    if(arrowD) arrowD.querySelector('polygon').setAttribute('fill', '#3b82f6');
+                    
+                }, 500);
+
+                // STEP 4: Reset all visual wires back to idle state
+                setTimeout(() => {
+                    // Reset Clock
+                    wireClk.setAttribute('stroke', '#475569');
+                    wireClk.setAttribute('stroke-width', '3');
+                    
+                    // Reset Q
+                    wireQ.setAttribute('stroke', '#475569');
+                    wireQ.setAttribute('stroke-width', '3');
+                    if(arrowQ) arrowQ.querySelector('polygon').setAttribute('fill', '#475569');
+                    
+                    // Reset Feedback
+                    wireFeedback.setAttribute('stroke', '#475569');
+                    wireFeedback.setAttribute('stroke-width', '3');
+                    if(arrowFb) arrowFb.querySelector('polygon').setAttribute('fill', '#475569');
+                    
+                    // Reset D
+                    wireD.setAttribute('stroke', '#475569');
+                    wireD.setAttribute('stroke-width', '3');
+                    if(arrowD) arrowD.querySelector('polygon').setAttribute('fill', '#475569');
+                    
+                    // Enable button again
+                    btnClock.disabled = false;
+                    btnClock.classList.remove('bg-emerald-500', 'scale-95');
+                }, 900);
             }
 
-            // Event Listeners
-            inputA.addEventListener('change', updateMux);
-            inputB.addEventListener('change', updateMux);
-            selectS.addEventListener('change', updateMux);
-            
-            // Init
-            updateMux();
+            // Bind Event
+            btnClock.addEventListener('click', triggerClockPulse);
         });
     </script>
 </body>
