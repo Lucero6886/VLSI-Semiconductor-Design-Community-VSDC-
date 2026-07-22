@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tuần 7: What Is Verilog? | IC Design Mentoring</title>
+    <title>Tuần 8: FPGA vs ASIC | IC Design Mentoring</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -67,64 +67,62 @@
         }
         .custom-checkbox:checked::before { transform: scale(1); }
         .task-item.completed { text-decoration: line-through; color: #94a3b8; }
-
-        /* Code Syntax Highlighting Styles */
-        .v-kw { color: #c678dd; font-weight: bold; } /* Keywords: module, input, assign... */
-        .v-type { color: #56b6c2; } /* Types: wire, reg */
-        .v-var { color: #e06c75; } /* Variables */
-        .v-op { color: #56b6c2; } /* Operators */
-        .v-comment { color: #7f848e; font-style: italic; } /* Comments */
-
-        .wire-active { stroke: #10b981 !important; stroke-width: 4 !important; filter: drop-shadow(0 0 3px rgba(16,185,129,0.8)); transition: all 0.2s ease; }
-        .wire-inactive { stroke: #475569 !important; stroke-width: 2 !important; transition: all 0.2s ease; }
-        .code-highlight { background-color: rgba(16, 185, 129, 0.2); border-radius: 4px; transition: background-color 0.2s ease; }
-        .svg-interactive:hover { filter: brightness(1.2); }
+        
+        /* Decision Tool Animation */
+        .decision-highlight {
+            animation: highlightPulse 1.5s ease-out;
+        }
+        @keyframes highlightPulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.7); }
+            50% { transform: scale(1.02); box-shadow: 0 0 0 10px rgba(37, 99, 235, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased selection:bg-primary selection:text-white pb-20">
 
     <header class="bg-gradient-to-br from-dark to-slate-700 text-white pt-16 pb-20 px-6 shadow-xl relative overflow-hidden">
         <div class="absolute top-0 right-0 opacity-10 pointer-events-none">
-            <i class="fa-solid fa-file-code text-[20rem] -mt-10 -mr-10"></i>
+            <i class="fa-solid fa-scale-balanced text-[20rem] -mt-10 -mr-10"></i>
         </div>
         
         <div class="max-w-4xl mx-auto relative z-10">
             <div class="flex flex-wrap items-center gap-3 mb-4">
-                <span class="bg-primary text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Tuần 7</span>
-                <span class="bg-secondary text-dark text-xs font-bold px-3 py-1 rounded-full"><i class="fa-solid fa-laptop-code mr-1"></i> Ngôn Ngữ Thiết Kế</span>
+                <span class="bg-primary text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Tuần 8</span>
+                <span class="bg-secondary text-dark text-xs font-bold px-3 py-1 rounded-full"><i class="fa-solid fa-microchip mr-1"></i> Kiến Trúc Phần Cứng</span>
                 <span class="bg-white/20 text-white border border-white/30 text-xs font-semibold px-3 py-1 rounded-full"><i class="fa-solid fa-university mr-1"></i> Phenikaa University</span>
             </div>
             
             <h1 class="text-4xl md:text-5xl font-extrabold mb-3 leading-tight text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-300">
-                What Is Verilog?
+                FPGA vs ASIC
             </h1>
             <h2 class="text-xl md:text-2xl font-medium text-slate-300 mb-6 border-l-4 border-primary pl-4">
-                Verilog Là Gì Và Vì Sao Kỹ Sư Thiết Kế Số Cần Nó?
+                Lựa Chọn Nền Tảng Nào Cho Hệ Thống Của Bạn?
             </h2>
             
             <div class="bg-white/10 backdrop-blur-md rounded-xl p-5 border border-white/20 mb-8 max-w-3xl">
                 <p class="text-lg leading-relaxed">
                     <i class="fa-solid fa-quote-left text-primary opacity-50 mr-2"></i>
-                    Đã đến lúc chúng ta dịch các sơ đồ khối (Block Diagrams) và máy trạng thái (FSM) thành mã code. Nhưng hãy nhớ: <strong>Verilog KHÔNG PHẢI là C hay Python</strong>. Tuần này, chúng ta sẽ đập bỏ "Tư duy Lập trình phần mềm" để làm quen với "Tư duy Mô tả phần cứng" (Hardware Description).
+                    Viết code Verilog xong, chúng ta chạy nó ở đâu? Tuần này, chúng ta sẽ so sánh 2 con đường chính để biến mã code thành phần cứng thực tế: <strong>FPGA</strong> (nhanh, linh hoạt để học tập và thử nghiệm) và <strong>ASIC</strong> (tối ưu, sản xuất hàng loạt).
                 </p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="flex items-start gap-3">
                     <div class="bg-white/20 w-8 h-8 flex items-center justify-center rounded-lg text-secondary shrink-0"><i class="fa-solid fa-code-compare"></i></div>
-                    <p class="text-sm mt-1">Phân biệt được rõ ràng HDL (Verilog/VHDL) với ngôn ngữ phần mềm.</p>
+                    <p class="text-sm mt-1">Phân biệt được rõ ràng bản chất giữa chip FPGA và chip ASIC.</p>
                 </div>
                 <div class="flex items-start gap-3">
-                    <div class="bg-white/20 w-8 h-8 flex items-center justify-center rounded-lg text-secondary shrink-0"><i class="fa-solid fa-cubes"></i></div>
-                    <p class="text-sm mt-1">Hiểu cấu trúc của một <code>module</code> cơ bản: input, output, wire, reg.</p>
+                    <div class="bg-white/20 w-8 h-8 flex items-center justify-center rounded-lg text-secondary shrink-0"><i class="fa-solid fa-stopwatch"></i></div>
+                    <p class="text-sm mt-1">Phân tích sâu 4 tiêu chí đánh đổi: Volume, PPA, Time-to-market, Flexibility.</p>
                 </div>
                 <div class="flex items-start gap-3">
-                    <div class="bg-white/20 w-8 h-8 flex items-center justify-center rounded-lg text-secondary shrink-0"><i class="fa-solid fa-layer-group"></i></div>
-                    <p class="text-sm mt-1">Nắm vững khái niệm thực thi "Song song" (Parallelism) trong thiết kế số.</p>
+                    <div class="bg-white/20 w-8 h-8 flex items-center justify-center rounded-lg text-secondary shrink-0"><i class="fa-solid fa-vial"></i></div>
+                    <p class="text-sm mt-1">Hiểu quy trình dùng FPGA làm Mẫu thử nghiệm (Prototype) trước khi đúc ASIC.</p>
                 </div>
                 <div class="flex items-start gap-3">
-                    <div class="bg-white/20 w-8 h-8 flex items-center justify-center rounded-lg text-secondary shrink-0"><i class="fa-solid fa-bolt"></i></div>
-                    <p class="text-sm mt-1">Biết cách dùng lệnh <code>assign</code> để mô tả các cổng logic tổ hợp.</p>
+                    <div class="bg-white/20 w-8 h-8 flex items-center justify-center rounded-lg text-secondary shrink-0"><i class="fa-solid fa-graduation-cap"></i></div>
+                    <p class="text-sm mt-1">Giải thích được vì sao sinh viên cần học FPGA để bước vào ngành IC Design.</p>
                 </div>
             </div>
         </div>
@@ -140,11 +138,10 @@
             </div>
             <div class="p-6">
                 <p class="text-slate-600 mb-6">
-                    Sai lầm phổ biến nhất của sinh viên mới là cố gắng "ép" Verilog chạy như một phần mềm với hàng tá lệnh <code>for-loop</code>. Trong Verilog, mọi dòng lệnh <code>assign</code> đều tạo ra một sợi dây điện và một cổng logic vật lý, và chúng chạy <strong>đồng thời cùng một lúc</strong>.
+                    "Engineering is all about Trade-offs" (Kỹ thuật là bài toán đánh đổi). <strong>FPGA</strong> giống như một bảng Lego mà bạn có thể xếp đi xếp lại nhiều lần (linh hoạt). Còn <strong>ASIC</strong> giống như một bức tượng đúc bằng đồng nguyên khối (tối ưu nhưng không thể sửa).
                 </p>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Checklist -->
                     <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 hover:border-primary/30 transition-colors">
                         <h4 class="font-bold text-dark mb-4 border-b pb-2 flex items-center gap-2">
                             <i class="fa-solid fa-list-check text-primary"></i> Checklist Tự Học
@@ -152,31 +149,30 @@
                         <ul class="space-y-3" id="prep-checklist">
                             <li class="flex items-start gap-3 group">
                                 <input type="checkbox" class="custom-checkbox mt-0.5" id="task1" onclick="toggleTask(this)">
-                                <label for="task1" class="cursor-pointer text-sm text-slate-700 task-item group-hover:text-primary transition-colors">Đọc định nghĩa HDL và sự khác biệt với ngôn ngữ phần mềm</label>
+                                <label for="task1" class="cursor-pointer text-sm text-slate-700 task-item group-hover:text-primary transition-colors">Đọc định nghĩa: FPGA là gì? ASIC là gì?</label>
                             </li>
                             <li class="flex items-start gap-3 group">
                                 <input type="checkbox" class="custom-checkbox mt-0.5" id="task2" onclick="toggleTask(this)">
-                                <label for="task2" class="cursor-pointer text-sm text-slate-700 task-item group-hover:text-primary transition-colors">Tìm hiểu cấu trúc 1 module: <code>input</code>, <code>output</code>, <code>wire</code></label>
+                                <label for="task2" class="cursor-pointer text-sm text-slate-700 task-item group-hover:text-primary transition-colors">Hiểu khái niệm NRE Cost (Chi phí nghiên cứu ban đầu)</label>
                             </li>
                             <li class="flex items-start gap-3 group">
                                 <input type="checkbox" class="custom-checkbox mt-0.5" id="task3" onclick="toggleTask(this)">
-                                <label for="task3" class="cursor-pointer text-sm text-slate-700 task-item group-hover:text-primary transition-colors">Tương tác thử với Demo Verilog-To-Hardware bên dưới</label>
+                                <label for="task3" class="cursor-pointer text-sm text-slate-700 task-item group-hover:text-primary transition-colors">Trải nghiệm "Bảng Phân Tích Đánh Đổi" (Trade-off Matrix) bên dưới</label>
                             </li>
                             <li class="flex items-start gap-3 group">
                                 <input type="checkbox" class="custom-checkbox mt-0.5" id="task4" onclick="toggleTask(this)">
-                                <label for="task4" class="cursor-pointer text-sm text-slate-700 task-item group-hover:text-primary transition-colors">Chuẩn bị sẵn các câu hỏi để thảo luận với Mentor</label>
+                                <label for="task4" class="cursor-pointer text-sm text-slate-700 task-item group-hover:text-primary transition-colors">Chuẩn bị các câu hỏi thảo luận cho Mentor</label>
                             </li>
                         </ul>
                     </div>
 
-                    <!-- Câu hỏi gợi mở -->
                     <div class="bg-blue-50 p-5 rounded-xl border border-blue-200 relative overflow-hidden">
                         <i class="fa-regular fa-lightbulb absolute -right-4 -bottom-4 text-6xl text-blue-200 opacity-50"></i>
                         <h4 class="font-bold text-primary mb-4 border-b border-blue-200 pb-2 relative z-10">Tư Duy Khởi Động</h4>
                         <ul class="space-y-3 list-disc list-inside text-sm text-slate-700 relative z-10">
-                            <li>Khi bạn viết <code>c = a + b</code> trong C++, CPU phải tính toán qua vài chu kỳ xung nhịp. Còn trong Verilog, câu lệnh đó tạo ra bộ linh kiện gì?</li>
-                            <li>Tại sao người ta gọi Verilog là mô tả "song song" (parallel) thay vì "tuần tự" (sequential)?</li>
-                            <li>"Module" trong Verilog giống với khái niệm nào bạn từng thấy khi học về Mạch tổ hợp (Tuần 4)?</li>
+                            <li>Tại sao Apple tốn hàng tỷ USD thiết kế chip M4 (ASIC) thay vì mua hàng triệu con chip FPGA về để nhúng vào Macbook cho nhanh?</li>
+                            <li>Ngược lại, nếu Start-up của bạn làm vệ tinh nhân tạo chỉ phóng 5 cái lên vũ trụ, bạn sẽ dùng chip gì?</li>
+                            <li>Đồ thị "Điểm hòa vốn" (Break-even point) giữa FPGA và ASIC có ý nghĩa gì đối với Giám đốc công nghệ (CTO)?</li>
                         </ul>
                     </div>
                 </div>
@@ -186,7 +182,7 @@
         <section class="bg-white rounded-2xl shadow-lg border border-slate-200 overflow-hidden">
             <div class="px-6 py-4 border-b border-slate-100 bg-gradient-to-r from-slate-50 to-white">
                 <h3 class="text-xl font-bold text-dark flex items-center gap-2">
-                    <i class="fa-solid fa-microchip text-primary"></i> Khái Niệm Cốt Lõi & Demo Trực Quan
+                    <i class="fa-solid fa-microchip text-primary"></i> Khái Niệm Cốt Lõi & Demo Đánh Giá
                 </h3>
             </div>
             
@@ -195,140 +191,131 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <h4 class="text-lg font-bold text-primary mb-2 flex items-center gap-2">
-                                <span class="bg-primary/10 text-primary w-6 h-6 rounded-full flex items-center justify-center text-sm">1</span> Ngôn ngữ mô tả phần cứng (HDL)
+                                <span class="bg-primary/10 text-primary w-6 h-6 rounded-full flex items-center justify-center text-sm">1</span> FPGA (Field-Programmable Gate Array)
                             </h4>
                             <p class="text-slate-600 text-sm leading-relaxed mb-4">
-                                Verilog (hay VHDL) không sinh ra các tệp <code>.exe</code> để chạy trên hệ điều hành. Nó là "bản vẽ kỹ thuật" dùng text. Phần mềm biên dịch (Synthesizer) sẽ đọc Verilog và "nối dây" các Transistor/Cổng logic lại với nhau bên trong chip (FPGA/ASIC).
+                                Chip có thể <strong>xóa và cấu hình lại phần cứng</strong> bằng code bất cứ lúc nào. Chi phí NRE (Thiết kế ban đầu) gần như bằng 0. Rất phù hợp để thử nghiệm (Prototype), thời gian ra mắt (Time-to-Market) cực nhanh, linh hoạt. Tuy nhiên, giá thành mỗi con chip khá đắt, tốn pin và tốc độ chậm hơn ASIC.
                             </p>
                         </div>
                         <div>
                             <h4 class="text-lg font-bold text-primary mb-2 flex items-center gap-2">
-                                <span class="bg-primary/10 text-primary w-6 h-6 rounded-full flex items-center justify-center text-sm">2</span> Tính song song (Parallelism)
+                                <span class="bg-primary/10 text-primary w-6 h-6 rounded-full flex items-center justify-center text-sm">2</span> ASIC (Application-Specific IC)
                             </h4>
                             <p class="text-slate-600 text-sm leading-relaxed mb-4">
-                                Trong phần cứng vật lý, dòng điện chạy qua mọi cổng logic cùng một lúc. Do đó, các khối <code>assign</code> hay các <code>module</code> trong Verilog hoạt động <strong>song song và độc lập</strong>, không quan tâm dòng nào viết trước, dòng nào viết sau.
+                                Chip được <strong>đúc cứng vĩnh viễn</strong> tại xưởng (Foundry) cho một ứng dụng cụ thể. Chi phí NRE khổng lồ (hàng triệu USD để thiết kế mặt nạ quang khắc). Bù lại, khi sản xuất hàng triệu con, giá trên từng chip rất rẻ, PPA (Tốc độ, Tiêu thụ pin, Diện tích) cực kỳ tối ưu.
                             </p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Interactive Verilog to Hardware Demo -->
+                <!-- NEW Advanced Interactive Decision Tool (SVG Driven) -->
                 <div class="py-5">
                     <div class="bg-slate-800 p-5 rounded-xl border border-slate-700 shadow-inner">
-                        <div class="mb-4">
-                            <p class="text-sm font-semibold text-white"><i class="fa-solid fa-gamepad text-secondary"></i> Demo: Verilog To Hardware Visualizer (Mạch Half Adder)</p>
-                            <p class="text-xs text-slate-400 italic mt-1">Bài toán: Mô tả mạch cộng Bán tổng (Half Adder). Hãy thử click trực tiếp vào khối <strong>Input A</strong> và <strong>Input B</strong> trong bản vẽ SVG. Bạn sẽ thấy 2 dòng lệnh <code>assign</code> bên code Verilog sẽ <strong>thực thi đồng thời</strong>, tương ứng với dòng dữ liệu chạy qua phần cứng vật lý.</p>
+                        <div class="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                            <div>
+                                <p class="text-sm font-semibold text-white"><i class="fa-solid fa-chart-line text-secondary"></i> Bảng Phân Tích Đánh Đổi (Trade-off Analysis Dashboard)</p>
+                                <p class="text-xs text-slate-400 italic mt-1">Đóng vai CTO: Hãy điều chỉnh 4 yêu cầu của dự án để xem đồ thị kinh tế và quyết định cuối cùng.</p>
+                            </div>
                         </div>
                         
-                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start bg-slate-900 p-6 rounded-lg border border-slate-600">
                             
-                            <!-- Left: Verilog Code Editor View -->
-                            <div class="bg-[#1e1e1e] rounded-lg border border-slate-600 overflow-hidden flex flex-col font-mono text-sm shadow-md">
-                                <div class="bg-[#2d2d2d] px-4 py-2 border-b border-slate-700 flex justify-between items-center">
-                                    <span class="text-slate-300 text-xs">half_adder.v</span>
-                                    <div class="flex gap-1.5">
-                                        <div class="w-2.5 h-2.5 rounded-full bg-red-500"></div>
-                                        <div class="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
-                                        <div class="w-2.5 h-2.5 rounded-full bg-green-500"></div>
+                            <!-- Left: 4 Sliders Controls -->
+                            <div class="space-y-6">
+                                <div>
+                                    <div class="flex justify-between text-xs font-bold text-slate-300 mb-2 uppercase tracking-wider">
+                                        <span>Số lượng SX (Volume)</span>
+                                        <span id="volLabel" class="text-primary font-mono bg-primary/20 px-2 py-0.5 rounded">Rất Ít (100)</span>
+                                    </div>
+                                    <input type="range" id="sliderVol" min="0" max="100" value="10" class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-primary">
+                                    <div class="flex justify-between text-[10px] text-slate-500 mt-1 font-mono">
+                                        <span>Prototype</span>
+                                        <span>Mass Production</span>
                                     </div>
                                 </div>
-                                <div class="p-4 leading-relaxed text-slate-300 overflow-x-auto h-full flex items-center">
-<pre class="w-full"><code><span class="v-kw">module</span> <span class="text-white font-bold">half_adder</span> (
-    <span class="v-kw">input</span>  <span class="v-type">wire</span> <span class="v-var">a</span>,
-    <span class="v-kw">input</span>  <span class="v-type">wire</span> <span class="v-var">b</span>,
-    <span class="v-kw">output</span> <span class="v-type">wire</span> <span class="v-var">sum</span>,
-    <span class="v-kw">output</span> <span class="v-type">wire</span> <span class="v-var">cout</span>
-);
 
-    <span class="v-comment">// Tính tổng (Sum) dùng cổng XOR</span>
-<span id="codeAssignSum" class="block px-1 rounded transition-colors duration-300">    <span class="v-kw">assign</span> <span class="v-var">sum</span>  <span class="v-op">=</span> <span class="v-var">a</span> <span class="v-op">^</span> <span class="v-var">b</span>;</span>
+                                <div>
+                                    <div class="flex justify-between text-xs font-bold text-slate-300 mb-2 uppercase tracking-wider">
+                                        <span>Yêu cầu PPA (Hiệu năng/Pin)</span>
+                                        <span id="ppaLabel" class="text-emerald-400 font-mono bg-emerald-400/20 px-2 py-0.5 rounded">Bình thường</span>
+                                    </div>
+                                    <input type="range" id="sliderPPA" min="0" max="100" value="30" class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-emerald-400">
+                                </div>
 
-    <span class="v-comment">// Tính cờ nhớ (Carry Out) dùng cổng AND</span>
-<span id="codeAssignCout" class="block px-1 rounded transition-colors duration-300">    <span class="v-kw">assign</span> <span class="v-var">cout</span> <span class="v-op">=</span> <span class="v-var">a</span> <span class="v-op">&</span> <span class="v-var">b</span>;</span>
+                                <div>
+                                    <div class="flex justify-between text-xs font-bold text-slate-300 mb-2 uppercase tracking-wider">
+                                        <span>Thời gian ra mắt (Time-to-Market)</span>
+                                        <span id="ttmLabel" class="text-amber-400 font-mono bg-amber-400/20 px-2 py-0.5 rounded">Rất Gấp (Vài tháng)</span>
+                                    </div>
+                                    <input type="range" id="sliderTTM" min="0" max="100" value="10" class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-amber-400">
+                                    <div class="flex justify-between text-[10px] text-slate-500 mt-1 font-mono">
+                                        <span>Càng sớm càng tốt</span>
+                                        <span>Có thể đợi 2 năm</span>
+                                    </div>
+                                </div>
 
-<span class="v-kw">endmodule</span></code></pre>
+                                <div>
+                                    <div class="flex justify-between text-xs font-bold text-slate-300 mb-2 uppercase tracking-wider">
+                                        <span>Khả năng Sửa đổi/Cập nhật</span>
+                                        <span id="flexLabel" class="text-purple-400 font-mono bg-purple-400/20 px-2 py-0.5 rounded">Cần sửa lỗi liên tục</span>
+                                    </div>
+                                    <input type="range" id="sliderFlex" min="0" max="100" value="80" class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-purple-400">
                                 </div>
                             </div>
 
-                            <!-- Right: Hardware Schematic Visualization (100% SVG) -->
-                            <div class="bg-slate-900 rounded-lg border border-slate-600 p-2 flex flex-col justify-center relative overflow-hidden shadow-md">
-                                <div class="w-full relative">
-                                    <svg viewBox="0 0 450 220" class="w-full h-auto font-mono drop-shadow-md select-none">
+                            <!-- Right: Visual Result & Graph Panel -->
+                            <div class="flex flex-col h-full gap-4">
+                                <!-- SVG Graph: Break-Even Point -->
+                                <div class="bg-slate-800 border border-slate-600 rounded-lg p-3 relative h-48 w-full flex items-center justify-center">
+                                    <span class="absolute top-2 left-2 text-[10px] text-slate-400 font-bold uppercase tracking-widest z-10">Total Cost (Chi phí tổng)</span>
+                                    <span class="absolute bottom-2 right-2 text-[10px] text-slate-400 font-bold uppercase tracking-widest z-10">Volume</span>
+                                    
+                                    <!-- Academic Break-even SVG -->
+                                    <svg viewBox="0 0 100 100" class="w-full h-full p-2 overflow-visible" preserveAspectRatio="none">
+                                        <!-- Axes -->
+                                        <line x1="0" y1="100" x2="100" y2="100" stroke="#475569" stroke-width="1"/>
+                                        <line x1="0" y1="0" x2="0" y2="100" stroke="#475569" stroke-width="1"/>
                                         
-                                        <!-- WIRES (A & B Branching to both gates) -->
-                                        <!-- Wire A to XOR -->
-                                        <path id="wireA_XOR" d="M 60 40 L 90 40 L 90 60 L 170 60" fill="none" class="svg-wire wire-inactive" stroke-linejoin="round" stroke-linecap="round"/>
-                                        <!-- Wire A to AND -->
-                                        <path id="wireA_AND" d="M 90 40 L 90 140 L 170 140" fill="none" class="svg-wire wire-inactive" stroke-linejoin="round" stroke-linecap="round"/>
-                                        <!-- Junction dot for A -->
-                                        <circle id="dotA" cx="90" cy="40" r="4" fill="#475569" class="transition-colors duration-200"/>
+                                        <!-- ASIC Line: Start high (NRE), grow slow (Unit Cost) -->
+                                        <line x1="0" y1="30" x2="100" y2="10" stroke="#10b981" stroke-width="2" stroke-dasharray="3,2" opacity="0.8"/>
+                                        <text x="80" y="8" fill="#10b981" font-size="6" font-weight="bold">ASIC</text>
+                                        
+                                        <!-- FPGA Line: Start zero (NRE), grow fast (Unit Cost) -->
+                                        <line x1="0" y1="95" x2="100" y2="20" stroke="#3b82f6" stroke-width="2"/>
+                                        <text x="85" y="28" fill="#3b82f6" font-size="6" font-weight="bold">FPGA</text>
 
-                                        <!-- Wire B to XOR -->
-                                        <path id="wireB_XOR" d="M 60 120 L 110 120 L 110 80 L 170 80" fill="none" class="svg-wire wire-inactive" stroke-linejoin="round" stroke-linecap="round"/>
-                                        <!-- Wire B to AND -->
-                                        <path id="wireB_AND" d="M 110 120 L 110 160 L 170 160" fill="none" class="svg-wire wire-inactive" stroke-linejoin="round" stroke-linecap="round"/>
-                                        <!-- Junction dot for B -->
-                                        <circle id="dotB" cx="110" cy="120" r="4" fill="#475569" class="transition-colors duration-200"/>
-
-                                        <!-- GATES -->
-                                        <!-- XOR Gate (for SUM) -->
-                                        <g transform="translate(160, 30)">
-                                            <!-- The curved back line of XOR -->
-                                            <path d="M 0 10 Q 15 40 0 70" fill="none" stroke="#2563eb" stroke-width="3"/>
-                                            <!-- The main body of XOR -->
-                                            <path d="M 10 10 C 35 10, 55 25, 70 40 C 55 55, 35 70, 10 70 Q 25 40 10 10 Z" fill="#1e293b" stroke="#2563eb" stroke-width="3"/>
-                                            <text x="35" y="44" fill="white" font-weight="bold" font-size="12" text-anchor="middle">XOR</text>
-                                        </g>
-
-                                        <!-- AND Gate (for COUT) -->
-                                        <g transform="translate(160, 120)">
-                                            <!-- Main body of AND -->
-                                            <path d="M 10 0 L 40 0 A 30 30 0 0 1 40 60 L 10 60 Z" fill="#1e293b" stroke="#2563eb" stroke-width="3"/>
-                                            <text x="35" y="34" fill="white" font-weight="bold" font-size="12" text-anchor="middle">AND</text>
-                                        </g>
-
-                                        <!-- OUTPUT WIRES -->
-                                        <!-- Sum Wire -->
-                                        <path id="wireSum" d="M 230 70 L 310 70" fill="none" class="svg-wire wire-inactive" stroke-linecap="round"/>
-                                        <!-- Cout Wire -->
-                                        <path id="wireCout" d="M 230 150 L 310 150" fill="none" class="svg-wire wire-inactive" stroke-linecap="round"/>
-
-                                        <!-- INTERACTIVE INPUT BUTTONS (Natively in SVG) -->
-                                        <!-- Input A -->
-                                        <g id="btnInputA" class="cursor-pointer svg-interactive transition-transform hover:scale-[1.02]" transform-origin="40 40">
-                                            <rect id="rectA" x="20" y="20" width="40" height="40" rx="8" fill="#334155" stroke="#475569" stroke-width="2" class="transition-colors duration-300"/>
-                                            <text id="textA" x="40" y="46" fill="#cbd5e1" font-size="20" font-weight="bold" text-anchor="middle" class="transition-colors duration-300">0</text>
-                                            <text x="40" y="12" fill="#94a3b8" font-size="10" font-family="sans-serif" font-weight="bold" text-anchor="middle">Input A</text>
-                                        </g>
-
-                                        <!-- Input B -->
-                                        <g id="btnInputB" class="cursor-pointer svg-interactive transition-transform hover:scale-[1.02]" transform-origin="40 120">
-                                            <rect id="rectB" x="20" y="100" width="40" height="40" rx="8" fill="#334155" stroke="#475569" stroke-width="2" class="transition-colors duration-300"/>
-                                            <text id="textB" x="40" y="126" fill="#cbd5e1" font-size="20" font-weight="bold" text-anchor="middle" class="transition-colors duration-300">0</text>
-                                            <text x="40" y="92" fill="#94a3b8" font-size="10" font-family="sans-serif" font-weight="bold" text-anchor="middle">Input B</text>
-                                        </g>
-
-                                        <!-- OUTPUT LEDS & LABELS -->
-                                        <!-- Sum Output -->
-                                        <g transform="translate(330, 70)">
-                                            <circle id="ledSum" cx="0" cy="0" r="18" fill="#1e293b" stroke="#475569" stroke-width="3" class="transition-all duration-300"/>
-                                            <text id="valSum" x="0" y="6" fill="#64748b" font-size="18" font-weight="bold" text-anchor="middle" class="transition-colors duration-300">0</text>
-                                        </g>
-                                        <text x="360" y="65" fill="#10b981" font-size="12" font-family="sans-serif" font-weight="bold">sum</text>
-                                        <text x="360" y="80" fill="#64748b" font-size="10" font-family="sans-serif">(A XOR B)</text>
-
-                                        <!-- Cout Output -->
-                                        <g transform="translate(330, 150)">
-                                            <circle id="ledCout" cx="0" cy="0" r="18" fill="#1e293b" stroke="#475569" stroke-width="3" class="transition-all duration-300"/>
-                                            <text id="valCout" x="0" y="6" fill="#64748b" font-size="18" font-weight="bold" text-anchor="middle" class="transition-colors duration-300">0</text>
-                                        </g>
-                                        <text x="360" y="145" fill="#3b82f6" font-size="12" font-family="sans-serif" font-weight="bold">cout</text>
-                                        <text x="360" y="160" fill="#64748b" font-size="10" font-family="sans-serif">(A AND B)</text>
-
+                                        <!-- Intersection Point ~ X=65 -->
+                                        <circle cx="65" cy="18" r="2" fill="#f59e0b" class="animate-pulse"/>
+                                        <text x="50" y="12" fill="#f59e0b" font-size="4">Break-even Point</text>
+                                        
+                                        <!-- Dynamic User Volume Line -->
+                                        <line id="userVolLine" x1="10" y1="0" x2="10" y2="100" stroke="#f43f5e" stroke-width="1" class="transition-all duration-300 ease-out"/>
+                                        <polygon id="userVolMarker" points="6,100 14,100 10,95" fill="#f43f5e" class="transition-all duration-300 ease-out"/>
                                     </svg>
                                 </div>
-                                <div class="bg-black/30 p-2 rounded text-center border border-white/5 mt-2 z-20 mx-4">
-                                    <span class="text-xs text-slate-400"><i class="fa-solid fa-bolt text-yellow-500 mr-1"></i> Hai lệnh <code>assign</code> chạy hoàn toàn độc lập và song song với nhau.</span>
+
+                                <!-- Result Box -->
+                                <div id="resultPanel" class="relative flex-1 flex flex-col items-center justify-center p-4 bg-[#1e293b] rounded-lg border-2 transition-all duration-500 decision-highlight">
+                                    <div class="absolute inset-0 bg-gradient-to-br opacity-20 rounded-lg" id="resultGlow"></div>
+                                    
+                                    <div class="flex items-center justify-center gap-6 z-10 w-full mb-3">
+                                        <div id="fpgaIcon" class="flex flex-col items-center transition-all duration-300">
+                                            <div class="w-12 h-12 rounded bg-blue-900 border-2 border-blue-400 flex items-center justify-center">
+                                                <i class="fa-solid fa-cube text-2xl text-blue-300"></i>
+                                            </div>
+                                            <span class="text-blue-400 font-bold text-sm mt-1">FPGA</span>
+                                        </div>
+                                        <div id="asicIcon" class="flex flex-col items-center transition-all duration-300">
+                                            <div class="w-12 h-12 rounded bg-emerald-900 border-2 border-emerald-400 flex items-center justify-center">
+                                                <i class="fa-solid fa-microchip text-2xl text-emerald-300"></i>
+                                            </div>
+                                            <span class="text-emerald-400 font-bold text-sm mt-1">ASIC</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <p id="reasonText" class="text-sm text-slate-300 text-left w-full z-10 font-mono leading-relaxed bg-black/40 p-3 rounded shadow-inner">
+                                        Khuyên dùng: FPGA.
+                                    </p>
                                 </div>
                             </div>
 
@@ -350,7 +337,7 @@
                     <i class="fa-solid fa-lightbulb text-secondary text-xl mt-1"></i>
                     <div>
                         <p class="text-sm font-bold text-slate-800 mb-1">Quy tắc Mentor:</p>
-                        <p class="text-sm text-slate-600 italic">"Đừng cố dạy cú pháp Verilog như một tiết học lập trình khô khan. Hãy nhấn mạnh vào tư duy: Khi bạn gõ <code>assign y = a & b;</code> là bạn đang yêu cầu phần mềm đúc ra 1 cái cổng AND vật lý."</p>
+                        <p class="text-sm text-slate-600 italic">"Đừng đọc slide so sánh khô khan. Hãy đặt một tình huống cụ thể (Ví dụ: Thiết kế máy chơi game mới, hoặc vệ tinh Starlink) và yêu cầu nhóm quyết định dùng chip gì, giải thích dựa trên các rào cản kinh tế và kỹ thuật."</p>
                     </div>
                 </div>
 
@@ -358,23 +345,23 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-slate-700 mb-2">
                     <div class="bg-slate-50 p-3 rounded-lg border border-slate-200 flex gap-3 items-center hover:border-amber-300 transition-colors">
                         <span class="bg-dark text-white rounded w-6 h-6 flex items-center justify-center shrink-0 font-bold text-xs">1</span>
-                        <p class="font-medium">Verilog là gì? Phân biệt cơ bản giữa HDL và ngôn ngữ lập trình (C/Python).</p>
+                        <p class="font-medium">Giải thích đơn giản: Bản chất phần cứng của FPGA và ASIC khác nhau ở đâu?</p>
                     </div>
                     <div class="bg-slate-50 p-3 rounded-lg border border-slate-200 flex gap-3 items-center hover:border-amber-300 transition-colors">
                         <span class="bg-dark text-white rounded w-6 h-6 flex items-center justify-center shrink-0 font-bold text-xs">2</span>
-                        <p class="font-medium">Cấu trúc của một <code>module</code> cơ bản (Khai báo tên, port list).</p>
+                        <p class="font-medium">Giải thích NRE Cost và Unit Cost. Mối quan hệ với Số lượng sản xuất (Volume).</p>
                     </div>
                     <div class="bg-slate-50 p-3 rounded-lg border border-slate-200 flex gap-3 items-center hover:border-amber-300 transition-colors">
                         <span class="bg-dark text-white rounded w-6 h-6 flex items-center justify-center shrink-0 font-bold text-xs">3</span>
-                        <p class="font-medium">Giải thích các từ khóa quan trọng: <code>input</code>, <code>output</code>, <code>wire</code>, <code>reg</code>.</p>
+                        <p class="font-medium">Khi nào một dự án bắt buộc phải chọn FPGA (Time-to-market ngắn, cần sửa lỗi sau bán)?</p>
                     </div>
                     <div class="bg-slate-50 p-3 rounded-lg border border-slate-200 flex gap-3 items-center hover:border-amber-300 transition-colors">
                         <span class="bg-dark text-white rounded w-6 h-6 flex items-center justify-center shrink-0 font-bold text-xs">4</span>
-                        <p class="font-medium">Phân biệt sự khác nhau giữa <code>assign</code> và <code>always</code> block.</p>
+                        <p class="font-medium">Khi nào một công ty sẵn sàng đổ hàng triệu USD đúc ASIC?</p>
                     </div>
                     <div class="bg-slate-50 p-3 rounded-lg border border-slate-200 flex gap-3 items-center sm:col-span-2 hover:border-amber-300 transition-colors bg-gradient-to-r from-amber-50 to-white">
-                        <span class="bg-secondary text-white rounded w-6 h-6 flex items-center justify-center shrink-0 font-bold text-xs"><i class="fa-solid fa-code"></i></span>
-                        <p class="font-medium">Thực hành: Viết 1 module cổng AND đơn giản và giải thích từng dòng code cho lớp.</p>
+                        <span class="bg-secondary text-white rounded w-6 h-6 flex items-center justify-center shrink-0 font-bold text-xs"><i class="fa-solid fa-graduation-cap"></i></span>
+                        <p class="font-medium">Kết luận: Tại sao sinh viên làm quen với vi mạch lại bắt đầu bằng việc code trên board FPGA?</p>
                     </div>
                 </div>
             </div>
@@ -394,7 +381,7 @@
                         <span class="text-accent font-bold text-sm w-16 bg-accent/10 px-2 py-0.5 rounded text-center">0' - 5'</span>
                         <h4 class="font-bold text-dark text-lg">Quick Check-in</h4>
                     </div>
-                    <p class="text-sm text-slate-600 bg-slate-50 p-2 rounded border border-slate-100">Khởi động: Mentor hỏi nhanh "Viết code Verilog để tạo ra phần mềm hay phần cứng?".</p>
+                    <p class="text-sm text-slate-600 bg-slate-50 p-2 rounded border border-slate-100">Khởi động: "Tại sao chip iPhone đắt thế mà Apple không dùng FPGA cho rẻ ban đầu?".</p>
                 </div>
                 
                 <div class="relative pl-6 md:pl-8 group">
@@ -403,7 +390,7 @@
                         <span class="text-primary font-bold text-sm w-16 bg-primary/10 px-2 py-0.5 rounded text-center">5' - 15'</span>
                         <h4 class="font-bold text-dark text-lg">Student Presentation</h4>
                     </div>
-                    <p class="text-sm text-slate-600 bg-slate-50 p-2 rounded border border-slate-100">Cá nhân/Nhóm đại diện lên thuyết trình về "What is Verilog?".</p>
+                    <p class="text-sm text-slate-600 bg-slate-50 p-2 rounded border border-slate-100">Đại diện lên thuyết trình phân biệt FPGA và ASIC dựa trên PPA và Cost.</p>
                 </div>
 
                 <div class="relative pl-6 md:pl-8 group">
@@ -412,7 +399,7 @@
                         <span class="text-dark font-bold text-sm w-16 bg-slate-200 px-2 py-0.5 rounded text-center">15' - 25'</span>
                         <h4 class="font-bold text-dark text-lg">Mentor Guidance</h4>
                     </div>
-                    <p class="text-sm text-slate-600 bg-slate-50 p-2 rounded border border-slate-100">Mentor phân tích: <strong class="text-red-500">Viết code là đang "đi dây" (Wiring)</strong>. Giải thích sự khác biệt cốt lõi của tính chạy song song.</p>
+                    <p class="text-sm text-slate-600 bg-slate-50 p-2 rounded border border-slate-100">Mentor phân tích: <strong class="text-red-500">Mọi ASIC đều từng chạy thử trên FPGA (Prototyping)</strong>. Nhấn mạnh việc FPGA là sân chơi rủi ro thấp.</p>
                 </div>
 
                 <div class="relative pl-6 md:pl-8 group">
@@ -421,7 +408,7 @@
                         <span class="text-secondary font-bold text-sm w-16 bg-secondary/10 px-2 py-0.5 rounded text-center">25' - 45'</span>
                         <h4 class="font-bold text-dark text-lg">Breakout Room</h4>
                     </div>
-                    <p class="text-sm text-slate-600 bg-slate-50 p-2 rounded border border-slate-100">Vào phòng nhỏ. Phân tích chức năng và phác thảo cấu trúc module cho một mạch cơ bản.</p>
+                    <p class="text-sm text-slate-600 bg-slate-50 p-2 rounded border border-slate-100">Vào phòng nhỏ. Phân tích case study: Đóng vai CTO chọn công nghệ cho dự án Drone.</p>
                 </div>
 
                 <div class="relative pl-6 md:pl-8 group">
@@ -430,7 +417,7 @@
                         <span class="text-purple-500 font-bold text-sm w-16 bg-purple-100 px-2 py-0.5 rounded text-center">45' - 55'</span>
                         <h4 class="font-bold text-dark text-lg">Group Sharing</h4>
                     </div>
-                    <p class="text-sm text-slate-600 bg-slate-50 p-2 rounded border border-slate-100">Đại diện nhóm đọc thử danh sách port (input/output) của mạch nhóm mình đã chọn.</p>
+                    <p class="text-sm text-slate-600 bg-slate-50 p-2 rounded border border-slate-100">Các nhóm bảo vệ quan điểm lựa chọn nền tảng của mình (Tranh biện Trade-offs).</p>
                 </div>
 
                 <div class="relative pl-6 md:pl-8 group">
@@ -439,7 +426,7 @@
                         <span class="text-emerald-600 font-bold text-sm w-16 bg-emerald-100 px-2 py-0.5 rounded text-center">55' - 60'</span>
                         <h4 class="font-bold text-dark text-lg">Wrap-up & Task</h4>
                     </div>
-                    <p class="text-sm text-slate-600 bg-slate-50 p-2 rounded border border-slate-100">Giao task viết code module rỗng và điền form điểm danh.</p>
+                    <p class="text-sm text-slate-600 bg-slate-50 p-2 rounded border border-slate-100">Tổng kết tầm quan trọng của việc luyện code trên FPGA. Giao task.</p>
                 </div>
             </div>
         </section>
@@ -450,24 +437,24 @@
                     <i class="fa-solid fa-comments text-secondary text-xl"></i>
                     <h3 class="text-xl font-bold">Hướng Dẫn Breakout Room</h3>
                 </div>
-                <span class="text-[10px] uppercase font-bold bg-white/10 px-2 py-1 rounded text-slate-300">Hardware Modeling</span>
+                <span class="text-[10px] uppercase font-bold bg-white/10 px-2 py-1 rounded text-slate-300">Engineering Trade-offs</span>
             </div>
 
             <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
                     <h4 class="font-semibold text-secondary mb-3 uppercase tracking-wider text-sm flex items-center gap-2">
-                        <i class="fa-regular fa-message"></i> 3 Câu Hỏi Thảo Luận
+                        <i class="fa-regular fa-message"></i> Case Study Thảo Luận
                     </h4>
-                    <p class="text-sm text-slate-300 mb-4 italic">Hãy chọn mạch MUX 2-1 (Tuần 4) hoặc Mạch Half Adder.</p>
+                    <p class="text-sm text-slate-300 mb-4 bg-black/20 p-3 rounded border border-white/10">Công ty A muốn làm một thiết bị điều khiển máy bay không người lái (Drone). Ban đầu họ cần 50 cái để bay thử nghiệm. Nếu thành công, họ sẽ bán ra thị trường 5 triệu cái.</p>
                     <ul class="space-y-3">
                         <li class="bg-white/5 p-3 rounded-lg text-sm border-l-2 border-secondary hover:bg-white/10 transition-colors">
-                            <span class="font-bold text-secondary mr-2">Q1.</span> Mạch này có những cổng giao tiếp (Input/Output ports) nào? Đặt tên biến cho chúng.
+                            <span class="font-bold text-secondary mr-2">Q1.</span> Ở giai đoạn làm 50 cái thử nghiệm, công ty nên thiết kế bằng mạch FPGA hay đặt đúc ASIC? Tại sao?
                         </li>
                         <li class="bg-white/5 p-3 rounded-lg text-sm border-l-2 border-secondary hover:bg-white/10 transition-colors">
-                            <span class="font-bold text-secondary mr-2">Q2.</span> Nếu viết bằng lời (logic), mạch này hoạt động như thế nào? (Vd: Nếu A=1 thì Y=...)
+                            <span class="font-bold text-secondary mr-2">Q2.</span> Ở giai đoạn sản xuất 5 triệu cái, nếu tiếp tục dùng FPGA thì sẽ gặp bất lợi gì về giá cả (Unit Cost) và Pin (Power)?
                         </li>
                         <li class="bg-white/5 p-3 rounded-lg text-sm border-l-2 border-secondary hover:bg-white/10 transition-colors">
-                            <span class="font-bold text-secondary mr-2">Q3.</span> Phác thảo cấu trúc module Verilog cho mạch đó. Chỉ cần viết phần <code>module tên_mach (...);</code> và khai báo input/output, chưa cần viết logic bên trong.
+                            <span class="font-bold text-secondary mr-2">Q3.</span> Nếu thuật toán điều khiển Drone liên tục phải cập nhật qua WiFi, FPGA có điểm mạnh gì so với ASIC?
                         </li>
                     </ul>
                 </div>
@@ -479,15 +466,15 @@
                     <div class="space-y-2 mb-4 bg-black/20 p-3 rounded-xl border border-white/5">
                         <div class="flex items-center gap-3">
                             <div class="bg-white/10 w-8 h-8 rounded-full flex items-center justify-center shrink-0"><i class="fa-solid fa-user-tie text-accent text-sm"></i></div>
-                            <p class="text-sm"><strong class="text-white">Facilitator:</strong> Chọn nhanh 1 mạch để cả nhóm cùng tập trung phân tích.</p>
+                            <p class="text-sm"><strong class="text-white">Facilitator:</strong> Điều phối để các thành viên so sánh ưu nhược điểm (Trade-offs).</p>
                         </div>
                         <div class="flex items-center gap-3">
                             <div class="bg-white/10 w-8 h-8 rounded-full flex items-center justify-center shrink-0"><i class="fa-solid fa-pen-clip text-accent text-sm"></i></div>
-                            <p class="text-sm"><strong class="text-white">Note Keeper:</strong> Mở Notepad/Chatbox gõ nháp cấu trúc `module... endmodule` theo ý kiến của nhóm.</p>
+                            <p class="text-sm"><strong class="text-white">Note Keeper:</strong> Ghi chép câu trả lời cho từng giai đoạn của Drone.</p>
                         </div>
                         <div class="flex items-center gap-3">
                             <div class="bg-white/10 w-8 h-8 rounded-full flex items-center justify-center shrink-0"><i class="fa-solid fa-bullhorn text-accent text-sm"></i></div>
-                            <p class="text-sm"><strong class="text-white">Reporter:</strong> Copy đoạn code nháp đó paste vào chatbox chung của lớp khi hết giờ.</p>
+                            <p class="text-sm"><strong class="text-white">Reporter:</strong> Thay mặt công ty thuyết trình kế hoạch sử dụng phần cứng cho Drone.</p>
                         </div>
                     </div>
                 </div>
@@ -501,34 +488,34 @@
             
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover:border-primary transition-all duration-300">
-                    <h4 class="font-bold text-primary text-lg mb-1">HDL</h4>
-                    <p class="text-sm font-bold text-dark mb-1">Ngôn ngữ mô tả phần cứng</p>
-                    <p class="text-[11px] text-slate-500">(Hardware Description Language) Ngôn ngữ dùng để thiết kế kiến trúc chip thay vì phần mềm.</p>
+                    <h4 class="font-bold text-primary text-lg mb-1">Prototype</h4>
+                    <p class="text-sm font-bold text-dark mb-1">Mẫu thử / Nguyên mẫu</p>
+                    <p class="text-[11px] text-slate-500">Phiên bản chạy được ban đầu để kiểm tra chức năng trước khi sản xuất hàng loạt.</p>
                 </div>
                 
                 <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover:border-primary transition-all duration-300">
-                    <h4 class="font-bold text-primary text-lg mb-1">Module</h4>
-                    <p class="text-sm font-bold text-dark mb-1">Khối thiết kế</p>
-                    <p class="text-[11px] text-slate-500">Khối xây dựng cơ bản trong Verilog, đại diện cho một mạch điện cụ thể (như Black box).</p>
+                    <h4 class="font-bold text-primary text-lg mb-1">NRE Cost</h4>
+                    <p class="text-sm font-bold text-dark mb-1">Chi phí thiết kế</p>
+                    <p class="text-[11px] text-slate-500">(Non-Recurring Engineering) Chi phí ban đầu để R&D, thiết kế mặt nạ đúc chip (rất đắt với ASIC).</p>
                 </div>
                 
                 <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover:border-primary transition-all duration-300">
-                    <h4 class="font-bold text-primary text-lg mb-1">Wire / Reg</h4>
-                    <p class="text-sm font-bold text-dark mb-1">Dây dẫn / Thanh ghi</p>
-                    <p class="text-[11px] text-slate-500">Các kiểu dữ liệu chính. Wire để nối mạch tổ hợp, Reg thường dùng lưu giá trị trong mạch tuần tự.</p>
+                    <h4 class="font-bold text-primary text-lg mb-1">PPA</h4>
+                    <p class="text-sm font-bold text-dark mb-1">Bộ 3 tiêu chí đo lường</p>
+                    <p class="text-[11px] text-slate-500">Power (Năng lượng), Performance (Hiệu năng), Area (Diện tích/Kích thước).</p>
                 </div>
                 
                 <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover:border-primary transition-all duration-300">
-                    <h4 class="font-bold text-primary text-lg mb-1">Assign</h4>
-                    <p class="text-sm font-bold text-dark mb-1">Lệnh gán liên tục</p>
-                    <p class="text-[11px] text-slate-500">Dùng để tạo ra các mạch logic tổ hợp (Combinational Logic). Các lệnh assign chạy song song.</p>
+                    <h4 class="font-bold text-primary text-lg mb-1">Time to Market</h4>
+                    <p class="text-sm font-bold text-dark mb-1">Thời gian ra mắt</p>
+                    <p class="text-[11px] text-slate-500">Khoảng thời gian từ lúc có ý tưởng đến lúc có sản phẩm bán ra thị trường.</p>
                 </div>
             </div>
         </section>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <section class="bg-blue-600 text-white rounded-2xl shadow-lg p-6 relative overflow-hidden flex flex-col">
-                <i class="fa-solid fa-keyboard absolute -right-6 -bottom-6 text-9xl text-blue-500 opacity-30"></i>
+                <i class="fa-solid fa-graduation-cap absolute -right-6 -bottom-6 text-9xl text-blue-500 opacity-30"></i>
                 <div class="relative z-10 flex-1">
                     <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
                         <i class="fa-solid fa-lightbulb text-yellow-300"></i> Lời Khuyên Từ Mentor
@@ -537,12 +524,12 @@
                     <div class="space-y-4">
                         <div class="bg-yellow-500/20 p-3 rounded-lg border border-yellow-400/50 backdrop-blur-sm">
                             <span class="text-yellow-300 text-xs font-bold uppercase tracking-wider block mb-1"><i class="fa-solid fa-triangle-exclamation"></i> Sửa Lỗi Tư Duy (Misconception)</span>
-                            <p class="text-sm text-white leading-relaxed">Nhiều sinh viên học Verilog sau C/C++ nên mang thói quen "lập trình tuần tự". Nhớ rằng: Viết Verilog <strong>KHÔNG PHẢI</strong> là viết thuật toán để CPU chạy từng dòng. Viết Verilog là bạn đang <strong>"mô tả cấu trúc dây điện và linh kiện"</strong> để nhà máy đúc ra.</p>
+                            <p class="text-sm text-white leading-relaxed">Nhiều bạn nghĩ FPGA chỉ là công cụ dành cho sinh viên thực hành, còn kỹ sư thật phải làm ASIC. <strong>Sự thật:</strong> Rất nhiều hệ thống quân sự, không gian, viễn thông, radar sử dụng chip FPGA trong sản phẩm cuối cùng vì nhu cầu phải cập nhật thuật toán liên tục (Reconfigurable) mà không cần thay phần cứng mới.</p>
                         </div>
 
                         <div class="border-t border-blue-400/50 pt-3">
-                            <p class="text-base font-bold text-yellow-300 italic mb-2">"Think Hardware Before Coding."</p>
-                            <p class="text-sm text-blue-50 leading-relaxed">Quy tắc số 1: Trước khi gõ bất kỳ dòng code Verilog nào, hãy tự hỏi: <em>"Mạch điện mình đang muốn tạo ra (MUX, Adder, hay Flip-Flop) trông như thế nào?"</em> Hãy vẽ nó ra giấy trước!</p>
+                            <p class="text-base font-bold text-yellow-300 italic mb-2">"Fail fast, fail cheap."</p>
+                            <p class="text-sm text-blue-50 leading-relaxed">FPGA cho phép kỹ sư sai và sửa code liên tục với chi phí 0 đồng. ASIC sai một dòng code, sửa lại tốn nhiều tháng và hàng triệu đô. Đừng bao giờ làm ASIC nếu chưa chạy thử nghiệm kỹ (Prototyping) trên FPGA.</p>
                         </div>
                     </div>
                 </div>
@@ -553,28 +540,28 @@
                     <i class="fa-solid fa-plug-circle-bolt text-secondary"></i> Kết Nối Dự Án (Mini-Projects)
                 </h3>
                 <p class="text-sm text-slate-600 mb-4">
-                    Mọi dự án phức tạp đều bắt đầu từ việc khai báo các Module đơn giản. Dưới đây là các Module nền tảng bạn nên thử tự viết code Verilog:
+                    Tại sao khóa học này lại dùng Board FPGA? Vì đây là nền tảng học tập chuẩn công nghiệp để bạn chứng minh mọi đoạn code Verilog của mình chạy được ngoài đời thực:
                 </p>
                 <div class="grid grid-cols-2 gap-3 flex-grow">
                     <div class="bg-slate-50 border border-slate-100 rounded-lg p-3 flex flex-col items-center justify-center text-center hover:border-emerald-300 transition-colors shadow-sm">
-                        <i class="fa-solid fa-code-merge text-2xl text-emerald-600 mb-2"></i>
-                        <h4 class="font-bold text-xs text-dark">Basic Logic Gates</h4>
-                        <p class="text-[10px] text-slate-500 mt-1">Viết module cho cổng AND, OR, XOR</p>
+                        <i class="fa-solid fa-traffic-light text-2xl text-emerald-600 mb-2"></i>
+                        <h4 class="font-bold text-xs text-dark">Logic Verification</h4>
+                        <p class="text-[10px] text-slate-500 mt-1">Nạp code FSM Đèn giao thông xem LED nhấp nháy chuẩn chưa.</p>
                     </div>
                     <div class="bg-slate-50 border border-slate-100 rounded-lg p-3 flex flex-col items-center justify-center text-center hover:border-blue-400 transition-colors shadow-sm">
-                        <i class="fa-solid fa-code-branch text-2xl text-blue-500 mb-2"></i>
-                        <h4 class="font-bold text-xs text-dark">2-to-1 MUX</h4>
-                        <p class="text-[10px] text-slate-500 mt-1">Sử dụng toán tử điều kiện (?:)</p>
+                        <i class="fa-solid fa-stopwatch-20 text-2xl text-blue-500 mb-2"></i>
+                        <h4 class="font-bold text-xs text-dark">Timing Analysis</h4>
+                        <p class="text-[10px] text-slate-500 mt-1">Kiểm tra Clock chạy đúng tần số trên phần cứng không.</p>
                     </div>
                     <div class="bg-slate-50 border border-slate-100 rounded-lg p-3 flex flex-col items-center justify-center text-center hover:border-amber-400 transition-colors shadow-sm">
-                        <i class="fa-solid fa-plus-minus text-2xl text-amber-500 mb-2"></i>
-                        <h4 class="font-bold text-xs text-dark">Half/Full Adder</h4>
-                        <p class="text-[10px] text-slate-500 mt-1">Dùng lệnh assign để tính Sum và Cout</p>
+                        <i class="fa-solid fa-network-wired text-2xl text-amber-500 mb-2"></i>
+                        <h4 class="font-bold text-xs text-dark">UART Comms</h4>
+                        <p class="text-[10px] text-slate-500 mt-1">Giao tiếp chip với máy tính PC thực tế.</p>
                     </div>
                     <div class="bg-slate-50 border border-slate-100 rounded-lg p-3 flex flex-col items-center justify-center text-center hover:border-purple-400 transition-colors shadow-sm">
-                        <i class="fa-solid fa-memory text-2xl text-purple-500 mb-2"></i>
-                        <h4 class="font-bold text-xs text-dark">D Flip-Flop</h4>
-                        <p class="text-[10px] text-slate-500 mt-1">Tập làm quen với khối always @(posedge clk)</p>
+                        <i class="fa-solid fa-microchip text-2xl text-purple-500 mb-2"></i>
+                        <h4 class="font-bold text-xs text-dark">ASIC-ready Code</h4>
+                        <p class="text-[10px] text-slate-500 mt-1">Viết Verilog trên FPGA chuẩn bị cho tổng hợp ASIC.</p>
                     </div>
                 </div>
             </section>
@@ -590,17 +577,13 @@
                 <!-- Mini Task -->
                 <div class="bg-white p-5 rounded-xl border border-emerald-100 shadow-sm mb-6 relative overflow-hidden">
                     <div class="absolute right-0 top-0 w-1 h-full bg-emerald-400"></div>
-                    <h4 class="font-bold text-emerald-700 mb-2 flex items-center gap-2"><i class="fa-solid fa-fire text-secondary"></i> Task Tuần Này (Module Declaration)</h4>
-                    <p class="text-sm text-slate-700 mb-3">Mỗi bạn hãy chọn 1 mạch cơ bản (VD: MUX 2-1 hoặc Half Adder), xác định danh sách cổng, và thử viết một cấu trúc module rỗng đăng lên Group lớp:</p>
-                    <div class="bg-slate-800 p-3 rounded text-slate-300 font-mono text-sm mb-2 border border-slate-700">
-<pre><code>module [ten_mach] (
-    input wire [ten_input1],
-    input wire [ten_input2],
-    output wire [ten_output]
-);
-    // Bạn chưa cần viết logic ở đây!
-endmodule</code></pre>
-                    </div>
+                    <h4 class="font-bold text-emerald-700 mb-2 flex items-center gap-2"><i class="fa-solid fa-fire text-secondary"></i> Task Tuần Này (Make a Decision)</h4>
+                    <p class="text-sm text-slate-700 mb-3">Mỗi bạn hãy chọn <strong>1 ứng dụng/sản phẩm công nghệ</strong> và trả lời các câu hỏi sau lên Group lớp:</p>
+                    <ul class="list-disc list-inside text-sm text-slate-600 space-y-1 ml-2 font-mono bg-slate-50 p-3 rounded border border-slate-200">
+                        <li><strong>Ứng dụng:</strong> Máy siêu âm bệnh viện / Chuột chơi game giá rẻ...</li>
+                        <li><strong>Chọn FPGA hay ASIC?</strong> Tại sao? (Cân nhắc số lượng sản xuất, giá cả và NRE).</li>
+                        <li><strong>Bạn có thể tự làm phiên bản đơn giản (Prototype) trên Board FPGA của trường không?</strong></li>
+                    </ul>
                 </div>
 
                 <div class="space-y-3">
@@ -613,11 +596,10 @@ endmodule</code></pre>
                         </summary>
                         <div class="p-4 border-t border-slate-100 text-sm text-slate-600 bg-slate-50/50">
                             <ul class="space-y-2">
-                                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> Hiểu Verilog là ngôn ngữ mô tả kiến trúc phần cứng (HDL).</li>
-                                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> Phân biệt rõ sự khác biệt với ngôn ngữ phần mềm (C/C++).</li>
-                                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> Giải thích được cấu trúc của một <code>module</code> và các ports (input/output).</li>
-                                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> Hiểu tính thực thi song song (Parallelism) của lệnh <code>assign</code>.</li>
-                                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> Kết nối được kiến thức mạch tổ hợp với mã nguồn Verilog.</li>
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> Giải thích được sự khác nhau cốt lõi giữa khả năng lập trình linh hoạt của FPGA và phần cứng cố định của ASIC.</li>
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> Đánh giá được điểm hòa vốn dựa trên Volume, NRE Cost và Unit Cost.</li>
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> Hiểu vai trò của FPGA trong việc làm Prototype kiểm chứng (Verification) trước khi đúc chip ASIC.</li>
+                                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> Có tư duy tổng quan (PPA, Time-to-Market) khi thiết kế một hệ thống vi mạch thực tế.</li>
                             </ul>
                         </div>
                     </details>
@@ -630,19 +612,19 @@ endmodule</code></pre>
                             </span>
                         </summary>
                         <div class="p-4 border-t border-slate-100 bg-blue-50/30">
-                            <p class="text-sm text-slate-600 mb-4">Vui lòng hoàn thành Form để Mentor nắm được mức độ tiếp thu của bạn về Verilog.</p>
+                            <p class="text-sm text-slate-600 mb-4">Vui lòng hoàn thành Form để Mentor đánh giá chất lượng buổi học và giải đáp thắc mắc.</p>
                             <div class="bg-white border border-slate-200 p-4 rounded-lg shadow-sm">
                                 <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Mentor sẽ hỏi 5 nội dung sau:</p>
                                 <ol class="list-decimal list-inside text-sm text-slate-700 space-y-1.5 font-medium">
-                                    <li>Xác nhận tham gia buổi học Week 7?</li>
-                                    <li>Em hiểu Verilog là ngôn ngữ mô tả phần cứng ở mức nào (1-5)?</li>
-                                    <li>Em thấy Verilog khác C/Python ở điểm nào lớn nhất?</li>
-                                    <li>Khái niệm nào khó nhất: module, wire, reg, assign, always?</li>
-                                    <li>Em muốn thử viết Verilog cho mạch cơ bản nào?</li>
+                                    <li>Xác nhận tham gia buổi học Week 8?</li>
+                                    <li>Em hiểu sự khác biệt giữa FPGA và ASIC ở mức nào (1-5)?</li>
+                                    <li>Đồ thị kinh tế (Điểm hòa vốn) có giúp em dễ hiểu hơn không?</li>
+                                    <li>Tiêu chí PPA (Power, Performance, Area) có điểm nào em chưa rõ?</li>
+                                    <li>Em mong muốn thử làm project gì trên board FPGA?</li>
                                 </ol>
                             </div>
                             <a href="https://forms.gle/4ZFMSAyY3GHe2soZA" target="_blank" class="mt-4 bg-primary hover:bg-blue-700 text-white font-semibold py-2.5 px-6 rounded-lg transition-colors inline-flex items-center gap-2 shadow-md hover:shadow-lg">
-                                <i class="fa-brands fa-google"></i> Mở Google Form Tuần 7
+                                <i class="fa-brands fa-google"></i> Mở Google Form Tuần 8
                             </a>
                         </div>
                     </details>
@@ -686,138 +668,142 @@ endmodule</code></pre>
             }
         }
 
-        // 2. Interactive Verilog To Hardware Visualizer (Half Adder) - SVG Driven
+        // 2. Interactive Decision Tool Logic (Advanced Trade-off)
         document.addEventListener('DOMContentLoaded', () => {
-            // SVG Interactive Input Groups
-            const btnInputA = document.getElementById('btnInputA');
-            const btnInputB = document.getElementById('btnInputB');
+            const sliderVol = document.getElementById('sliderVol');
+            const sliderPPA = document.getElementById('sliderPPA');
+            const sliderTTM = document.getElementById('sliderTTM');
+            const sliderFlex = document.getElementById('sliderFlex');
             
-            // SVG Rects & Texts for Inputs
-            const rectA = document.getElementById('rectA');
-            const textA = document.getElementById('textA');
-            const rectB = document.getElementById('rectB');
-            const textB = document.getElementById('textB');
+            const fpgaIcon = document.getElementById('fpgaIcon');
+            const asicIcon = document.getElementById('asicIcon');
             
-            // Output Values & LEDs in SVG
-            const valSum = document.getElementById('valSum');
-            const valCout = document.getElementById('valCout');
-            const ledSum = document.getElementById('ledSum');
-            const ledCout = document.getElementById('ledCout');
+            const resultPanel = document.getElementById('resultPanel');
+            const resultGlow = document.getElementById('resultGlow');
+            const reasonText = document.getElementById('reasonText');
+            
+            // Graph Elements
+            const userVolLine = document.getElementById('userVolLine');
+            const userVolMarker = document.getElementById('userVolMarker');
 
-            // Wires
-            const wireA_XOR = document.getElementById('wireA_XOR');
-            const wireA_AND = document.getElementById('wireA_AND');
-            const dotA = document.getElementById('dotA');
+            function updateDecision() {
+                const vol = parseInt(sliderVol.value);
+                const ppa = parseInt(sliderPPA.value);
+                const ttm = parseInt(sliderTTM.value);
+                const flex = parseInt(sliderFlex.value);
 
-            const wireB_XOR = document.getElementById('wireB_XOR');
-            const wireB_AND = document.getElementById('wireB_AND');
-            const dotB = document.getElementById('dotB');
+                // --- Update Labels ---
+                document.getElementById('volLabel').textContent = vol < 30 ? 'Ít (Prototype)' : (vol < 70 ? 'Vừa (Hàng ngàn)' : 'Nhiều (Hàng triệu)');
+                document.getElementById('ppaLabel').textContent = ppa < 40 ? 'Bình thường' : (ppa < 80 ? 'Cao' : 'Tối đa (Pin/Tốc độ)');
+                document.getElementById('ttmLabel').textContent = ttm < 40 ? 'Rất Gấp (<6 tháng)' : (ttm < 80 ? 'Vừa phải' : 'Thong thả (>2 năm)');
+                document.getElementById('flexLabel').textContent = flex < 40 ? 'Cố định' : (flex < 80 ? 'Đôi khi cập nhật' : 'Sửa lỗi liên tục');
 
-            const wireSum = document.getElementById('wireSum');
-            const wireCout = document.getElementById('wireCout');
+                // --- Update SVG Graph (Break-even Point) ---
+                // Mapped to viewBox="0 0 100 100". Break-even is roughly at X=65
+                userVolLine.setAttribute('x1', vol);
+                userVolLine.setAttribute('x2', vol);
+                // Update marker polygon
+                userVolMarker.setAttribute('points', `${vol-4},100 ${vol+4},100 ${vol},95`);
 
-            // Code Highlights
-            const codeAssignSum = document.getElementById('codeAssignSum');
-            const codeAssignCout = document.getElementById('codeAssignCout');
+                // --- Evaluation Logic (Weighted Score) ---
+                let asicScore = 0;
+                let fpgaScore = 0;
+                let asicReasons = [];
+                let fpgaReasons = [];
 
-            let stateA = 0;
-            let stateB = 0;
-
-            function updateSimulation() {
-                // --- Input A Updates ---
-                textA.textContent = stateA;
-                if (stateA) {
-                    rectA.setAttribute('fill', '#10b981'); // Emerald
-                    textA.setAttribute('fill', '#ffffff');
-                    wireA_XOR.classList.replace('wire-inactive', 'wire-active');
-                    wireA_AND.classList.replace('wire-inactive', 'wire-active');
-                    dotA.setAttribute('fill', '#10b981');
+                // 1. Volume (Economic Break-even)
+                if (vol > 65) {
+                    asicScore += 3;
+                    asicReasons.push("Sản lượng lớn vượt điểm hòa vốn, Unit Cost của ASIC mang lại lợi nhuận cao.");
                 } else {
-                    rectA.setAttribute('fill', '#334155'); // Slate
-                    textA.setAttribute('fill', '#cbd5e1');
-                    wireA_XOR.classList.replace('wire-active', 'wire-inactive');
-                    wireA_AND.classList.replace('wire-active', 'wire-inactive');
-                    dotA.setAttribute('fill', '#475569');
+                    fpgaScore += 3;
+                    fpgaReasons.push("Sản lượng ít, dùng FPGA để tránh chi phí thiết kế (NRE) khổng lồ ban đầu.");
                 }
 
-                // --- Input B Updates ---
-                textB.textContent = stateB;
-                if (stateB) {
-                    rectB.setAttribute('fill', '#3b82f6'); // Blue
-                    textB.setAttribute('fill', '#ffffff');
+                // 2. PPA Requirement
+                if (ppa > 70) {
+                    asicScore += 2;
+                    asicReasons.push("Yêu cầu tối ưu PPA (Pin/Tốc độ) cực kỳ khắt khe, kiến trúc ASIC là bắt buộc.");
+                } else {
+                    fpgaScore += 1;
+                    fpgaReasons.push("Yêu cầu PPA không quá khắt khe, FPGA hoàn toàn đáp ứng được.");
+                }
+
+                // 3. Time-to-Market (TTM)
+                if (ttm < 30) {
+                    fpgaScore += 2;
+                    fpgaReasons.push("Thời gian Time-to-Market quá gấp, FPGA giúp ra sản phẩm ngay lập tức.");
+                } else {
+                    asicScore += 1;
+                    asicReasons.push("Thời gian phát triển đủ dài để thực hiện quy trình đúc chip ASIC.");
+                }
+
+                // 4. Flexibility (Reconfigurability)
+                if (flex > 70) {
+                    fpgaScore += 2;
+                    fpgaReasons.push("Dự án đòi hỏi cập nhật thuật toán liên tục, FPGA cho phép cấu hình lại phần cứng.");
+                } else {
+                    asicScore += 1;
+                    asicReasons.push("Thuật toán đã cố định, có thể đóng gói cứng thành ASIC để tối ưu hóa.");
+                }
+
+                // Xử lý cảnh báo đánh đổi (Trade-off Warnings)
+                if (asicScore >= fpgaScore && vol <= 65) {
+                    asicReasons.unshift("<span class='text-amber-400 font-bold'>⚠️ Đánh đổi:</span> Sản lượng ít làm chi phí NRE/chip rất cao, nhưng phải chọn ASIC vì rào cản kỹ thuật.");
+                } else if (fpgaScore > asicScore && vol > 65) {
+                    fpgaReasons.unshift("<span class='text-amber-400 font-bold'>⚠️ Đánh đổi:</span> Sản xuất số lượng lớn bằng FPGA rất tốn kém (Unit Cost cao), nhưng buộc phải chọn vì rào cản thời gian/linh hoạt.");
+                }
+
+                // Trigger Animation
+                resultPanel.classList.remove('decision-highlight');
+                void resultPanel.offsetWidth;
+                resultPanel.classList.add('decision-highlight');
+
+                // Generate Recommendation
+                if (asicScore >= fpgaScore) {
+                    // ASIC WINS
+                    asicIcon.classList.replace('opacity-40', 'opacity-100');
+                    asicIcon.classList.replace('scale-100', 'scale-110');
+                    asicIcon.classList.remove('grayscale');
+                    asicIcon.firstElementChild.classList.add('shadow-[0_0_15px_rgba(16,185,129,0.5)]');
+
+                    fpgaIcon.classList.replace('opacity-100', 'opacity-40');
+                    fpgaIcon.classList.replace('scale-110', 'scale-100');
+                    fpgaIcon.classList.add('grayscale');
+                    fpgaIcon.firstElementChild.classList.remove('shadow-[0_0_15px_rgba(59,130,246,0.5)]');
+
+                    resultPanel.className = "relative flex-1 flex flex-col items-center justify-center p-4 bg-[#064e3b] rounded-lg border-2 border-emerald-500 transition-all duration-500 decision-highlight";
+                    resultGlow.className = "absolute inset-0 bg-gradient-to-br from-emerald-500/20 to-transparent rounded-lg";
                     
-                    wireB_XOR.classList.replace('wire-inactive', 'wire-active');
-                    wireB_XOR.style.stroke = '#3b82f6';
-                    wireB_AND.classList.replace('wire-inactive', 'wire-active');
-                    wireB_AND.style.stroke = '#3b82f6';
-                    dotB.setAttribute('fill', '#3b82f6');
-                } else {
-                    rectB.setAttribute('fill', '#334155');
-                    textB.setAttribute('fill', '#cbd5e1');
+                    reasonText.innerHTML = `<strong>🏆 Khuyên dùng: ASIC.</strong> <br/> <ul class="list-disc ml-4 mt-2 opacity-90 space-y-1">` + asicReasons.map(r => `<li>${r}</li>`).join('') + `</ul>`;
                     
-                    wireB_XOR.classList.replace('wire-active', 'wire-inactive');
-                    wireB_XOR.style.stroke = '';
-                    wireB_AND.classList.replace('wire-active', 'wire-inactive');
-                    wireB_AND.style.stroke = '';
-                    dotB.setAttribute('fill', '#475569');
-                }
-
-                // --- Logic Calculation (PARALLEL) ---
-                const sum = stateA ^ stateB; // XOR
-                const cout = stateA & stateB; // AND
-
-                // --- Code Execution Highlight ---
-                codeAssignSum.classList.add('code-highlight');
-                codeAssignCout.classList.add('code-highlight');
-                setTimeout(() => {
-                    codeAssignSum.classList.remove('code-highlight');
-                    codeAssignCout.classList.remove('code-highlight');
-                }, 300);
-
-                // --- Output Sum Visuals ---
-                valSum.textContent = sum;
-                if (sum) {
-                    wireSum.classList.replace('wire-inactive', 'wire-active');
-                    ledSum.setAttribute('stroke', '#10b981');
-                    ledSum.style.filter = 'drop-shadow(0 0 8px rgba(16,185,129,0.8))';
-                    valSum.setAttribute('fill', '#10b981');
                 } else {
-                    wireSum.classList.replace('wire-active', 'wire-inactive');
-                    ledSum.setAttribute('stroke', '#475569');
-                    ledSum.style.filter = 'none';
-                    valSum.setAttribute('fill', '#64748b');
-                }
+                    // FPGA WINS
+                    fpgaIcon.classList.replace('opacity-40', 'opacity-100');
+                    fpgaIcon.classList.replace('scale-100', 'scale-110');
+                    fpgaIcon.classList.remove('grayscale');
+                    fpgaIcon.firstElementChild.classList.add('shadow-[0_0_15px_rgba(59,130,246,0.5)]');
 
-                // --- Output Cout Visuals ---
-                valCout.textContent = cout;
-                if (cout) {
-                    wireCout.classList.replace('wire-inactive', 'wire-active');
-                    wireCout.style.stroke = '#3b82f6';
-                    ledCout.setAttribute('stroke', '#3b82f6');
-                    ledCout.style.filter = 'drop-shadow(0 0 8px rgba(59,130,246,0.8))';
-                    valCout.setAttribute('fill', '#3b82f6');
-                } else {
-                    wireCout.classList.replace('wire-active', 'wire-inactive');
-                    wireCout.style.stroke = '';
-                    ledCout.setAttribute('stroke', '#475569');
-                    ledCout.style.filter = 'none';
-                    valCout.setAttribute('fill', '#64748b');
+                    asicIcon.classList.replace('opacity-100', 'opacity-40');
+                    asicIcon.classList.replace('scale-110', 'scale-100');
+                    asicIcon.classList.add('grayscale');
+                    asicIcon.firstElementChild.classList.remove('shadow-[0_0_15px_rgba(16,185,129,0.5)]');
+
+                    resultPanel.className = "relative flex-1 flex flex-col items-center justify-center p-4 bg-[#1e3a8a] rounded-lg border-2 border-blue-500 transition-all duration-500 decision-highlight";
+                    resultGlow.className = "absolute inset-0 bg-gradient-to-br from-blue-500/20 to-transparent rounded-lg";
+                    
+                    reasonText.innerHTML = `<strong>🏆 Khuyên dùng: FPGA.</strong> <br/> <ul class="list-disc ml-4 mt-2 opacity-90 space-y-1">` + fpgaReasons.map(r => `<li>${r}</li>`).join('') + `</ul>`;
                 }
             }
 
-            // Click Listeners on SVG Groups
-            btnInputA.addEventListener('click', () => {
-                stateA = stateA ? 0 : 1;
-                updateSimulation();
-            });
-
-            btnInputB.addEventListener('click', () => {
-                stateB = stateB ? 0 : 1;
-                updateSimulation();
-            });
-
-            // Initial state
-            updateSimulation();
+            // Listeners
+            sliderVol.addEventListener('input', updateDecision);
+            sliderPPA.addEventListener('input', updateDecision);
+            sliderTTM.addEventListener('input', updateDecision);
+            sliderFlex.addEventListener('input', updateDecision);
+            
+            // Init
+            updateDecision();
         });
     </script>
 </body>
